@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --nc-bg: #17102A;
+  --nc-bg-deep: #0F0A1C;
+  --nc-surface: #22183B;
+  --nc-surface-raised: #2B1E4A;
+  --nc-surface-subtle: #1D1433;
+  --nc-border: #3A2E5C;
+  --nc-border-subtle: #2B2144;
+  --nc-text: #F3EEFF;
+  --nc-text-muted: #A99CCB;
+  --nc-text-dim: #7C6F9B;
+  --nc-accent: #FFB547;
+  --role-build: #38BDF8;
+  --role-design: #F472B6;
+  --role-business: #FBBF24;
+  --role-research: #2DD4BF;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(23, 16, 42, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: #3A2E5C;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FFB547;
+}
+
+/* Glass & Card styles */
+.nc-card {
+  background: #22183B;
+  border: 1px solid #3A2E5C;
+  border-radius: 16px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nc-card-hover:hover {
+  border-color: rgba(255, 181, 71, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.nc-input {
+  background: #17102A;
+  border: 1px solid #3A2E5C;
+  color: #F3EEFF;
+  border-radius: 10px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nc-input:focus {
+  border-color: #FFB547;
+  box-shadow: 0 0 0 2px rgba(255, 181, 71, 0.2);
+}
+
+.nc-button-primary {
+  background: #FFB547;
+  color: #17102A;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 10px 20px;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.nc-button-primary:hover {
+  background: #FFA31A;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(255, 181, 71, 0.35);
+}
+
+.nc-button-secondary {
+  background: rgba(58, 46, 92, 0.4);
+  color: #F3EEFF;
+  border: 1px solid #3A2E5C;
+  font-weight: 500;
+  border-radius: 12px;
+  padding: 10px 20px;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.nc-button-secondary:hover {
+  background: #3A2E5C;
+  border-color: #A99CCB;
+}
+
+/* Animations */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
