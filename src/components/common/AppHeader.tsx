@@ -21,6 +21,7 @@ export const AppHeader: React.FC = () => {
     settings,
     toggleLanguage,
     toggleTheme,
+    t,
   } = useApp();
 
   const [showNotificationsDropdown, setShowNotificationsDropdown] = useState(false);
@@ -33,6 +34,17 @@ export const AppHeader: React.FC = () => {
     }
   };
 
+  const getLanguageLabel = () => {
+    switch (settings.language) {
+      case 'te':
+        return 'తెలుగు';
+      case 'ta':
+        return 'தமிழ்';
+      default:
+        return 'EN';
+    }
+  };
+
   return (
     <header className="h-16 px-4 lg:px-8 border-b border-[#DCD1C0] bg-[#F3EDE3]/90 backdrop-blur-md flex items-center justify-between sticky top-0 z-20">
       {/* Search Input */}
@@ -42,7 +54,7 @@ export const AppHeader: React.FC = () => {
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search Telugu builders, skills, circles, projects..."
+          placeholder={t('header_searchPlaceholder')}
           className="w-full bg-[#FFFFFF] border border-[#DCD1C0] rounded-xl pl-9 pr-4 py-2 text-xs text-[#29251F] placeholder-[#8C8173] focus:border-[#805536] focus:outline-none transition-colors shadow-sm"
         />
       </form>
@@ -66,10 +78,11 @@ export const AppHeader: React.FC = () => {
         <button
           onClick={toggleLanguage}
           className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#FFFFFF] border border-[#DCD1C0] text-xs text-[#29251F] hover:border-[#805536] transition-colors shadow-sm"
-          title="Toggle Language"
+          title={t('header_toggleLanguage')}
+          aria-label={t('header_toggleLanguage')}
         >
           <Languages className="w-3.5 h-3.5 text-[#665E54]" />
-          <span className="font-medium">{settings.language === 'en' ? 'EN' : 'తెలుగు'}</span>
+          <span className="font-medium">{getLanguageLabel()}</span>
         </button>
 
         {/* Theme mode toggle */}
@@ -78,8 +91,8 @@ export const AppHeader: React.FC = () => {
           className="p-2 rounded-lg bg-[#FFFFFF] border border-[#DCD1C0] text-[#665E54] hover:text-[#29251F] hover:border-[#805536] transition-colors shadow-sm"
           title={
             settings.theme === 'dark'
-              ? 'Switch to Warm Luxury (Light)'
-              : 'Switch to Premium Midnight (Dark)'
+              ? t('header_switchLight')
+              : t('header_switchDark')
           }
           aria-label="Toggle visual theme"
         >
@@ -97,7 +110,7 @@ export const AppHeader: React.FC = () => {
         >
           <Sparkles className="w-3.5 h-3.5 text-[#805536]" />
           <span className="text-xs text-[#665E54]">
-            Credits:{' '}
+            {t('header_credits')}:{' '}
             <strong className="text-[#29251F] font-semibold">
               {mentorCredits.remaining}/{mentorCredits.total}
             </strong>
@@ -109,7 +122,7 @@ export const AppHeader: React.FC = () => {
           <button
             onClick={() => setShowNotificationsDropdown(!showNotificationsDropdown)}
             className="relative p-2 rounded-lg bg-[#FFFFFF] border border-[#DCD1C0] text-[#665E54] hover:text-[#29251F] hover:border-[#805536] transition-colors shadow-sm"
-            title="Notifications"
+            title={t('nav_notifications')}
           >
             <Bell className="w-4 h-4" />
             {unreadNotificationCount > 0 && (
@@ -122,13 +135,13 @@ export const AppHeader: React.FC = () => {
           {showNotificationsDropdown && (
             <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl shadow-card-hover overflow-hidden z-50">
               <div className="p-3 border-b border-[#DCD1C0] flex items-center justify-between bg-[#F3EDE3]">
-                <span className="text-xs font-semibold text-[#29251F]">Notifications</span>
+                <span className="text-xs font-semibold text-[#29251F]">{t('nav_notifications')}</span>
                 {unreadNotificationCount > 0 && (
                   <button
                     onClick={markAllNotificationsRead}
                     className="text-[11px] text-[#805536] font-medium hover:underline"
                   >
-                    Mark all read
+                    {t('header_markAllRead')}
                   </button>
                 )}
               </div>
@@ -168,7 +181,7 @@ export const AppHeader: React.FC = () => {
                   }}
                   className="text-xs text-[#805536] hover:underline font-semibold"
                 >
-                  View all notifications
+                  {t('header_viewAllNotifications')}
                 </button>
               </div>
             </div>

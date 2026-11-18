@@ -13,7 +13,9 @@ import {
   UserSettings,
   RoutePath,
   KanbanTask,
+  SupportedLanguage,
 } from '../types';
+import { TranslationDictionary, getTranslation } from '../i18n/translations';
 import {
   CURRENT_USER,
   MOCK_MEMBERS,
@@ -112,6 +114,9 @@ interface AppContextType {
   updateSettings: (updates: Partial<UserSettings>) => void;
   toggleTheme: () => void;
   toggleLanguage: () => void;
+  setLanguage: (lang: SupportedLanguage) => void;
+  currentLanguage: SupportedLanguage;
+  t: (key: keyof TranslationDictionary, fallback?: string) => string;
   pauseSubscription: () => void;
   cancelSubscription: () => void;
   reactivateSubscription: () => void;
@@ -181,9 +186,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return 'light';
   };
 
+  const getInitialLanguage = (): SupportedLanguage => {
+    try {
+      const saved = localStorage.getItem('nightclub_language');
+      if (saved === 'en' || saved === 'te' || saved === 'ta') return saved;
+    } catch (e) {
+      // Ignore localStorage errors
+    }
+    return 'en';
+  };
+
   const [settings, setSettings] = useState<UserSettings>(() => ({
     ...INITIAL_SETTINGS,
     theme: getInitialTheme(),
+    language: getInitialLanguage(),
   }));
 
   // Sync theme with document & localStorage
@@ -203,6 +219,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       document.body.classList.remove('dark');
     }
   }, [settings.theme]);
+
+  // Sync language with localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('nightclub_language', settings.language);
+    } catch (e) {
+      // Ignore localStorage errors
+    }
+  }, [settings.language]);
 
   // Toasts
   const [toasts, setToasts] = useState<ToastItem[]>([]);
@@ -602,10 +627,31 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const toggleLanguage = () => {
     setSettings((prev) => {
-      const nextLang = prev.language === 'en' ? 'te' : 'en';
-      showToast(nextLang === 'te' ? 'భాష: తెలుగు' : 'Language: English', 'info');
+      const order: SupportedLanguage[] = ['en', 'te', 'ta'];
+      const currentIndex = order.indexOf(prev.language);
+      const nextLang = order[(currentIndex + 1) % order.length];
+      const labels: Record<SupportedLanguage, string> = {
+        en: 'Language: English',
+        te: 'భాష: తెలుగు (Telugu)',
+        ta: 'மொழி: தமிழ் (Tamil)',
+      };
+      showToast(labels[nextLang], 'info');
       return { ...prev, language: nextLang };
     });
+  };
+
+  const setLanguage = (lang: SupportedLanguage) => {
+    setSettings((prev) => ({ ...prev, language: lang }));
+    const labels: Record<SupportedLanguage, string> = {
+      en: 'Language: English',
+      te: 'భాష: తెలుగు (Telugu)',
+      ta: 'மொழி: தமிழ் (Tamil)',
+    };
+    showToast(labels[lang], 'info');
+  };
+
+  const t = (key: keyof TranslationDictionary, fallback?: string): string => {
+    return getTranslation(settings.language, key, fallback);
   };
 
   const pauseSubscription = () => {
@@ -691,6 +737,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         updateSettings,
         toggleTheme,
         toggleLanguage,
+        setLanguage,
+        currentLanguage: settings.language,
+        t,
         pauseSubscription,
         cancelSubscription,
         reactivateSubscription,

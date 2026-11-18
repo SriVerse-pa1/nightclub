@@ -21,6 +21,8 @@ export const SettingsPage: React.FC = () => {
     currentUser,
     navigate,
     showToast,
+    setLanguage,
+    t,
   } = useApp();
 
   const [activeTab, setActiveTab] = useState<
@@ -64,13 +66,13 @@ export const SettingsPage: React.FC = () => {
         {/* Left Settings Sidebar (4 cols) */}
         <div className="md:col-span-4 bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl p-2.5 space-y-1 text-xs shadow-card">
           {[
-            { id: 'account', label: 'Account Profile', icon: User },
-            { id: 'notifications', label: 'Notifications & Quiet Hours', icon: Bell },
-            { id: 'privacy', label: 'Privacy & Visibility', icon: Shield },
-            { id: 'blocked', label: 'Blocked People', icon: Ban },
-            { id: 'language', label: 'Language & Theme', icon: Languages },
-            { id: 'billing', label: 'Subscription & Billing', icon: CreditCard },
-            { id: 'data', label: 'Data & Deletion', icon: Trash2 },
+            { id: 'account', label: t('settings_tabAccount'), icon: User },
+            { id: 'notifications', label: t('settings_tabNotifications'), icon: Bell },
+            { id: 'privacy', label: t('settings_tabPrivacy'), icon: Shield },
+            { id: 'blocked', label: t('settings_tabBlocked'), icon: Ban },
+            { id: 'language', label: t('settings_tabLanguage'), icon: Languages },
+            { id: 'billing', label: t('settings_tabBilling'), icon: CreditCard },
+            { id: 'data', label: t('settings_tabData'), icon: Trash2 },
           ].map((item) => {
             const Icon = item.icon;
             const isSelected = activeTab === item.id;
@@ -300,42 +302,57 @@ export const SettingsPage: React.FC = () => {
           {activeTab === 'language' && (
             <div className="space-y-6">
               <h3 className="font-heading font-bold text-base text-[#29251F]">
-                Language & Appearance
+                {t('settings_tabLanguage')}
               </h3>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-[#665E54] font-medium mb-2">Display Language</label>
-                  <div className="grid grid-cols-2 gap-3">
+                  <label className="block text-[#665E54] font-medium mb-1">{t('lang_title')}</label>
+                  <p className="text-xs text-[#8C8173] mb-3">{t('lang_subtitle')}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <button
                       type="button"
-                      onClick={() => updateSettings({ language: 'en' })}
-                      className={`p-3 rounded-xl border text-center font-bold transition-colors ${
+                      onClick={() => setLanguage('en')}
+                      className={`p-3.5 rounded-xl border text-center font-bold transition-all ${
                         settings.language === 'en'
-                          ? 'border-[#805536] bg-[#805536] text-white shadow-sm'
+                          ? 'border-[#805536] bg-[#805536] text-white shadow-sm ring-2 ring-[#805536]/20'
                           : 'border-[#DCD1C0] bg-[#FFFFFF] text-[#665E54] hover:text-[#29251F] hover:border-[#805536]'
                       }`}
                     >
-                      English
+                      <span className="block text-sm">English</span>
+                      <span className="block text-[10px] opacity-80 font-normal mt-0.5">Global Builder Standard</span>
                     </button>
                     <button
                       type="button"
-                      onClick={() => updateSettings({ language: 'te' })}
-                      className={`p-3 rounded-xl border text-center font-bold transition-colors ${
+                      onClick={() => setLanguage('te')}
+                      className={`p-3.5 rounded-xl border text-center font-bold transition-all ${
                         settings.language === 'te'
-                          ? 'border-[#805536] bg-[#805536] text-white shadow-sm'
+                          ? 'border-[#805536] bg-[#805536] text-white shadow-sm ring-2 ring-[#805536]/20'
                           : 'border-[#DCD1C0] bg-[#FFFFFF] text-[#665E54] hover:text-[#29251F] hover:border-[#805536]'
                       }`}
                     >
-                      తెలుగు (Telugu)
+                      <span className="block text-sm">తెలుగు</span>
+                      <span className="block text-[10px] opacity-80 font-normal mt-0.5">Telugu AI Cohort</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setLanguage('ta')}
+                      className={`p-3.5 rounded-xl border text-center font-bold transition-all ${
+                        settings.language === 'ta'
+                          ? 'border-[#805536] bg-[#805536] text-white shadow-sm ring-2 ring-[#805536]/20'
+                          : 'border-[#DCD1C0] bg-[#FFFFFF] text-[#665E54] hover:text-[#29251F] hover:border-[#805536]'
+                      }`}
+                    >
+                      <span className="block text-sm">தமிழ்</span>
+                      <span className="block text-[10px] opacity-80 font-normal mt-0.5">Tamil Builder Network</span>
                     </button>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#DCD1C0]">
-                  <label className="block text-[#665E54] font-medium mb-2">Visual Theme</label>
+                <div className="pt-4 border-t border-[#DCD1C0]">
+                  <label className="block text-[#665E54] font-medium mb-1">{t('theme_title')}</label>
                   <p className="text-xs text-[#8C8173] mb-3">
-                    Choose your preferred environment. Both modes share the same visual identity, typography, and terracotta accents.
+                    {t('theme_subtitle')}
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     {/* Warm Luxury Light Card */}
@@ -353,18 +370,18 @@ export const SettingsPage: React.FC = () => {
                           <div className="w-6 h-6 rounded-lg bg-[#F3EDE3] border border-[#DCD1C0] flex items-center justify-center text-[#805536]">
                             <Sun className="w-3.5 h-3.5" />
                           </div>
-                          <span className="font-bold text-sm text-[#29251F]">Warm Luxury</span>
+                          <span className="font-bold text-sm text-[#29251F]">{t('theme_warmLuxury')}</span>
                         </div>
                         {settings.theme !== 'dark' ? (
                           <span className="inline-flex items-center gap-1 text-[10px] text-[#805536] font-semibold bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25">
-                            <Check className="w-3 h-3" /> Active
+                            <Check className="w-3 h-3" /> {t('theme_active')}
                           </span>
                         ) : (
-                          <span className="text-[10px] text-[#8C8173]">Default</span>
+                          <span className="text-[10px] text-[#8C8173]">{t('theme_default')}</span>
                         )}
                       </div>
                       <p className="text-[#665E54] text-xs leading-relaxed mb-3">
-                        Warm editorial palette inspired by high-end paper, ivory linen, and purposeful terracotta accents.
+                        {t('theme_warmLuxuryDesc')}
                       </p>
                       {/* Color Swatch Preview */}
                       <div className="flex items-center gap-1.5 pt-2 border-t border-[#DCD1C0]">
@@ -391,18 +408,18 @@ export const SettingsPage: React.FC = () => {
                           <div className="w-6 h-6 rounded-lg bg-[#161311] border border-[#362F29] flex items-center justify-center text-[#805536]">
                             <Moon className="w-3.5 h-3.5" />
                           </div>
-                          <span className="font-bold text-sm text-[#F7F2EE]">Premium Midnight</span>
+                          <span className="font-bold text-sm text-[#F7F2EE]">{t('theme_premiumMidnight')}</span>
                         </div>
                         {settings.theme === 'dark' ? (
                           <span className="inline-flex items-center gap-1 text-[10px] text-[#805536] font-semibold bg-[#805536]/20 px-2 py-0.5 rounded border border-[#805536]/40">
-                            <Check className="w-3 h-3" /> Active
+                            <Check className="w-3 h-3" /> {t('theme_active')}
                           </span>
                         ) : (
-                          <span className="text-[10px] text-[#8A7E73]">Companion</span>
+                          <span className="text-[10px] text-[#8A7E73]">{t('theme_companion')}</span>
                         )}
                       </div>
                       <p className="text-[#BDB1A6] text-xs leading-relaxed mb-3">
-                        Deep warm obsidian charcoal backgrounds with elevated dark surfaces and signature terracotta warmth.
+                        {t('theme_premiumMidnightDesc')}
                       </p>
                       {/* Color Swatch Preview */}
                       <div className="flex items-center gap-1.5 pt-2 border-t border-[#362F29]">

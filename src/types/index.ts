@@ -273,8 +273,10 @@ export interface ChatThread {
   isBlocked?: boolean;
 }
 
+export type SupportedLanguage = 'en' | 'te' | 'ta';
+
 export interface UserSettings {
-  language: 'en' | 'te'; // English or Telugu
+  language: SupportedLanguage;
   theme: 'light' | 'dark' | 'nightclub' | 'monochrome';
   notifications: {
     messages: boolean;

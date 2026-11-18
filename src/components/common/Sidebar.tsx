@@ -26,6 +26,7 @@ export const Sidebar: React.FC = () => {
     unreadNotificationCount,
     mentorCredits,
     currentUser,
+    t,
   } = useApp();
 
   const unreadMessagesCount = threads.reduce((acc, t) => acc + (t.unreadCount || 0), 0);
@@ -37,31 +38,31 @@ export const Sidebar: React.FC = () => {
     badge?: number | string;
     isFeatured?: boolean;
   }> = [
-    { name: 'Home', route: '/dashboard', icon: Home },
+    { name: t('nav_home'), route: '/dashboard', icon: Home },
     {
-      name: 'Find Your Four',
+      name: t('nav_findYourFour'),
       route: '/find-your-four',
       icon: Users2,
       isFeatured: true,
       badge: '0.92',
     },
-    { name: 'Discover', route: '/discover', icon: Compass },
-    { name: 'Build', route: '/build', icon: Hammer },
+    { name: t('nav_discover'), route: '/discover', icon: Compass },
+    { name: t('nav_build'), route: '/build', icon: Hammer },
     {
-      name: 'Mentorship',
+      name: t('nav_mentorship'),
       route: '/mentorship',
       icon: GraduationCap,
-      badge: `${mentorCredits.remaining} left`,
+      badge: `${mentorCredits.remaining} ${t('header_creditsLeft')}`,
     },
     {
-      name: 'Messages',
+      name: t('nav_messages'),
       route: '/messages',
       icon: MessageSquare,
       badge: unreadMessagesCount > 0 ? unreadMessagesCount : undefined,
     },
-    { name: 'Careers', route: '/careers', icon: Briefcase },
-    { name: 'Circles', route: '/circles', icon: Layers },
-    { name: 'Profile', route: '/profile', icon: User },
+    { name: t('nav_careers'), route: '/careers', icon: Briefcase },
+    { name: t('nav_circles'), route: '/circles', icon: Layers },
+    { name: t('nav_profile'), route: '/profile', icon: User },
   ];
 
   return (
@@ -82,7 +83,7 @@ export const Sidebar: React.FC = () => {
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-[#805536] animate-pulse" />
             </div>
-            <span className="text-[10px] text-[#665E54] block -mt-1 font-medium">Founding Cohort</span>
+            <span className="text-[10px] text-[#665E54] block -mt-1 font-medium">{t('nav_foundingCohort')}</span>
           </div>
         </div>
 
@@ -90,7 +91,7 @@ export const Sidebar: React.FC = () => {
         <button
           onClick={() => navigate('/notifications')}
           className="relative p-2 rounded-lg text-[#665E54] hover:text-[#29251F] hover:bg-[#E7DCCB] transition-colors"
-          title="Notifications"
+          title={t('nav_notifications')}
         >
           <Bell className="w-4 h-4" />
           {unreadNotificationCount > 0 && (
@@ -102,7 +103,7 @@ export const Sidebar: React.FC = () => {
       {/* Main Navigation */}
       <div className="flex-1 overflow-y-auto px-3 py-4 space-y-1.5">
         <div className="text-[11px] font-semibold uppercase tracking-wider text-[#8C8173] px-3 pb-1">
-          Menu
+          {t('nav_menu')}
         </div>
 
         {navItems.map((item) => {
@@ -172,7 +173,7 @@ export const Sidebar: React.FC = () => {
             }`}
           >
             <Settings className="w-3.5 h-3.5 text-[#665E54]" />
-            <span>Settings</span>
+            <span>{t('nav_settings')}</span>
           </button>
           <button
             onClick={() => navigate('/admin')}
@@ -183,7 +184,7 @@ export const Sidebar: React.FC = () => {
             }`}
           >
             <Shield className="w-3.5 h-3.5 text-[#665E54]" />
-            <span>Admin Console</span>
+            <span>{t('nav_admin')}</span>
           </button>
         </div>
       </div>

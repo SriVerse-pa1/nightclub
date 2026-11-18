@@ -24,6 +24,7 @@ export const DashboardPage: React.FC = () => {
     challenges,
     projects,
     startChatWithMember,
+    t,
   } = useApp();
 
   const [selectedMember, setSelectedMember] = useState<Member | null>(fourTeam.members[0] || null);
@@ -40,13 +41,13 @@ export const DashboardPage: React.FC = () => {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#DCD1C0]">
           <div>
             <span className="text-xs font-semibold uppercase tracking-wider text-[#805536]">
-              Nightclub Core Introduction
+              {t('nav_foundingCohort')}
             </span>
             <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F] mt-0.5">
-              Your Five is ready, {currentUser.name.split(' ')[0]}
+              {t('dashboard_greeting')}, {currentUser.name.split(' ')[0]}
             </h1>
             <p className="text-xs text-[#665E54] mt-1">
-              Tap any teammate to see their fit breakdown, shared ambition, and complementary skills.
+              {t('dashboard_subtitle')}
             </p>
           </div>
 
@@ -55,7 +56,7 @@ export const DashboardPage: React.FC = () => {
               onClick={() => navigate('/find-your-four')}
               className="nc-button-primary text-xs py-2 px-4"
             >
-              <span>Full Screen Mode</span>
+              <span>{t('dashboard_viewFour')}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>

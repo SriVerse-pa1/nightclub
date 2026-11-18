@@ -18,18 +18,18 @@ import {
 } from 'lucide-react';
 
 export const MobileBottomBar: React.FC = () => {
-  const { currentRoute, navigate, threads, logout } = useApp();
+  const { currentRoute, navigate, threads, logout, t } = useApp();
   const [showMoreMenu, setShowMoreMenu] = useState(false);
 
   const unreadMessagesCount = threads.reduce((acc, t) => acc + (t.unreadCount || 0), 0);
 
   const primaryTabs = [
-    { name: 'Home', route: '/dashboard' as const, icon: Home },
-    { name: 'Four', route: '/find-your-four' as const, icon: Users2, isSpecial: true },
-    { name: 'Build', route: '/build' as const, icon: Hammer },
-    { name: 'Mentors', route: '/mentorship' as const, icon: GraduationCap },
+    { name: t('nav_home'), route: '/dashboard' as const, icon: Home },
+    { name: t('nav_findYourFour'), route: '/find-your-four' as const, icon: Users2, isSpecial: true },
+    { name: t('nav_build'), route: '/build' as const, icon: Hammer },
+    { name: t('nav_mentorship'), route: '/mentorship' as const, icon: GraduationCap },
     {
-      name: 'Messages',
+      name: t('nav_messages'),
       route: '/messages' as const,
       icon: MessageSquare,
       badge: unreadMessagesCount,
@@ -117,7 +117,7 @@ export const MobileBottomBar: React.FC = () => {
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
                 <Compass className="w-4 h-4 text-[#805536]" />
-                <span>Discover</span>
+                <span>{t('nav_discover')}</span>
               </button>
 
               <button
@@ -139,7 +139,7 @@ export const MobileBottomBar: React.FC = () => {
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
                 <Briefcase className="w-4 h-4 text-[#805536]" />
-                <span>Careers</span>
+                <span>{t('nav_careers')}</span>
               </button>
 
               <button
@@ -150,7 +150,7 @@ export const MobileBottomBar: React.FC = () => {
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
                 <Layers className="w-4 h-4 text-[#805536]" />
-                <span>Circles</span>
+                <span>{t('nav_circles')}</span>
               </button>
 
               <button
@@ -161,7 +161,7 @@ export const MobileBottomBar: React.FC = () => {
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
                 <User className="w-4 h-4 text-[#805536]" />
-                <span>My Profile</span>
+                <span>{t('nav_profile')}</span>
               </button>
 
               <button
@@ -172,7 +172,7 @@ export const MobileBottomBar: React.FC = () => {
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
                 <Settings className="w-4 h-4 text-[#805536]" />
-                <span>Settings</span>
+                <span>{t('nav_settings')}</span>
               </button>
 
               <button
@@ -183,7 +183,7 @@ export const MobileBottomBar: React.FC = () => {
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
                 <Shield className="w-4 h-4 text-[#805536]" />
-                <span>Admin</span>
+                <span>{t('nav_admin')}</span>
               </button>
 
               <button
@@ -194,7 +194,7 @@ export const MobileBottomBar: React.FC = () => {
                 className="flex items-center gap-2.5 p-3 rounded-xl bg-[#FFFFFF] border border-[#DCD1C0] text-[#665E54] hover:text-[#805536] hover:border-[#805536] transition-colors font-medium text-xs"
               >
                 <LogOut className="w-4 h-4" />
-                <span>Log out</span>
+                <span>{t('nav_logout')}</span>
               </button>
             </div>
           </div>
