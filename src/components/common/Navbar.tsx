@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Sun, Moon } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
-  const { navigate, currentRoute, isAuthenticated, logout } = useApp();
+  const { navigate, currentRoute, isAuthenticated, logout, settings, toggleTheme } = useApp();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
@@ -80,6 +80,24 @@ export const Navbar: React.FC = () => {
 
         {/* Right CTA */}
         <div className="hidden md:flex items-center gap-3">
+          {/* Public Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-xl bg-[#FFFFFF] border border-[#DCD1C0] text-[#665E54] hover:text-[#29251F] hover:border-[#805536] transition-colors shadow-sm"
+            title={
+              settings.theme === 'dark'
+                ? 'Switch to Warm Luxury (Light)'
+                : 'Switch to Premium Midnight (Dark)'
+            }
+            aria-label="Toggle visual theme"
+          >
+            {settings.theme === 'dark' ? (
+              <Sun className="w-4 h-4 text-[#805536]" />
+            ) : (
+              <Moon className="w-4 h-4 text-[#805536]" />
+            )}
+          </button>
+
           {isAuthenticated ? (
             <>
               <button
@@ -116,6 +134,22 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile menu trigger */}
         <div className="flex md:hidden items-center gap-2">
+          <button
+            onClick={toggleTheme}
+            className="p-1.5 rounded-lg bg-[#FFFFFF] border border-[#DCD1C0] text-[#665E54] hover:text-[#29251F]"
+            title={
+              settings.theme === 'dark'
+                ? 'Switch to Warm Luxury (Light)'
+                : 'Switch to Premium Midnight (Dark)'
+            }
+            aria-label="Toggle visual theme"
+          >
+            {settings.theme === 'dark' ? (
+              <Sun className="w-4 h-4 text-[#805536]" />
+            ) : (
+              <Moon className="w-4 h-4 text-[#805536]" />
+            )}
+          </button>
           {isAuthenticated && (
             <button
               onClick={() => navigate('/dashboard')}

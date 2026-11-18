@@ -76,9 +76,18 @@ export const AppHeader: React.FC = () => {
         <button
           onClick={toggleTheme}
           className="p-2 rounded-lg bg-[#FFFFFF] border border-[#DCD1C0] text-[#665E54] hover:text-[#29251F] hover:border-[#805536] transition-colors shadow-sm"
-          title={`Theme: ${settings.theme}`}
+          title={
+            settings.theme === 'dark'
+              ? 'Switch to Warm Luxury (Light)'
+              : 'Switch to Premium Midnight (Dark)'
+          }
+          aria-label="Toggle visual theme"
         >
-          <Moon className="w-3.5 h-3.5 text-[#805536]" />
+          {settings.theme === 'dark' ? (
+            <Sun className="w-3.5 h-3.5 text-[#805536]" />
+          ) : (
+            <Moon className="w-3.5 h-3.5 text-[#805536]" />
+          )}
         </button>
 
         {/* Mentor Credits badge */}

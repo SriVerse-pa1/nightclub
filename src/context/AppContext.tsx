@@ -170,8 +170,39 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Notifications
   const [notifications, setNotifications] = useState<AppNotification[]>(MOCK_NOTIFICATIONS);
 
-  // Settings
-  const [settings, setSettings] = useState<UserSettings>(INITIAL_SETTINGS);
+  // Settings & Theme
+  const getInitialTheme = (): 'light' | 'dark' => {
+    try {
+      const saved = localStorage.getItem('nightclub_theme');
+      if (saved === 'dark' || saved === 'light') return saved;
+    } catch (e) {
+      // Ignore localStorage errors
+    }
+    return 'light';
+  };
+
+  const [settings, setSettings] = useState<UserSettings>(() => ({
+    ...INITIAL_SETTINGS,
+    theme: getInitialTheme(),
+  }));
+
+  // Sync theme with document & localStorage
+  useEffect(() => {
+    const isDark = settings.theme === 'dark';
+    try {
+      localStorage.setItem('nightclub_theme', settings.theme);
+    } catch (e) {
+      // Ignore localStorage errors
+    }
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark');
+      document.body.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+      document.body.classList.remove('dark');
+    }
+  }, [settings.theme]);
 
   // Toasts
   const [toasts, setToasts] = useState<ToastItem[]>([]);
@@ -558,8 +589,13 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   const toggleTheme = () => {
     setSettings((prev) => {
-      const nextTheme = prev.theme === 'nightclub' ? 'monochrome' : prev.theme === 'monochrome' ? 'light' : 'nightclub';
-      showToast(`Switched theme to ${nextTheme}`, 'info');
+      const nextTheme = prev.theme === 'dark' ? 'light' : 'dark';
+      showToast(
+        nextTheme === 'dark'
+          ? 'Switched to Premium Midnight theme'
+          : 'Switched to Warm Luxury theme',
+        'info'
+      );
       return { ...prev, theme: nextTheme };
     });
   };

@@ -275,7 +275,7 @@ export interface ChatThread {
 
 export interface UserSettings {
   language: 'en' | 'te'; // English or Telugu
-  theme: 'nightclub' | 'monochrome' | 'light';
+  theme: 'light' | 'dark' | 'nightclub' | 'monochrome';
   notifications: {
     messages: boolean;
     teamMatches: boolean;

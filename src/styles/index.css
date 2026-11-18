@@ -16,6 +16,28 @@
   --nc-accent: #805536;
 }
 
+/* Premium Midnight Dark Mode Variables */
+html.dark,
+.dark {
+  --nc-bg: #161311;
+  --nc-bg-deep: #110F0D;
+  --nc-surface: #1E1A17;
+  --nc-surface-raised: #25201C;
+  --nc-surface-subtle: #181512;
+  --nc-border: #362F29;
+  --nc-border-subtle: #2C2621;
+  --nc-text: #F7F2EE;
+  --nc-text-muted: #BDB1A6;
+  --nc-text-dim: #8A7E73;
+  --nc-accent: #805536;
+}
+
+html.dark,
+html.dark body {
+  background-color: #161311 !important;
+  color: #F7F2EE !important;
+}
+
 /* Custom Scrollbar - Premium Warm Luxury */
 ::-webkit-scrollbar {
   width: 6px;
@@ -30,6 +52,16 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #805536;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #161311 !important;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #362F29 !important;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #805536 !important;
 }
 
 /* Glass & Card styles - Premium Warm Luxury */
@@ -104,6 +136,240 @@
   background: #F3EDE3;
   border-color: #805536;
   color: #805536;
+}
+
+/* ==========================================================================
+   PREMIUM MIDNIGHT DARK MODE - SURFACE & TOKEN MAPPINGS
+   Deep warm charcoal (#161311), elevated surfaces (#1E1A17), readable text (#F7F2EE, #BDB1A6),
+   refined warm bronze hairline borders (#362F29), and identical terracotta accent (#805536).
+   ========================================================================== */
+
+/* Dark Component Overrides */
+.dark .nc-card {
+  background: #1E1A17 !important;
+  border-color: #362F29 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 4px 14px rgba(0, 0, 0, 0.28) !important;
+}
+
+.dark .nc-card-hover:hover {
+  border-color: #805536 !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55) !important;
+}
+
+.dark .nc-input {
+  background: #1E1A17 !important;
+  border-color: #362F29 !important;
+  color: #F7F2EE !important;
+}
+
+.dark .nc-input::placeholder {
+  color: #8A7E73 !important;
+}
+
+.dark .nc-input:focus {
+  border-color: #805536 !important;
+  box-shadow: 0 0 0 1px #805536 !important;
+}
+
+.dark .nc-button-secondary {
+  background: #1E1A17 !important;
+  color: #F7F2EE !important;
+  border-color: #362F29 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) !important;
+}
+
+.dark .nc-button-secondary:hover {
+  background: #25201C !important;
+  border-color: #805536 !important;
+  color: #805536 !important;
+}
+
+/* Dark Backgrounds */
+.dark .bg-\[\#F3EDE3\] {
+  background-color: #161311 !important;
+}
+
+.dark .bg-\[\#F3EDE3\]\/90 {
+  background-color: rgba(22, 19, 17, 0.92) !important;
+}
+
+.dark .bg-\[\#F3EDE3\]\/80 {
+  background-color: rgba(22, 19, 17, 0.82) !important;
+}
+
+.dark .bg-\[\#F3EDE3\]\/70 {
+  background-color: rgba(22, 19, 17, 0.72) !important;
+}
+
+.dark .bg-\[\#F3EDE3\]\/60 {
+  background-color: rgba(22, 19, 17, 0.62) !important;
+}
+
+.dark .bg-\[\#F3EDE3\]\/50 {
+  background-color: rgba(22, 19, 17, 0.52) !important;
+}
+
+.dark .bg-\[\#E7DCCB\] {
+  background-color: #1E1A17 !important;
+}
+
+.dark .bg-\[\#E7DCCB\]\/60 {
+  background-color: rgba(30, 26, 23, 0.6) !important;
+}
+
+.dark .bg-\[\#E7DCCB\]\/50 {
+  background-color: rgba(30, 26, 23, 0.5) !important;
+}
+
+.dark .bg-\[\#E7DCCB\]\/40 {
+  background-color: rgba(30, 26, 23, 0.4) !important;
+}
+
+.dark .bg-\[\#E7DCCB\]\/30 {
+  background-color: rgba(30, 26, 23, 0.3) !important;
+}
+
+.dark .bg-\[\#FFFFFF\],
+.dark .bg-white {
+  background-color: #1E1A17 !important;
+}
+
+.dark .bg-\[\#FFFFFF\]\/95,
+.dark .bg-white\/95 {
+  background-color: rgba(30, 26, 23, 0.95) !important;
+}
+
+.dark .bg-\[\#FFFFFF\]\/90,
+.dark .bg-white\/90 {
+  background-color: rgba(30, 26, 23, 0.9) !important;
+}
+
+.dark .bg-\[\#FFFFFF\]\/80,
+.dark .bg-white\/80 {
+  background-color: rgba(30, 26, 23, 0.8) !important;
+}
+
+.dark .bg-\[\#FFFFFF\]\/70,
+.dark .bg-white\/70 {
+  background-color: rgba(30, 26, 23, 0.7) !important;
+}
+
+.dark .bg-\[\#FFFFFF\]\/60,
+.dark .bg-white\/60 {
+  background-color: rgba(30, 26, 23, 0.6) !important;
+}
+
+.dark .bg-\[\#FFFFFF\]\/50,
+.dark .bg-white\/50 {
+  background-color: rgba(30, 26, 23, 0.5) !important;
+}
+
+/* Dark Borders & Dividers */
+.dark .border-\[\#DCD1C0\] {
+  border-color: #362F29 !important;
+}
+
+.dark .border-\[\#E8DFD1\],
+.dark .border-\[\#E7DCCB\] {
+  border-color: #2C2621 !important;
+}
+
+.dark .border-\[\#FFFFFF\] {
+  border-color: #362F29 !important;
+}
+
+.dark .divide-\[\#DCD1C0\] > :not([hidden]) ~ :not([hidden]) {
+  border-color: #362F29 !important;
+}
+
+/* Dark Text Colors */
+.dark .text-\[\#29251F\] {
+  color: #F7F2EE !important;
+}
+
+.dark .text-\[\#665E54\] {
+  color: #BDB1A6 !important;
+}
+
+.dark .text-\[\#8C8173\] {
+  color: #8A7E73 !important;
+}
+
+.dark .placeholder-\[\#8C8173\]::placeholder {
+  color: #8A7E73 !important;
+}
+
+/* High contrast role text in dark mode */
+.dark .text-\[\#5C4533\] {
+  color: #D5B496 !important;
+}
+
+.dark .text-\[\#6E4D36\] {
+  color: #DEAB88 !important;
+}
+
+/* Hover States in Dark Mode */
+.dark .hover\:bg-\[\#F3EDE3\]:hover {
+  background-color: #25201C !important;
+}
+
+.dark .hover\:bg-\[\#E7DCCB\]:hover {
+  background-color: #2C2621 !important;
+}
+
+.dark .hover\:bg-\[\#FFFFFF\]:hover {
+  background-color: #25201C !important;
+}
+
+.dark .hover\:text-\[\#29251F\]:hover {
+  color: #FFFFFF !important;
+}
+
+.dark .hover\:border-\[\#DCD1C0\]:hover {
+  border-color: #4A4038 !important;
+}
+
+/* Form controls in dark mode */
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="password"],
+.dark input[type="search"],
+.dark input[type="number"],
+.dark input[type="time"],
+.dark textarea,
+.dark select {
+  background-color: #1E1A17;
+  color: #F7F2EE;
+  border-color: #362F29;
+}
+
+.dark input[type="text"]::placeholder,
+.dark input[type="email"]::placeholder,
+.dark input[type="password"]::placeholder,
+.dark input[type="search"]::placeholder,
+.dark textarea::placeholder {
+  color: #8A7E73;
+}
+
+.dark select option {
+  background-color: #1E1A17;
+  color: #F7F2EE;
+}
+
+/* Modal Backdrops & Overlays in Dark Mode */
+.dark .bg-\[\#29251F\]\/40 {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+/* SVG Constellation & Ring Lines in Dark Mode */
+.dark svg circle[stroke="#DCD1C0"],
+.dark svg line[stroke="#DCD1C0"] {
+  stroke: #362F29 !important;
+}
+
+.dark svg circle[stroke="#E7DCCB"],
+.dark svg line[stroke="#E7DCCB"] {
+  stroke: #25201C !important;
 }
 
 /* Animations */

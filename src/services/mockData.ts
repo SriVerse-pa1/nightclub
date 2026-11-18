@@ -958,7 +958,7 @@ export const MOCK_THREADS: ChatThread[] = [
 
 export const INITIAL_SETTINGS: UserSettings = {
   language: 'en',
-  theme: 'monochrome',
+  theme: 'light',
   notifications: {
     messages: true,
     teamMatches: true,

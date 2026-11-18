@@ -9,6 +9,9 @@ import {
   CreditCard,
   Trash2,
   Download,
+  Sun,
+  Moon,
+  Check,
 } from 'lucide-react';
 
 export const SettingsPage: React.FC = () => {
@@ -331,14 +334,85 @@ export const SettingsPage: React.FC = () => {
 
                 <div className="pt-3 border-t border-[#DCD1C0]">
                   <label className="block text-[#665E54] font-medium mb-2">Visual Theme</label>
-                  <div className="p-3.5 rounded-xl border border-[#DCD1C0] bg-[#F3EDE3] text-xs">
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-[#29251F]">Nightclub Warm Luxury</span>
-                      <span className="text-[10px] text-[#805536] font-semibold bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25">Active</span>
-                    </div>
-                    <p className="text-[#665E54] text-[11px] mt-1">
-                      Warm editorial palette inspired by high-end paper, refined typography, and purposeful terracotta accents.
-                    </p>
+                  <p className="text-xs text-[#8C8173] mb-3">
+                    Choose your preferred environment. Both modes share the same visual identity, typography, and terracotta accents.
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    {/* Warm Luxury Light Card */}
+                    <button
+                      type="button"
+                      onClick={() => updateSettings({ theme: 'light' })}
+                      className={`text-left p-4 rounded-2xl border transition-all ${
+                        settings.theme !== 'dark'
+                          ? 'border-[#805536] bg-[#FFFFFF] shadow-md ring-2 ring-[#805536]/20'
+                          : 'border-[#DCD1C0] bg-[#FFFFFF] hover:border-[#805536]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-lg bg-[#F3EDE3] border border-[#DCD1C0] flex items-center justify-center text-[#805536]">
+                            <Sun className="w-3.5 h-3.5" />
+                          </div>
+                          <span className="font-bold text-sm text-[#29251F]">Warm Luxury</span>
+                        </div>
+                        {settings.theme !== 'dark' ? (
+                          <span className="inline-flex items-center gap-1 text-[10px] text-[#805536] font-semibold bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25">
+                            <Check className="w-3 h-3" /> Active
+                          </span>
+                        ) : (
+                          <span className="text-[10px] text-[#8C8173]">Default</span>
+                        )}
+                      </div>
+                      <p className="text-[#665E54] text-xs leading-relaxed mb-3">
+                        Warm editorial palette inspired by high-end paper, ivory linen, and purposeful terracotta accents.
+                      </p>
+                      {/* Color Swatch Preview */}
+                      <div className="flex items-center gap-1.5 pt-2 border-t border-[#DCD1C0]">
+                        <div className="w-4 h-4 rounded-full bg-[#F3EDE3] border border-[#DCD1C0]" title="#F3EDE3 Canvas" />
+                        <div className="w-4 h-4 rounded-full bg-[#FFFFFF] border border-[#DCD1C0]" title="#FFFFFF Surface" />
+                        <div className="w-4 h-4 rounded-full bg-[#805536]" title="#805536 Terracotta" />
+                        <div className="w-4 h-4 rounded-full bg-[#29251F]" title="#29251F Text" />
+                        <span className="text-[10px] text-[#8C8173] ml-auto">Ivory & Linen</span>
+                      </div>
+                    </button>
+
+                    {/* Premium Midnight Dark Card */}
+                    <button
+                      type="button"
+                      onClick={() => updateSettings({ theme: 'dark' })}
+                      className={`text-left p-4 rounded-2xl border transition-all ${
+                        settings.theme === 'dark'
+                          ? 'border-[#805536] bg-[#1E1A17] shadow-md ring-2 ring-[#805536]/20'
+                          : 'border-[#DCD1C0] bg-[#1E1A17] hover:border-[#805536]'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-lg bg-[#161311] border border-[#362F29] flex items-center justify-center text-[#805536]">
+                            <Moon className="w-3.5 h-3.5" />
+                          </div>
+                          <span className="font-bold text-sm text-[#F7F2EE]">Premium Midnight</span>
+                        </div>
+                        {settings.theme === 'dark' ? (
+                          <span className="inline-flex items-center gap-1 text-[10px] text-[#805536] font-semibold bg-[#805536]/20 px-2 py-0.5 rounded border border-[#805536]/40">
+                            <Check className="w-3 h-3" /> Active
+                          </span>
+                        ) : (
+                          <span className="text-[10px] text-[#8A7E73]">Companion</span>
+                        )}
+                      </div>
+                      <p className="text-[#BDB1A6] text-xs leading-relaxed mb-3">
+                        Deep warm obsidian charcoal backgrounds with elevated dark surfaces and signature terracotta warmth.
+                      </p>
+                      {/* Color Swatch Preview */}
+                      <div className="flex items-center gap-1.5 pt-2 border-t border-[#362F29]">
+                        <div className="w-4 h-4 rounded-full bg-[#161311] border border-[#362F29]" title="#161311 Canvas" />
+                        <div className="w-4 h-4 rounded-full bg-[#1E1A17] border border-[#362F29]" title="#1E1A17 Surface" />
+                        <div className="w-4 h-4 rounded-full bg-[#805536]" title="#805536 Terracotta" />
+                        <div className="w-4 h-4 rounded-full bg-[#F7F2EE]" title="#F7F2EE Text" />
+                        <span className="text-[10px] text-[#8A7E73] ml-auto">Warm Obsidian</span>
+                      </div>
+                    </button>
                   </div>
                 </div>
               </div>
