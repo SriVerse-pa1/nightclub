@@ -11,11 +11,7 @@ import {
   Star,
   Video,
   ArrowRight,
-  Filter,
   CheckCircle2,
-  XCircle,
-  AlertCircle,
-  ExternalLink,
 } from 'lucide-react';
 
 export const MentorshipPage: React.FC = () => {
@@ -26,7 +22,6 @@ export const MentorshipPage: React.FC = () => {
     bookMentorSession,
     cancelMentorSession,
     submitSessionFeedback,
-    showToast,
   } = useApp();
 
   const [activeTab, setActiveTab] = useState<'roster' | 'my_sessions'>('roster');
@@ -45,30 +40,30 @@ export const MentorshipPage: React.FC = () => {
   return (
     <div className="space-y-6 pb-16">
       {/* Persistent Header with Credit Indicator */}
-      <div className="bg-[#1C1431] border border-[#3A2E5C] rounded-3xl p-6 sm:p-7 shadow-glow-card flex flex-col md:flex-row md:items-center justify-between gap-5">
+      <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl p-6 sm:p-7 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-5">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs uppercase tracking-wider text-[#FFB547] font-semibold">
+            <span className="text-xs uppercase tracking-wider text-[#805536] font-semibold">
               1-on-1 Advisory Network
             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FFB547] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#805536] animate-pulse" />
           </div>
-          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3EEFF] mt-1">
+          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F] mt-1">
             Personal Mentorship
           </h1>
-          <p className="text-xs text-[#A99CCB] mt-0.5">
+          <p className="text-xs text-[#665E54] mt-0.5">
             30-minute private video sessions with industry leaders.
           </p>
         </div>
 
         {/* Credits Card */}
-        <div className="bg-[#22183B] border border-[#FFB547]/40 rounded-2xl p-4 flex flex-col gap-2 min-w-[240px]">
+        <div className="bg-[#F3EDE3] border border-[#DCD1C0] rounded-2xl p-4 flex flex-col gap-2 min-w-[240px]">
           <div className="flex items-center justify-between text-xs">
-            <span className="text-[#A99CCB] font-medium flex items-center gap-1.5">
-              <Sparkles className="w-4 h-4 text-[#FFB547]" />
+            <span className="text-[#665E54] font-medium flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-[#805536]" />
               Monthly Credits:
             </span>
-            <strong className="text-sm text-[#FFB547]">
+            <strong className="text-sm text-[#805536] font-bold">
               {mentorCredits.remaining} of {mentorCredits.total} left
             </strong>
           </div>
@@ -79,26 +74,26 @@ export const MentorshipPage: React.FC = () => {
               <span
                 key={i}
                 className={`h-2 flex-1 rounded-full ${
-                  i < mentorCredits.remaining ? 'bg-[#FFB547]' : 'bg-[#3A2E5C]'
+                  i < mentorCredits.remaining ? 'bg-[#805536]' : 'bg-[#E7DCCB]'
                 }`}
               />
             ))}
           </div>
 
-          <span className="text-[10px] text-[#7C6F9B]">
+          <span className="text-[10px] text-[#8C8173]">
             Credits reset on the 1st of every month (No rollover)
           </span>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#3A2E5C] pb-2 text-xs">
+      <div className="flex items-center gap-2 border-b border-[#DCD1C0] pb-2 text-xs">
         <button
           onClick={() => setActiveTab('roster')}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold transition-all ${
             activeTab === 'roster'
-              ? 'bg-[#22183B] text-[#FFB547] border border-[#3A2E5C]'
-              : 'text-[#A99CCB] hover:text-[#F3EEFF]'
+              ? 'bg-[#FFFFFF] text-[#805536] border border-[#805536]/30 shadow-sm'
+              : 'text-[#665E54] hover:text-[#29251F]'
           }`}
         >
           <GraduationCap className="w-4 h-4" />
@@ -109,8 +104,8 @@ export const MentorshipPage: React.FC = () => {
           onClick={() => setActiveTab('my_sessions')}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold transition-all ${
             activeTab === 'my_sessions'
-              ? 'bg-[#22183B] text-[#FFB547] border border-[#3A2E5C]'
-              : 'text-[#A99CCB] hover:text-[#F3EEFF]'
+              ? 'bg-[#FFFFFF] text-[#805536] border border-[#805536]/30 shadow-sm'
+              : 'text-[#665E54] hover:text-[#29251F]'
           }`}
         >
           <Calendar className="w-4 h-4" />
@@ -123,7 +118,7 @@ export const MentorshipPage: React.FC = () => {
         <div className="space-y-6">
           {/* Filters */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
-            <span className="text-[#7C6F9B] font-semibold text-[11px] uppercase mr-1">
+            <span className="text-[#8C8173] font-semibold text-[11px] uppercase mr-1">
               Expertise:
             </span>
             {['all', 'Large Language Models', 'Product Strategy', 'Pre-seed Fundraising', 'Pricing'].map(
@@ -133,8 +128,8 @@ export const MentorshipPage: React.FC = () => {
                   onClick={() => setSelectedExpertise(exp)}
                   className={`px-3 py-1.5 rounded-xl capitalize font-medium whitespace-nowrap transition-all ${
                     selectedExpertise === exp
-                      ? 'bg-[#FFB547] text-[#17102A] font-bold'
-                      : 'bg-[#22183B] text-[#A99CCB] border border-[#3A2E5C]'
+                      ? 'bg-[#805536] text-white font-bold shadow-sm'
+                      : 'bg-[#FFFFFF] text-[#665E54] border border-[#DCD1C0] hover:text-[#29251F]'
                   }`}
                 >
                   {exp}
@@ -148,35 +143,35 @@ export const MentorshipPage: React.FC = () => {
             {filteredMentors.map((mentor) => (
               <div
                 key={mentor.id}
-                className="nc-card p-6 space-y-4 hover:border-[#FFB547]/50 flex flex-col justify-between"
+                className="nc-card p-6 space-y-4 bg-[#FFFFFF] border border-[#DCD1C0] hover:border-[#805536] flex flex-col justify-between shadow-card"
               >
                 <div className="space-y-3.5">
                   <div className="flex items-start justify-between gap-3">
                     <img
                       src={mentor.avatar}
                       alt={mentor.name}
-                      className="w-14 h-14 rounded-full object-cover border-2 border-[#FFB547]/40"
+                      className="w-14 h-14 rounded-full object-cover border border-[#DCD1C0]"
                     />
                     <div className="text-right">
-                      <div className="flex items-center gap-1 text-xs font-bold text-[#FFB547]">
-                        <Star className="w-3.5 h-3.5 fill-[#FFB547]" />
+                      <div className="flex items-center gap-1 text-xs font-bold text-[#805536]">
+                        <Star className="w-3.5 h-3.5 fill-[#805536]" />
                         <span>{mentor.rating}</span>
                       </div>
-                      <span className="text-[10px] text-[#7C6F9B]">
+                      <span className="text-[10px] text-[#8C8173]">
                         {mentor.reviewsCount} reviews
                       </span>
                     </div>
                   </div>
 
                   <div>
-                    <h3 className="font-heading font-bold text-base text-[#F3EEFF]">
+                    <h3 className="font-heading font-bold text-base text-[#29251F]">
                       {mentor.name}
                     </h3>
-                    <p className="text-xs text-[#A99CCB] font-medium">{mentor.title}</p>
-                    <span className="text-[11px] text-[#2DD4BF]">{mentor.company}</span>
+                    <p className="text-xs text-[#29251F] font-medium">{mentor.title}</p>
+                    <span className="text-[11px] text-[#665E54]">{mentor.company}</span>
                   </div>
 
-                  <p className="text-xs text-[#A99CCB] line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-[#665E54] line-clamp-2 leading-relaxed">
                     {mentor.bio}
                   </p>
 
@@ -185,7 +180,7 @@ export const MentorshipPage: React.FC = () => {
                     {mentor.expertise.slice(0, 3).map((exp) => (
                       <span
                         key={exp}
-                        className="text-[10px] px-2 py-0.5 rounded bg-[#17102A] border border-[#3A2E5C] text-[#A99CCB]"
+                        className="text-[10px] px-2 py-0.5 rounded bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F]"
                       >
                         {exp}
                       </span>
@@ -193,14 +188,14 @@ export const MentorshipPage: React.FC = () => {
                   </div>
 
                   {/* Next Open Slot */}
-                  <div className="p-3 bg-[#17102A] rounded-xl border border-[#3A2E5C] flex items-center justify-between text-xs">
-                    <span className="text-[#A99CCB]">Next Open Slot:</span>
-                    <span className="font-semibold text-[#FFB547]">{mentor.nextSlot}</span>
+                  <div className="p-3 bg-[#F3EDE3] rounded-xl border border-[#DCD1C0] flex items-center justify-between text-xs">
+                    <span className="text-[#665E54]">Next Open Slot:</span>
+                    <span className="font-semibold text-[#29251F]">{mentor.nextSlot}</span>
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#3A2E5C] flex items-center justify-between">
-                  <span className="text-xs text-[#7C6F9B]">
+                <div className="pt-3 border-t border-[#DCD1C0] flex items-center justify-between">
+                  <span className="text-xs text-[#8C8173]">
                     Languages: {mentor.languages.join(', ')}
                   </span>
 
@@ -223,13 +218,13 @@ export const MentorshipPage: React.FC = () => {
         <div className="space-y-8 text-xs">
           {/* Upcoming Sessions */}
           <div className="space-y-4">
-            <h3 className="font-heading font-bold text-base text-[#F3EEFF] flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-[#FFB547]" />
+            <h3 className="font-heading font-bold text-base text-[#29251F] flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-[#805536]" />
               <span>Upcoming Confirmed Sessions</span>
             </h3>
 
             {upcomingSessions.length === 0 ? (
-              <div className="p-8 text-center bg-[#22183B] border border-[#3A2E5C] rounded-2xl text-[#A99CCB]">
+              <div className="p-8 text-center bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl text-[#665E54] shadow-card">
                 No upcoming sessions booked. Select a mentor to book your 30-minute call.
               </div>
             ) : (
@@ -237,26 +232,26 @@ export const MentorshipPage: React.FC = () => {
                 {upcomingSessions.map((sess) => (
                   <div
                     key={sess.id}
-                    className="nc-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                    className="nc-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#FFFFFF] border border-[#DCD1C0] shadow-card"
                   >
                     <div className="flex items-start gap-3.5">
                       <img
                         src={sess.mentorAvatar}
                         alt={sess.mentorName}
-                        className="w-12 h-12 rounded-full object-cover border border-[#FFB547]/40"
+                        className="w-12 h-12 rounded-full object-cover border border-[#DCD1C0]"
                       />
                       <div className="space-y-1">
-                        <h4 className="font-heading font-bold text-sm text-[#F3EEFF]">
+                        <h4 className="font-heading font-bold text-sm text-[#29251F]">
                           {sess.mentorName}
                         </h4>
-                        <p className="text-[11px] text-[#A99CCB]">{sess.mentorTitle}</p>
-                        <div className="flex items-center gap-2 text-[#FFB547] font-semibold text-xs pt-1">
-                          <Clock className="w-3.5 h-3.5" />
+                        <p className="text-[11px] text-[#665E54]">{sess.mentorTitle}</p>
+                        <div className="flex items-center gap-2 text-[#29251F] font-semibold text-xs pt-1">
+                          <Clock className="w-3.5 h-3.5 text-[#805536]" />
                           <span>
                             {sess.slotDay} • {sess.slotTime}
                           </span>
                         </div>
-                        <p className="text-[11px] text-[#F3EEFF]/80 italic mt-1">
+                        <p className="text-[11px] text-[#665E54] italic mt-1">
                           Goal: "{sess.goal}"
                         </p>
                       </div>
@@ -265,7 +260,7 @@ export const MentorshipPage: React.FC = () => {
                     <div className="flex items-center gap-2 shrink-0">
                       <button
                         onClick={() => cancelMentorSession(sess.id)}
-                        className="nc-button-secondary py-2 px-3 text-rose-300 hover:text-rose-200"
+                        className="nc-button-secondary py-2 px-3 text-[#665E54] hover:text-[#29251F]"
                       >
                         Cancel
                       </button>
@@ -286,9 +281,9 @@ export const MentorshipPage: React.FC = () => {
           </div>
 
           {/* Past Sessions & Feedback */}
-          <div className="space-y-4 pt-4 border-t border-[#3A2E5C]">
-            <h3 className="font-heading font-bold text-base text-[#F3EEFF] flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#2DD4BF]" />
+          <div className="space-y-4 pt-4 border-t border-[#DCD1C0]">
+            <h3 className="font-heading font-bold text-base text-[#29251F] flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-[#805536]" />
               <span>Past Sessions & Notes</span>
             </h3>
 
@@ -296,19 +291,19 @@ export const MentorshipPage: React.FC = () => {
               {pastSessions.map((sess) => (
                 <div
                   key={sess.id}
-                  className="nc-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  className="nc-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#FFFFFF] border border-[#DCD1C0] shadow-card"
                 >
                   <div className="flex items-start gap-3.5">
                     <img
                       src={sess.mentorAvatar}
                       alt={sess.mentorName}
-                      className="w-11 h-11 rounded-full object-cover border border-[#3A2E5C]"
+                      className="w-11 h-11 rounded-full object-cover border border-[#DCD1C0]"
                     />
                     <div className="space-y-1">
-                      <h4 className="font-bold text-xs text-[#F3EEFF]">{sess.mentorName}</h4>
-                      <span className="text-[10px] text-[#7C6F9B]">{sess.slotDay}</span>
+                      <h4 className="font-bold text-xs text-[#29251F]">{sess.mentorName}</h4>
+                      <span className="text-[10px] text-[#8C8173]">{sess.slotDay}</span>
                       {sess.feedbackHelp && (
-                        <p className="text-[11px] text-[#A99CCB] bg-[#17102A] p-2 rounded-lg border border-[#3A2E5C] mt-2">
+                        <p className="text-[11px] text-[#29251F] bg-[#F3EDE3] p-2 rounded-lg border border-[#DCD1C0] mt-2">
                           "{sess.feedbackHelp}"
                         </p>
                       )}
@@ -324,9 +319,9 @@ export const MentorshipPage: React.FC = () => {
                         Leave Feedback
                       </button>
                     ) : (
-                      <div className="flex items-center gap-1 text-[#FFB547]">
+                      <div className="flex items-center gap-1 text-[#805536]">
                         {Array.from({ length: sess.rating }).map((_, i) => (
-                          <Star key={i} className="w-3.5 h-3.5 fill-[#FFB547]" />
+                          <Star key={i} className="w-3.5 h-3.5 fill-[#805536]" />
                         ))}
                       </div>
                     )}

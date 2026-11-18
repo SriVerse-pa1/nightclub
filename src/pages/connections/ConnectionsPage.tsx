@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { RoleBadge } from '../../components/common/RoleBadge';
-import { Member } from '../../types';
 import {
   Users2,
   UserCheck,
@@ -55,23 +54,23 @@ export const ConnectionsPage: React.FC = () => {
   return (
     <div className="space-y-6 pb-16">
       {/* Header */}
-      <div className="pb-4 border-b border-[#3A2E5C]">
-        <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3EEFF]">
+      <div className="pb-4 border-b border-[#DCD1C0]">
+        <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F]">
           Connections & Network
         </h1>
-        <p className="text-xs text-[#A99CCB] mt-0.5">
+        <p className="text-xs text-[#665E54] mt-0.5">
           Manage your accepted teammates, pending invites, and private direct contact channels.
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#3A2E5C] pb-2 text-xs">
+      <div className="flex items-center gap-2 border-b border-[#DCD1C0] pb-2 text-xs">
         <button
           onClick={() => setActiveTab('requests')}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold transition-all ${
             activeTab === 'requests'
-              ? 'bg-[#22183B] text-[#FFB547] border border-[#3A2E5C]'
-              : 'text-[#A99CCB] hover:text-[#F3EEFF]'
+              ? 'bg-[#FFFFFF] text-[#805536] border border-[#805536]/30 shadow-sm'
+              : 'text-[#665E54] hover:text-[#29251F]'
           }`}
         >
           <Users2 className="w-4 h-4" />
@@ -82,8 +81,8 @@ export const ConnectionsPage: React.FC = () => {
           onClick={() => setActiveTab('sent')}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold transition-all ${
             activeTab === 'sent'
-              ? 'bg-[#22183B] text-[#FFB547] border border-[#3A2E5C]'
-              : 'text-[#A99CCB] hover:text-[#F3EEFF]'
+              ? 'bg-[#FFFFFF] text-[#805536] border border-[#805536]/30 shadow-sm'
+              : 'text-[#665E54] hover:text-[#29251F]'
           }`}
         >
           <Send className="w-4 h-4" />
@@ -94,8 +93,8 @@ export const ConnectionsPage: React.FC = () => {
           onClick={() => setActiveTab('connected')}
           className={`flex items-center gap-2 px-4 py-2 rounded-xl font-semibold transition-all ${
             activeTab === 'connected'
-              ? 'bg-[#22183B] text-[#FFB547] border border-[#3A2E5C]'
-              : 'text-[#A99CCB] hover:text-[#F3EEFF]'
+              ? 'bg-[#FFFFFF] text-[#805536] border border-[#805536]/30 shadow-sm'
+              : 'text-[#665E54] hover:text-[#29251F]'
           }`}
         >
           <UserCheck className="w-4 h-4" />
@@ -107,9 +106,9 @@ export const ConnectionsPage: React.FC = () => {
       {activeTab === 'requests' && (
         <div className="space-y-4">
           {requests.length === 0 ? (
-            <div className="p-12 text-center bg-[#22183B] border border-[#3A2E5C] rounded-2xl text-xs text-[#A99CCB] space-y-2">
-              <Users2 className="w-8 h-8 text-[#FFB547] mx-auto" />
-              <p className="font-semibold text-[#F3EEFF]">No pending connection requests</p>
+            <div className="p-12 text-center bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl text-xs text-[#665E54] space-y-2 shadow-card">
+              <Users2 className="w-8 h-8 text-[#805536] mx-auto" />
+              <p className="font-semibold text-[#29251F]">No pending connection requests</p>
               <p>Discover complementary builders in the directory to grow your circle.</p>
               <button
                 onClick={() => navigate('/discover')}
@@ -123,27 +122,27 @@ export const ConnectionsPage: React.FC = () => {
               {requests.map((member) => (
                 <div
                   key={member.id}
-                  className="nc-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs"
+                  className="nc-card p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs bg-[#FFFFFF] border border-[#DCD1C0] shadow-card"
                 >
                   <div className="flex items-start gap-3.5">
                     <img
                       src={member.avatar}
                       alt={member.name}
-                      className="w-12 h-12 rounded-full object-cover border border-[#3A2E5C]"
+                      className="w-12 h-12 rounded-full object-cover border border-[#DCD1C0]"
                     />
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
-                        <h3 className="font-heading font-bold text-sm text-[#F3EEFF]">
+                        <h3 className="font-heading font-bold text-sm text-[#29251F]">
                           {member.name}
                         </h3>
                         <RoleBadge role={member.role} size="sm" />
-                        <span className="text-[10px] text-[#FFB547] font-semibold bg-[#FFB547]/10 px-2 py-0.5 rounded border border-[#FFB547]/30">
+                        <span className="text-[10px] text-[#805536] font-semibold bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25">
                           {member.matchScore}% Match
                         </span>
                       </div>
-                      <p className="text-[#A99CCB]">{member.roleTitle} • {member.location}</p>
+                      <p className="text-[#665E54]">{member.roleTitle} • {member.location}</p>
                       {member.note && (
-                        <p className="text-[#F3EEFF]/90 italic bg-[#17102A] p-2.5 rounded-lg border border-[#3A2E5C] mt-2">
+                        <p className="text-[#29251F] italic bg-[#F3EDE3] p-2.5 rounded-lg border border-[#DCD1C0] mt-2">
                           "{member.note}"
                         </p>
                       )}
@@ -153,7 +152,7 @@ export const ConnectionsPage: React.FC = () => {
                   <div className="flex items-center gap-2 shrink-0">
                     <button
                       onClick={() => declineConnectionRequest(member.id)}
-                      className="nc-button-secondary py-2 px-3 text-xs text-rose-300 hover:text-rose-200"
+                      className="nc-button-secondary py-2 px-3 text-xs text-[#665E54] hover:text-[#29251F]"
                     >
                       <X className="w-3.5 h-3.5" />
                       <span>Decline</span>
@@ -177,9 +176,9 @@ export const ConnectionsPage: React.FC = () => {
       {activeTab === 'sent' && (
         <div className="space-y-4">
           {sent.length === 0 ? (
-            <div className="p-12 text-center bg-[#22183B] border border-[#3A2E5C] rounded-2xl text-xs text-[#A99CCB] space-y-2">
-              <Send className="w-8 h-8 text-[#FFB547] mx-auto" />
-              <p className="font-semibold text-[#F3EEFF]">No outgoing connection requests</p>
+            <div className="p-12 text-center bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl text-xs text-[#665E54] space-y-2 shadow-card">
+              <Send className="w-8 h-8 text-[#805536] mx-auto" />
+              <p className="font-semibold text-[#29251F]">No outgoing connection requests</p>
               <p>Explore Discover or Find Your Four to connect with complementary teammates.</p>
             </div>
           ) : (
@@ -187,26 +186,26 @@ export const ConnectionsPage: React.FC = () => {
               {sent.map((member) => (
                 <div
                   key={member.id}
-                  className="nc-card p-5 flex items-center justify-between gap-4 text-xs"
+                  className="nc-card p-5 flex items-center justify-between gap-4 text-xs bg-[#FFFFFF] border border-[#DCD1C0] shadow-card"
                 >
                   <div className="flex items-center gap-3.5">
                     <img
                       src={member.avatar}
                       alt={member.name}
-                      className="w-11 h-11 rounded-full object-cover border border-[#3A2E5C]"
+                      className="w-11 h-11 rounded-full object-cover border border-[#DCD1C0]"
                     />
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="font-heading font-bold text-sm text-[#F3EEFF]">
+                        <h3 className="font-heading font-bold text-sm text-[#29251F]">
                           {member.name}
                         </h3>
                         <RoleBadge role={member.role} size="sm" />
                       </div>
-                      <p className="text-[#A99CCB] text-[11px]">{member.roleTitle}</p>
+                      <p className="text-[#665E54] text-[11px]">{member.roleTitle}</p>
                     </div>
                   </div>
 
-                  <span className="text-[11px] text-[#FFB547] bg-[#FFB547]/10 px-3 py-1 rounded-xl border border-[#FFB547]/30 font-medium">
+                  <span className="text-[11px] text-[#805536] bg-[#805536]/10 px-3 py-1 rounded-xl border border-[#805536]/25 font-medium">
                     Invitation Pending
                   </span>
                 </div>
@@ -221,7 +220,7 @@ export const ConnectionsPage: React.FC = () => {
         <div className="space-y-4">
           {/* Search bar */}
           <div className="relative max-w-md">
-            <Search className="w-4 h-4 text-[#A99CCB] absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#8C8173] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
@@ -235,14 +234,14 @@ export const ConnectionsPage: React.FC = () => {
             {filteredConnected.map((member) => (
               <div
                 key={member.id}
-                className="nc-card p-5 space-y-4 relative flex flex-col justify-between"
+                className="nc-card p-5 space-y-4 relative flex flex-col justify-between bg-[#FFFFFF] border border-[#DCD1C0] shadow-card"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
                     <img
                       src={member.avatar}
                       alt={member.name}
-                      className="w-12 h-12 rounded-full object-cover border border-[#3A2E5C]"
+                      className="w-12 h-12 rounded-full object-cover border border-[#DCD1C0]"
                     />
                     <div>
                       <h3
@@ -250,11 +249,11 @@ export const ConnectionsPage: React.FC = () => {
                           setViewingMember(member);
                           navigate('/member-profile');
                         }}
-                        className="font-heading font-bold text-sm text-[#F3EEFF] hover:text-[#FFB547] cursor-pointer"
+                        className="font-heading font-bold text-sm text-[#29251F] hover:text-[#805536] cursor-pointer"
                       >
                         {member.name}
                       </h3>
-                      <p className="text-[11px] text-[#A99CCB]">{member.roleTitle}</p>
+                      <p className="text-[11px] text-[#665E54]">{member.roleTitle}</p>
                       <RoleBadge role={member.role} size="sm" />
                     </div>
                   </div>
@@ -267,34 +266,34 @@ export const ConnectionsPage: React.FC = () => {
                           activeOverflowId === member.id ? null : member.id
                         )
                       }
-                      className="p-1 rounded-lg text-[#A99CCB] hover:text-[#F3EEFF]"
+                      className="p-1 rounded-lg text-[#665E54] hover:text-[#29251F]"
                     >
                       <MoreVertical className="w-4 h-4" />
                     </button>
 
                     {activeOverflowId === member.id && (
-                      <div className="absolute right-0 mt-1 w-36 bg-[#17102A] border border-[#3A2E5C] rounded-xl shadow-glow-card py-1 z-20 text-xs">
+                      <div className="absolute right-0 mt-1 w-36 bg-[#FFFFFF] border border-[#DCD1C0] rounded-xl shadow-card-hover py-1 z-20 text-xs">
                         <button
                           onClick={() => {
                             setActiveOverflowId(null);
                             setViewingMember(member);
                             navigate('/member-profile');
                           }}
-                          className="w-full text-left px-3 py-1.5 text-[#F3EEFF] hover:bg-[#22183B] flex items-center gap-1.5"
+                          className="w-full text-left px-3 py-1.5 text-[#29251F] hover:bg-[#F3EDE3] flex items-center gap-1.5"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                           <span>View Profile</span>
                         </button>
                         <button
                           onClick={() => handleReport(member.name)}
-                          className="w-full text-left px-3 py-1.5 text-[#A99CCB] hover:bg-[#22183B] flex items-center gap-1.5"
+                          className="w-full text-left px-3 py-1.5 text-[#665E54] hover:bg-[#F3EDE3] flex items-center gap-1.5"
                         >
                           <Flag className="w-3.5 h-3.5" />
                           <span>Report</span>
                         </button>
                         <button
                           onClick={() => handleBlock(member.name)}
-                          className="w-full text-left px-3 py-1.5 text-rose-400 hover:bg-[#22183B] flex items-center gap-1.5"
+                          className="w-full text-left px-3 py-1.5 text-[#805536] hover:bg-[#F3EDE3] flex items-center gap-1.5"
                         >
                           <Ban className="w-3.5 h-3.5" />
                           <span>Block</span>
@@ -304,9 +303,9 @@ export const ConnectionsPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#3A2E5C] flex items-center justify-between text-xs">
-                  <span className="text-[11px] text-[#2DD4BF] font-medium flex items-center gap-1">
-                    <UserCheck className="w-3.5 h-3.5" />
+                <div className="pt-3 border-t border-[#DCD1C0] flex items-center justify-between text-xs">
+                  <span className="text-[11px] text-[#29251F] font-medium flex items-center gap-1">
+                    <UserCheck className="w-3.5 h-3.5 text-[#805536]" />
                     <span>Direct chat active</span>
                   </span>
 

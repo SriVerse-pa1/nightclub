@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
-import { ArrowLeft, CheckCircle2, ShieldCheck, RefreshCw } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 export const VerifyEmailPage: React.FC = () => {
   const { navigate, routeParams, signup } = useApp();
@@ -48,28 +48,28 @@ export const VerifyEmailPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#17102A] text-[#F3EEFF] flex flex-col justify-between">
-      <header className="h-16 px-6 border-b border-[#3A2E5C] flex items-center justify-between">
+    <div className="min-h-screen bg-[#F3EDE3] text-[#29251F] flex flex-col justify-between font-body selection:bg-[#805536]/15 selection:text-[#29251F]">
+      <header className="h-16 px-6 border-b border-[#DCD1C0] bg-[#F3EDE3] flex items-center justify-between">
         <div onClick={() => navigate('/')} className="flex items-center gap-2 cursor-pointer">
-          <div className="w-8 h-8 rounded-lg bg-[#22183B] border border-[#FFB547]/50 flex items-center justify-center text-[#FFB547] font-bold">
+          <div className="w-8 h-8 rounded-lg bg-[#805536] border border-[#805536] flex items-center justify-center text-white font-bold shadow-sm">
             N
           </div>
-          <span className="font-heading font-bold text-base tracking-wider text-[#F3EEFF]">
+          <span className="font-heading font-bold text-base tracking-wider text-[#29251F]">
             NIGHTCLUB
           </span>
         </div>
       </header>
 
       <main className="flex-1 max-w-md mx-auto w-full px-4 py-12 flex flex-col justify-center">
-        <div className="bg-[#1E1537] border border-[#3A2E5C] rounded-3xl p-6 sm:p-8 space-y-6 shadow-glow-card text-center">
-          <div className="w-12 h-12 rounded-full bg-[#FFB547]/10 border border-[#FFB547]/30 flex items-center justify-center text-[#FFB547] mx-auto">
-            <ShieldCheck className="w-6 h-6" />
+        <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl p-6 sm:p-8 space-y-6 shadow-card text-center">
+          <div className="w-12 h-12 rounded-full bg-[#E7DCCB] border border-[#DCD1C0] flex items-center justify-center text-[#805536] mx-auto">
+            <ShieldCheck className="w-6 h-6 text-[#805536]" />
           </div>
 
           <div className="space-y-1">
-            <h1 className="font-heading font-bold text-xl text-[#F3EEFF]">Check your email</h1>
-            <p className="text-xs text-[#A99CCB]">
-              We sent a 6-digit confirmation code to <strong>{email}</strong>
+            <h1 className="font-heading font-bold text-xl text-[#29251F]">Check your email</h1>
+            <p className="text-xs text-[#665E54]">
+              We sent a 6-digit confirmation code to <strong className="text-[#29251F]">{email}</strong>
             </p>
           </div>
 
@@ -84,18 +84,18 @@ export const VerifyEmailPage: React.FC = () => {
                   maxLength={1}
                   value={digit}
                   onChange={(e) => handleDigitChange(i, e.target.value)}
-                  className="w-10 h-12 sm:w-12 sm:h-14 text-center font-heading font-bold text-lg bg-[#17102A] border border-[#3A2E5C] rounded-xl text-[#F3EEFF] focus:border-[#FFB547] focus:ring-1 focus:ring-[#FFB547] outline-none"
+                  className="w-10 h-12 sm:w-12 sm:h-14 text-center font-heading font-bold text-lg bg-[#FFFFFF] border border-[#DCD1C0] rounded-xl text-[#29251F] focus:border-[#805536] focus:ring-1 focus:ring-[#805536] outline-none transition-colors shadow-sm"
                 />
               ))}
             </div>
 
-            <div className="text-xs text-[#A99CCB] flex items-center justify-center gap-1">
+            <div className="text-xs text-[#665E54] flex items-center justify-center gap-1">
               <span>Didn't receive code?</span>
               <button
                 type="button"
                 disabled={timer > 0}
                 onClick={handleResend}
-                className="text-[#FFB547] hover:underline disabled:opacity-50 disabled:no-underline font-medium"
+                className="text-[#805536] hover:underline disabled:opacity-50 disabled:no-underline font-medium"
               >
                 {timer > 0 ? `Resend in ${timer}s` : 'Resend code now'}
               </button>
@@ -106,13 +106,13 @@ export const VerifyEmailPage: React.FC = () => {
               disabled={isVerifying}
               className="w-full nc-button-primary py-3 text-xs font-semibold"
             >
-              {isVerifying ? 'Verifying code...' : 'Verify & Launch Onboarding'}
+              {isVerifying ? 'Verifying code...' : 'Verify Email & Complete Onboarding'}
             </button>
           </form>
         </div>
       </main>
 
-      <footer className="h-14 border-t border-[#3A2E5C] px-6 flex items-center justify-center text-xs text-[#7C6F9B]">
+      <footer className="h-14 border-t border-[#DCD1C0] px-6 flex items-center justify-center text-xs text-[#8C8173] bg-[#F3EDE3]">
         <span>© 2026 Nightclub. Privacy-first network for Telugu AI builders.</span>
       </footer>
     </div>

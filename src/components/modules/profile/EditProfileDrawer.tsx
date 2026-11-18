@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Member } from '../../../types';
-import { X, Check, Save } from 'lucide-react';
+import { X, Save } from 'lucide-react';
 
 interface EditProfileDrawerProps {
   currentUser: Member;
@@ -42,18 +42,18 @@ export const EditProfileDrawer: React.FC<EditProfileDrawerProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/70 backdrop-blur-sm">
-      <div className="w-full max-w-md bg-[#1E1537] border-l border-[#3A2E5C] h-full flex flex-col p-6 space-y-4 shadow-glow-card animate-in slide-in-from-right duration-200 overflow-y-auto">
-        <div className="flex items-center justify-between pb-3 border-b border-[#3A2E5C]">
-          <h3 className="font-heading font-bold text-base text-[#F3EEFF]">Edit Your Profile</h3>
-          <button onClick={onClose} className="text-[#A99CCB] hover:text-[#F3EEFF]">
+    <div className="fixed inset-0 z-50 flex justify-end bg-[#29251F]/40 backdrop-blur-sm">
+      <div className="w-full max-w-md bg-[#FFFFFF] border-l border-[#DCD1C0] h-full flex flex-col p-6 space-y-4 shadow-2xl animate-in slide-in-from-right duration-200 overflow-y-auto">
+        <div className="flex items-center justify-between pb-3 border-b border-[#DCD1C0]">
+          <h3 className="font-heading font-bold text-base text-[#29251F]">Edit Your Profile</h3>
+          <button onClick={onClose} className="text-[#665E54] hover:text-[#29251F] transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 text-xs flex-1">
           <div>
-            <label className="block text-[#A99CCB] mb-1 font-medium">Display Name</label>
+            <label className="block text-[#665E54] mb-1 font-medium">Display Name</label>
             <input
               type="text"
               required
@@ -64,7 +64,7 @@ export const EditProfileDrawer: React.FC<EditProfileDrawerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[#A99CCB] mb-1 font-medium">Headline / Role Title</label>
+            <label className="block text-[#665E54] mb-1 font-medium">Headline / Role Title</label>
             <input
               type="text"
               required
@@ -75,7 +75,7 @@ export const EditProfileDrawer: React.FC<EditProfileDrawerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[#A99CCB] mb-1 font-medium">City / Location</label>
+            <label className="block text-[#665E54] mb-1 font-medium">City / Location</label>
             <input
               type="text"
               required
@@ -86,7 +86,7 @@ export const EditProfileDrawer: React.FC<EditProfileDrawerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[#A99CCB] mb-1 font-medium">Bio & Focus</label>
+            <label className="block text-[#665E54] mb-1 font-medium">Bio & Focus</label>
             <textarea
               rows={3}
               value={bio}
@@ -96,7 +96,7 @@ export const EditProfileDrawer: React.FC<EditProfileDrawerProps> = ({
           </div>
 
           <div>
-            <label className="block text-[#A99CCB] mb-1 font-medium">
+            <label className="block text-[#665E54] mb-1 font-medium">
               Available Building Hours (per week): {hoursPerWeek} hrs
             </label>
             <input
@@ -106,16 +106,16 @@ export const EditProfileDrawer: React.FC<EditProfileDrawerProps> = ({
               step={5}
               value={hoursPerWeek}
               onChange={(e) => setHoursPerWeek(Number(e.target.value))}
-              className="w-full accent-[#FFB547]"
+              className="w-full accent-[#805536] cursor-pointer"
             />
           </div>
 
-          <div className="pt-2 border-t border-[#3A2E5C] space-y-3">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#7C6F9B]">
+          <div className="pt-2 border-t border-[#DCD1C0] space-y-3">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#8C8173]">
               Portfolio Links
             </span>
             <div>
-              <label className="block text-[#A99CCB] mb-1">GitHub URL</label>
+              <label className="block text-[#665E54] mb-1">GitHub URL</label>
               <input
                 type="url"
                 value={github}
@@ -125,7 +125,7 @@ export const EditProfileDrawer: React.FC<EditProfileDrawerProps> = ({
               />
             </div>
             <div>
-              <label className="block text-[#A99CCB] mb-1">Live Project / Demo URL</label>
+              <label className="block text-[#665E54] mb-1">Live Project / Demo URL</label>
               <input
                 type="url"
                 value={liveProject}
@@ -144,7 +144,7 @@ export const EditProfileDrawer: React.FC<EditProfileDrawerProps> = ({
             >
               Cancel
             </button>
-            <button type="submit" className="nc-button-primary py-2.5 px-5">
+            <button type="submit" className="nc-button-primary py-2.5 px-5 flex items-center gap-2">
               <Save className="w-3.5 h-3.5" />
               <span>Save Profile</span>
             </button>

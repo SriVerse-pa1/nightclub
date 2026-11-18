@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import {
-  RotateCcw,
   AlertTriangle,
   ArrowRight,
-  Shield,
-  Sparkles,
   Lock,
-  CheckCircle2,
-  Calendar,
-  XCircle,
 } from 'lucide-react';
 
 export const SubscriptionStatePage: React.FC = () => {
@@ -21,7 +15,7 @@ export const SubscriptionStatePage: React.FC = () => {
     navigate,
   } = useApp();
 
-  const [step, setStep] = useState<'survey' | 'confirm_pause' | 'confirm_cancel' | 'lapsed'>('survey');
+  const [step] = useState<'survey' | 'confirm_pause' | 'confirm_cancel' | 'lapsed'>('survey');
   const [cancelReason, setCancelReason] = useState('Found full-time team');
 
   const isLapsed = settings.subscription.status === 'lapsed' || settings.subscription.status === 'canceled';
@@ -29,39 +23,39 @@ export const SubscriptionStatePage: React.FC = () => {
   return (
     <div className="max-w-2xl mx-auto space-y-6 pb-16">
       {/* Header */}
-      <div className="pb-4 border-b border-[#3A2E5C]">
-        <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3EEFF]">
+      <div className="pb-4 border-b border-[#DCD1C0]">
+        <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F]">
           Membership Status & Management
         </h1>
-        <p className="text-xs text-[#A99CCB] mt-0.5">
+        <p className="text-xs text-[#665E54] mt-0.5">
           Review your subscription health, pause your payments, or reactivate your founding seat.
         </p>
       </div>
 
       {/* LAPSED STATE PREVIEW */}
       {(isLapsed || step === 'lapsed') ? (
-        <div className="bg-[#1C1431] border border-amber-500/40 rounded-3xl p-6 sm:p-8 space-y-6 shadow-glow-card text-xs">
+        <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl p-6 sm:p-8 space-y-6 shadow-card text-xs">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+            <div className="w-12 h-12 rounded-2xl bg-[#F3EDE3] border border-[#DCD1C0] flex items-center justify-center text-[#805536]">
               <Lock className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold text-amber-400">
+              <span className="text-[10px] uppercase font-bold text-[#8C8173]">
                 Membership Inactive / Lapsed
               </span>
-              <h2 className="font-heading font-bold text-lg text-[#F3EEFF]">
+              <h2 className="font-heading font-bold text-lg text-[#29251F]">
                 Your Nightclub features are paused
               </h2>
             </div>
           </div>
 
-          <p className="text-[#A99CCB] leading-relaxed">
+          <p className="text-[#665E54] leading-relaxed">
             You can still view your public profile and past project milestones, but private chat,
             active Build Rooms, and 8 monthly 1-on-1 mentor sessions are currently locked.
           </p>
 
-          <div className="p-4 bg-[#17102A] rounded-2xl border border-[#3A2E5C] space-y-2">
-            <span className="font-bold text-[#F3EEFF]">What unlocks upon rejoining:</span>
+          <div className="p-4 bg-[#F3EDE3] rounded-2xl border border-[#DCD1C0] space-y-2 text-[#665E54]">
+            <span className="font-bold text-[#29251F]">What unlocks upon rejoining:</span>
             <p>• Immediate restoration of 8 fresh 1-on-1 mentor credits</p>
             <p>• Active matching in the Telugu AI complementary graph</p>
             <p>• Unlocked private messaging with connected peers</p>
@@ -69,7 +63,7 @@ export const SubscriptionStatePage: React.FC = () => {
 
           <button
             onClick={reactivateSubscription}
-            className="w-full nc-button-primary py-3.5 text-xs font-bold shadow-glow-accent"
+            className="w-full nc-button-primary py-3.5 text-xs font-bold shadow-md"
           >
             <span>Reactivate Founding Membership (₹1,499/mo)</span>
             <ArrowRight className="w-4 h-4" />
@@ -79,15 +73,15 @@ export const SubscriptionStatePage: React.FC = () => {
         /* ACTIVE / PAUSE / CANCEL FLOW */
         <div className="space-y-6 text-xs">
           {step === 'survey' && (
-            <div className="bg-[#22183B] border border-[#3A2E5C] rounded-3xl p-6 sm:p-8 space-y-6 shadow-glow-card">
+            <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl p-6 sm:p-8 space-y-6 shadow-card">
               <div className="space-y-1">
-                <span className="text-xs uppercase font-bold text-[#FFB547]">
+                <span className="text-xs uppercase font-bold text-[#8C8173]">
                   Manage Your Subscription
                 </span>
-                <h2 className="font-heading font-bold text-xl text-[#F3EEFF]">
+                <h2 className="font-heading font-bold text-xl text-[#29251F]">
                   Need to take a breather?
                 </h2>
-                <p className="text-xs text-[#A99CCB]">
+                <p className="text-xs text-[#665E54]">
                   Tell us why you are considering stepping away so we can help:
                 </p>
               </div>
@@ -106,8 +100,8 @@ export const SubscriptionStatePage: React.FC = () => {
                     onClick={() => setCancelReason(reason)}
                     className={`w-full text-left p-3 rounded-xl border transition-all ${
                       cancelReason === reason
-                        ? 'border-[#FFB547] bg-[#FFB547]/10 text-[#F3EEFF] font-semibold'
-                        : 'border-[#3A2E5C] bg-[#17102A] text-[#A99CCB] hover:border-[#A99CCB]'
+                        ? 'border-[#805536] bg-[#805536]/10 text-[#29251F] font-semibold ring-1 ring-[#805536]/30'
+                        : 'border-[#DCD1C0] bg-[#FFFFFF] text-[#665E54] hover:border-[#805536] hover:text-[#29251F]'
                     }`}
                   >
                     {reason}
@@ -116,9 +110,9 @@ export const SubscriptionStatePage: React.FC = () => {
               </div>
 
               {/* Retention Preview: What You'll Lose */}
-              <div className="p-4 bg-rose-950/20 border border-rose-500/30 rounded-2xl space-y-2 text-rose-300">
-                <span className="font-bold flex items-center gap-1.5 text-rose-400">
-                  <AlertTriangle className="w-4 h-4" />
+              <div className="p-4 bg-[#F3EDE3] border border-[#DCD1C0] rounded-2xl space-y-2 text-[#665E54]">
+                <span className="font-bold flex items-center gap-1.5 text-[#29251F]">
+                  <AlertTriangle className="w-4 h-4 text-[#805536]" />
                   What you will lose upon cancellation:
                 </span>
                 <p>• Your locked-in ₹1,499 founding member monthly price</p>
@@ -127,12 +121,12 @@ export const SubscriptionStatePage: React.FC = () => {
               </div>
 
               {/* Pause Recommendation */}
-              <div className="p-4 bg-[#17102A] border border-[#FFB547]/40 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="p-4 bg-[#F3EDE3] border border-[#805536]/30 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h4 className="font-bold text-sm text-[#FFB547]">
+                  <h4 className="font-bold text-sm text-[#29251F]">
                     Option: Pause for 1 Month (Recommended)
                   </h4>
-                  <p className="text-[11px] text-[#A99CCB] mt-0.5">
+                  <p className="text-[11px] text-[#665E54] mt-0.5">
                     No charges next month. Your team and founding rate remain reserved.
                   </p>
                 </div>
@@ -153,7 +147,7 @@ export const SubscriptionStatePage: React.FC = () => {
                 </button>
                 <button
                   onClick={cancelSubscription}
-                  className="text-xs text-rose-400 hover:underline"
+                  className="text-xs text-[#8C8173] hover:text-red-700 hover:underline transition-colors"
                 >
                   Continue to Cancel
                 </button>

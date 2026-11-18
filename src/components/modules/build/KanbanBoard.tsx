@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Project, KanbanTask, Member } from '../../../types';
-import { RoleBadge } from '../../common/RoleBadge';
-import { Plus, Clock, ArrowRight, ArrowLeft, CheckCircle2, MoreVertical, X } from 'lucide-react';
+import { Project, KanbanTask } from '../../../types';
+import { Plus, Clock, ArrowRight, ArrowLeft, X } from 'lucide-react';
 
 interface KanbanBoardProps {
   project: Project;
@@ -25,25 +24,21 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
     id: 'todo' | 'in_progress' | 'done';
     title: string;
     count: number;
-    color: string;
   }> = [
     {
       id: 'todo',
       title: 'To Do',
       count: project.tasks.filter((t) => t.status === 'todo').length,
-      color: 'border-amber-500/30 text-amber-300',
     },
     {
       id: 'in_progress',
       title: 'Doing',
       count: project.tasks.filter((t) => t.status === 'in_progress').length,
-      color: 'border-sky-500/30 text-sky-300',
     },
     {
       id: 'done',
       title: 'Done',
       count: project.tasks.filter((t) => t.status === 'done').length,
-      color: 'border-emerald-500/30 text-emerald-300',
     },
   ];
 
@@ -72,10 +67,10 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
       {/* Board Controls */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold uppercase tracking-wider text-[#7C6F9B]">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#8C8173]">
             Team Tasks & Sprints
           </span>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-[#22183B] border border-[#3A2E5C] text-[#A99CCB]">
+          <span className="text-xs px-2 py-0.5 rounded-full bg-[#E7DCCB] border border-[#DCD1C0] text-[#29251F] font-medium">
             {project.tasks.length} tasks
           </span>
         </div>
@@ -97,66 +92,66 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
           return (
             <div
               key={col.id}
-              className="bg-[#1C1431] border border-[#3A2E5C] rounded-2xl p-3 sm:p-4 flex flex-col min-h-[420px]"
+              className="bg-[#E7DCCB]/40 border border-[#DCD1C0] rounded-2xl p-3 sm:p-4 flex flex-col min-h-[420px]"
             >
               {/* Col Header */}
-              <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#3A2E5C]">
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#DCD1C0]">
                 <div className="flex items-center gap-2">
-                  <span className={`text-xs font-bold px-2 py-0.5 rounded-md border ${col.color}`}>
+                  <span className="text-xs font-bold px-2 py-0.5 rounded-md border border-[#DCD1C0] bg-[#FFFFFF] text-[#29251F] shadow-sm">
                     {col.title}
                   </span>
-                  <span className="text-xs text-[#7C6F9B]">{col.count}</span>
+                  <span className="text-xs text-[#8C8173] font-semibold">{col.count}</span>
                 </div>
               </div>
 
               {/* Tasks List */}
               <div className="space-y-3 flex-1 overflow-y-auto">
                 {colTasks.length === 0 ? (
-                  <div className="h-32 flex flex-col items-center justify-center text-center p-4 border border-dashed border-[#3A2E5C] rounded-xl text-xs text-[#7C6F9B]">
+                  <div className="h-32 flex flex-col items-center justify-center text-center p-4 border border-dashed border-[#DCD1C0] rounded-xl text-xs text-[#8C8173]">
                     <span>No tasks in {col.title}</span>
                   </div>
                 ) : (
                   colTasks.map((task) => (
                     <div
                       key={task.id}
-                      className="nc-card p-3.5 hover:border-[#FFB547]/40 space-y-2.5 transition-all text-xs"
+                      className="nc-card p-3.5 hover:border-[#805536] space-y-2.5 transition-all text-xs"
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <h4 className="font-semibold text-[#F3EEFF] text-xs leading-snug">
+                        <h4 className="font-semibold text-[#29251F] text-xs leading-snug">
                           {task.title}
                         </h4>
                         <span
                           className={`text-[10px] px-1.5 py-0.5 rounded uppercase font-bold shrink-0 ${
                             task.priority === 'High'
-                              ? 'bg-rose-500/10 text-rose-300 border border-rose-500/30'
+                              ? 'bg-[#805536]/10 text-[#805536] border border-[#805536]/30'
                               : task.priority === 'Medium'
-                              ? 'bg-amber-500/10 text-amber-300 border border-amber-500/30'
-                              : 'bg-emerald-500/10 text-emerald-300 border border-emerald-500/30'
+                              ? 'bg-[#E7DCCB] text-[#29251F] border border-[#DCD1C0]'
+                              : 'bg-[#F3EDE3] text-[#665E54] border border-[#DCD1C0]'
                           }`}
                         >
                           {task.priority}
                         </span>
                       </div>
 
-                      <p className="text-[11px] text-[#A99CCB] line-clamp-2">
+                      <p className="text-[11px] text-[#665E54] line-clamp-2">
                         {task.description}
                       </p>
 
-                      <div className="flex items-center justify-between pt-2 border-t border-[#3A2E5C]/60 text-[11px]">
+                      <div className="flex items-center justify-between pt-2 border-t border-[#DCD1C0] text-[11px]">
                         {/* Assignee */}
                         <div className="flex items-center gap-1.5">
                           <img
                             src={task.assignee.avatar}
                             alt={task.assignee.name}
-                            className="w-5 h-5 rounded-full object-cover border border-[#3A2E5C]"
+                            className="w-5 h-5 rounded-full object-cover border border-[#DCD1C0]"
                           />
-                          <span className="text-[#A99CCB] truncate max-w-[80px]">
+                          <span className="text-[#665E54] truncate max-w-[80px]">
                             {task.assignee.name.split(' ')[0]}
                           </span>
                         </div>
 
                         {/* Due Date */}
-                        <div className="flex items-center gap-1 text-[#7C6F9B]">
+                        <div className="flex items-center gap-1 text-[#8C8173]">
                           <Clock className="w-3 h-3" />
                           <span>{task.dueDate}</span>
                         </div>
@@ -172,7 +167,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
                                 col.id === 'done' ? 'in_progress' : 'todo'
                               )
                             }
-                            className="p-1 rounded bg-[#17102A] text-[#A99CCB] hover:text-[#F3EEFF] text-[10px] flex items-center gap-0.5"
+                            className="p-1 rounded bg-[#FFFFFF] border border-[#DCD1C0] text-[#665E54] hover:text-[#29251F] hover:border-[#805536] text-[10px] flex items-center gap-0.5"
                             title="Move back"
                           >
                             <ArrowLeft className="w-3 h-3" />
@@ -186,7 +181,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
                                 col.id === 'todo' ? 'in_progress' : 'done'
                               )
                             }
-                            className="p-1 rounded bg-[#2B1E4A] hover:bg-[#FFB547] hover:text-[#17102A] text-[#FFB547] text-[10px] flex items-center gap-0.5 font-medium transition-colors"
+                            className="p-1 px-2 rounded bg-[#805536] hover:bg-[#6C462B] text-white text-[10px] flex items-center gap-0.5 font-medium transition-colors shadow-sm"
                             title="Advance status"
                           >
                             <span>Move</span>
@@ -205,15 +200,15 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
 
       {/* Add Task Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-          <div className="bg-[#22183B] border border-[#3A2E5C] rounded-2xl max-w-md w-full p-5 sm:p-6 space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-[#3A2E5C]">
-              <h3 className="font-heading font-bold text-base text-[#F3EEFF]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#29251F]/40 backdrop-blur-sm">
+          <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl max-w-md w-full p-5 sm:p-6 space-y-4 shadow-card-hover">
+            <div className="flex items-center justify-between pb-3 border-b border-[#DCD1C0]">
+              <h3 className="font-heading font-bold text-base text-[#29251F]">
                 Add Task to {project.title.split('—')[0]}
               </h3>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="text-[#A99CCB] hover:text-[#F3EEFF]"
+                className="text-[#665E54] hover:text-[#29251F]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -221,7 +216,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
 
             <form onSubmit={handleCreateTask} className="space-y-3 text-xs">
               <div>
-                <label className="block text-[#A99CCB] mb-1 font-medium">Task Title</label>
+                <label className="block text-[#665E54] mb-1 font-medium">Task Title</label>
                 <input
                   type="text"
                   required
@@ -233,7 +228,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
               </div>
 
               <div>
-                <label className="block text-[#A99CCB] mb-1 font-medium">Description</label>
+                <label className="block text-[#665E54] mb-1 font-medium">Description</label>
                 <textarea
                   rows={3}
                   value={newDesc}
@@ -245,14 +240,14 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[#A99CCB] mb-1 font-medium">Assignee</label>
+                  <label className="block text-[#665E54] mb-1 font-medium">Assignee</label>
                   <select
                     value={newAssigneeId}
                     onChange={(e) => setNewAssigneeId(e.target.value)}
                     className="w-full nc-input"
                   >
                     {project.members.map((m) => (
-                      <option key={m.id} value={m.id} className="bg-[#17102A] text-[#F3EEFF]">
+                      <option key={m.id} value={m.id} className="bg-white text-[#29251F]">
                         {m.name} ({m.role})
                       </option>
                     ))}
@@ -260,21 +255,21 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-[#A99CCB] mb-1 font-medium">Priority</label>
+                  <label className="block text-[#665E54] mb-1 font-medium">Priority</label>
                   <select
                     value={newPriority}
                     onChange={(e) => setNewPriority(e.target.value as any)}
                     className="w-full nc-input"
                   >
-                    <option value="High" className="bg-[#17102A]">High</option>
-                    <option value="Medium" className="bg-[#17102A]">Medium</option>
-                    <option value="Low" className="bg-[#17102A]">Low</option>
+                    <option value="High" className="bg-white text-[#29251F]">High</option>
+                    <option value="Medium" className="bg-white text-[#29251F]">Medium</option>
+                    <option value="Low" className="bg-white text-[#29251F]">Low</option>
                   </select>
                 </div>
               </div>
 
               <div>
-                <label className="block text-[#A99CCB] mb-1 font-medium">Due Date</label>
+                <label className="block text-[#665E54] mb-1 font-medium">Due Date</label>
                 <input
                   type="text"
                   value={newDueDate}

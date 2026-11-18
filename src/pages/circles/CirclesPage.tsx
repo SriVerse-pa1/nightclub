@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { Circle } from '../../types';
 import {
-  Layers,
-  Users2,
   Calendar,
   MessageSquare,
   ThumbsUp,
-  Share2,
   Flag,
   HelpCircle,
-  Plus,
   Send,
 } from 'lucide-react';
 
@@ -30,12 +26,12 @@ export const CirclesPage: React.FC = () => {
   return (
     <div className="space-y-6 pb-16">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#3A2E5C]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#DCD1C0]">
         <div>
-          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3EEFF]">
+          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F]">
             Community Circles
           </h1>
-          <p className="text-xs text-[#A99CCB] mt-0.5">
+          <p className="text-xs text-[#665E54] mt-0.5">
             Calm, moderated domain circles for Telugu AI builders to exchange benchmarks and insights.
           </p>
         </div>
@@ -44,7 +40,7 @@ export const CirclesPage: React.FC = () => {
           onClick={() => showToast('Guidelines: Respectful debate, authentic benchmarks, zero self-promotional spam.', 'info')}
           className="nc-button-secondary text-xs py-2 px-3"
         >
-          <HelpCircle className="w-3.5 h-3.5 text-[#38BDF8]" />
+          <HelpCircle className="w-3.5 h-3.5 text-[#805536]" />
           <span>Circle Guidelines</span>
         </button>
       </div>
@@ -59,15 +55,15 @@ export const CirclesPage: React.FC = () => {
               onClick={() => setSelectedCircle(cir)}
               className={`p-4 rounded-2xl border cursor-pointer transition-all ${
                 isSelected
-                  ? 'bg-[#2B1E4A] border-[#FFB547] shadow-glow-accent'
-                  : 'bg-[#22183B] border-[#3A2E5C] hover:border-[#A99CCB]'
+                  ? 'bg-[#FFFFFF] border-[#805536] ring-2 ring-[#805536]/20 shadow-md'
+                  : 'bg-[#FFFFFF] border-[#DCD1C0] hover:border-[#805536] shadow-sm'
               }`}
             >
-              <span className="text-[10px] text-[#FFB547] font-bold">{cir.tag}</span>
-              <h3 className="font-heading font-bold text-sm text-[#F3EEFF] mt-1">{cir.name}</h3>
-              <div className="flex items-center justify-between text-[11px] text-[#7C6F9B] mt-3 pt-2 border-t border-[#3A2E5C]/50">
+              <span className="text-[10px] text-[#805536] font-bold uppercase tracking-wider">{cir.tag}</span>
+              <h3 className="font-heading font-bold text-sm text-[#29251F] mt-1">{cir.name}</h3>
+              <div className="flex items-center justify-between text-[11px] text-[#8C8173] mt-3 pt-2 border-t border-[#DCD1C0]">
                 <span>{cir.memberCount} members</span>
-                {cir.isJoined && <span className="text-emerald-400 font-bold">Joined</span>}
+                {cir.isJoined && <span className="text-[#805536] font-bold">Joined ✓</span>}
               </div>
             </div>
           );
@@ -79,20 +75,20 @@ export const CirclesPage: React.FC = () => {
         {/* Posts & Feed (8 cols) */}
         <div className="lg:col-span-8 space-y-5">
           {/* Active Circle Banner */}
-          <div className="bg-[#1C1431] border border-[#3A2E5C] rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-card">
             <div>
-              <span className="text-xs font-bold text-[#FFB547]">{selectedCircle.tag}</span>
-              <h2 className="font-heading font-bold text-lg text-[#F3EEFF]">
+              <span className="text-xs font-bold text-[#805536] uppercase tracking-wider">{selectedCircle.tag}</span>
+              <h2 className="font-heading font-bold text-lg text-[#29251F] mt-0.5">
                 {selectedCircle.name}
               </h2>
-              <p className="text-xs text-[#A99CCB] mt-0.5">{selectedCircle.description}</p>
+              <p className="text-xs text-[#665E54] mt-0.5">{selectedCircle.description}</p>
             </div>
 
             <button
               onClick={() => toggleJoinCircle(selectedCircle.id)}
               className={`text-xs py-2 px-5 font-semibold shrink-0 rounded-xl transition-all ${
                 selectedCircle.isJoined
-                  ? 'bg-[#22183B] text-[#A99CCB] border border-[#3A2E5C]'
+                  ? 'bg-[#F3EDE3] text-[#29251F] border border-[#DCD1C0]'
                   : 'nc-button-primary shadow-glow-accent'
               }`}
             >
@@ -103,7 +99,7 @@ export const CirclesPage: React.FC = () => {
           {/* New Post Input */}
           <form
             onSubmit={handlePostSubmit}
-            className="bg-[#22183B] border border-[#3A2E5C] rounded-2xl p-4 space-y-3 text-xs"
+            className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl p-4 space-y-3 text-xs shadow-card"
           >
             <textarea
               rows={2}
@@ -113,7 +109,7 @@ export const CirclesPage: React.FC = () => {
               className="w-full nc-input resize-none"
             />
             <div className="flex items-center justify-between pt-1">
-              <span className="text-[10px] text-[#7C6F9B]">
+              <span className="text-[10px] text-[#8C8173]">
                 Moderated community • Respectful language required
               </span>
               <button
@@ -130,36 +126,36 @@ export const CirclesPage: React.FC = () => {
           {/* Posts List */}
           <div className="space-y-4">
             {selectedCircle.posts.map((post) => (
-              <div key={post.id} className="nc-card p-5 space-y-3 text-xs">
+              <div key={post.id} className="nc-card p-5 space-y-3 text-xs bg-[#FFFFFF] border border-[#DCD1C0] shadow-card">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <img
                       src={post.author.avatar}
                       alt={post.author.name}
-                      className="w-8 h-8 rounded-full object-cover border border-[#3A2E5C]"
+                      className="w-8 h-8 rounded-full object-cover border border-[#DCD1C0]"
                     />
                     <div>
-                      <h4 className="font-semibold text-xs text-[#F3EEFF]">
+                      <h4 className="font-semibold text-xs text-[#29251F]">
                         {post.author.name}
                       </h4>
-                      <span className="text-[10px] text-[#A99CCB]">{post.author.roleTitle}</span>
+                      <span className="text-[10px] text-[#665E54]">{post.author.roleTitle}</span>
                     </div>
                   </div>
-                  <span className="text-[10px] text-[#7C6F9B]">{post.timestamp}</span>
+                  <span className="text-[10px] text-[#8C8173]">{post.timestamp}</span>
                 </div>
 
-                <p className="text-xs text-[#F3EEFF] leading-relaxed">{post.content}</p>
+                <p className="text-xs text-[#29251F] leading-relaxed">{post.content}</p>
 
-                <div className="pt-2 border-t border-[#3A2E5C] flex items-center justify-between text-xs text-[#A99CCB]">
+                <div className="pt-2 border-t border-[#DCD1C0] flex items-center justify-between text-xs text-[#665E54]">
                   <div className="flex items-center gap-4">
                     <button
                       onClick={() => showToast('Upvoted post!', 'info')}
-                      className="flex items-center gap-1.5 hover:text-[#FFB547]"
+                      className="flex items-center gap-1.5 hover:text-[#805536] transition-colors"
                     >
-                      <ThumbsUp className="w-3.5 h-3.5" />
+                      <ThumbsUp className="w-3.5 h-3.5 text-[#805536]" />
                       <span>{post.likes}</span>
                     </button>
-                    <button className="flex items-center gap-1.5 hover:text-[#F3EEFF]">
+                    <button className="flex items-center gap-1.5 hover:text-[#805536] transition-colors">
                       <MessageSquare className="w-3.5 h-3.5" />
                       <span>{post.replies} replies</span>
                     </button>
@@ -167,7 +163,7 @@ export const CirclesPage: React.FC = () => {
 
                   <button
                     onClick={() => showToast('Reported post for moderator inspection.', 'info')}
-                    className="hover:text-rose-400 p-1"
+                    className="hover:text-[#805536] p-1 text-[#8C8173] transition-colors"
                     title="Report post"
                   >
                     <Flag className="w-3 h-3" />
@@ -187,33 +183,32 @@ export const CirclesPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Sidebar: Upcoming Events & Members (4 cols) */}
+        {/* Sidebar: Upcoming Events (4 cols) */}
         <div className="lg:col-span-4 space-y-5 text-xs">
-          {/* Upcoming Events */}
-          <div className="nc-card p-5 space-y-3">
-            <span className="font-bold text-[#F3EEFF] uppercase text-[11px] tracking-wider flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-[#FFB547]" />
+          <div className="nc-card p-5 space-y-3 bg-[#FFFFFF] border border-[#DCD1C0] shadow-card">
+            <span className="font-bold text-[#29251F] uppercase text-[11px] tracking-wider flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-[#805536]" />
               Circle Events
             </span>
 
             {selectedCircle.events.length === 0 ? (
-              <p className="text-[#A99CCB] text-[11px]">No upcoming events scheduled.</p>
+              <p className="text-[#8C8173] text-[11px]">No upcoming events scheduled.</p>
             ) : (
               <div className="space-y-3">
                 {selectedCircle.events.map((ev) => (
                   <div
                     key={ev.id}
-                    className="p-3 bg-[#17102A] rounded-xl border border-[#3A2E5C] space-y-1.5"
+                    className="p-3 bg-[#F3EDE3] rounded-xl border border-[#DCD1C0] space-y-1.5"
                   >
-                    <h4 className="font-semibold text-xs text-[#F3EEFF]">{ev.title}</h4>
-                    <span className="text-[10px] text-[#2DD4BF] block">{ev.date}</span>
+                    <h4 className="font-semibold text-xs text-[#29251F]">{ev.title}</h4>
+                    <span className="text-[10px] text-[#665E54] block">{ev.date}</span>
                     <div className="flex items-center justify-between pt-1">
-                      <span className="text-[10px] text-[#7C6F9B]">
+                      <span className="text-[10px] text-[#8C8173]">
                         {ev.attendees} RSVP'd
                       </span>
                       <button
                         onClick={() => showToast(`You RSVP'd for "${ev.title}"`, 'success')}
-                        className="text-[11px] text-[#FFB547] hover:underline font-medium"
+                        className="text-[11px] text-[#805536] hover:underline font-semibold"
                       >
                         RSVP
                       </button>

@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { Member, FourTeam } from '../../../types';
-import { RoleBadge } from '../../common/RoleBadge';
-import { Sparkles, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 interface CelebrationModalProps {
   fourTeam: FourTeam;
@@ -18,36 +17,36 @@ export const CelebrationModal: React.FC<CelebrationModalProps> = ({
   onClose,
 }) => {
   useEffect(() => {
-    // Launch celebratory confetti
+    // Warm luxury celebratory confetti
     try {
       confetti({
         particleCount: 80,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#FFB547', '#38BDF8', '#F472B6', '#FBBF24', '#2DD4BF'],
+        colors: ['#805536', '#A06E47', '#E7DCCB', '#F3EDE3', '#29251F'],
       });
     } catch (e) {
-      // Fallback gracefully
+      // Fallback
     }
   }, []);
 
   const allFive = [currentUser, ...fourTeam.members];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-      <div className="bg-[#1E1537] border border-[#FFB547]/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 text-center space-y-6 shadow-glow-card animate-in fade-in zoom-in-95 duration-200">
-        <div className="w-14 h-14 mx-auto rounded-2xl bg-[#FFB547]/20 border border-[#FFB547]/40 flex items-center justify-center text-[#FFB547]">
-          <Sparkles className="w-8 h-8 animate-pulse" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#29251F]/40 backdrop-blur-md">
+      <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl max-w-lg w-full p-6 sm:p-8 text-center space-y-6 shadow-card-hover animate-in fade-in zoom-in-95 duration-200">
+        <div className="w-14 h-14 mx-auto rounded-2xl bg-[#F3EDE3] border border-[#DCD1C0] flex items-center justify-center text-[#805536]">
+          <Sparkles className="w-8 h-8" />
         </div>
 
         <div>
-          <span className="text-xs uppercase tracking-widest text-[#FFB547] font-semibold">
+          <span className="text-xs uppercase tracking-widest text-[#805536] font-bold">
             Complementary Alignment Complete
           </span>
-          <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3EEFF] mt-1">
+          <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F] mt-1">
             Your Five is officially ready!
           </h2>
-          <p className="text-xs sm:text-sm text-[#A99CCB] mt-2 max-w-sm mx-auto">
+          <p className="text-xs sm:text-sm text-[#665E54] mt-2 max-w-sm mx-auto">
             You, Ananya, Karthik, Deepika, and Prashanth are now linked into a private collaborative Build Room.
           </p>
         </div>
@@ -59,8 +58,8 @@ export const CelebrationModal: React.FC<CelebrationModalProps> = ({
               <img
                 src={m.avatar}
                 alt={m.name}
-                className={`w-12 h-12 rounded-full object-cover border-2 ${
-                  idx === 0 ? 'border-[#FFB547] ring-2 ring-[#FFB547]/40' : 'border-[#1E1537]'
+                className={`w-12 h-12 rounded-full object-cover border-2 shadow-sm ${
+                  idx === 0 ? 'border-[#805536] ring-2 ring-[#805536]/25' : 'border-[#FFFFFF]'
                 }`}
               />
             </div>
@@ -68,14 +67,14 @@ export const CelebrationModal: React.FC<CelebrationModalProps> = ({
         </div>
 
         {/* Balance Metric */}
-        <div className="grid grid-cols-2 gap-3 p-3 rounded-2xl bg-[#17102A] border border-[#3A2E5C] text-left text-xs">
+        <div className="grid grid-cols-2 gap-3 p-3 rounded-2xl bg-[#F3EDE3] border border-[#DCD1C0] text-left text-xs">
           <div>
-            <span className="text-[#A99CCB]">Team balance score</span>
-            <p className="text-lg font-bold text-[#FFB547]">{fourTeam.teamBalance} / 1.0</p>
+            <span className="text-[#665E54]">Team balance score</span>
+            <p className="text-lg font-bold text-[#805536]">{fourTeam.teamBalance} / 1.0</p>
           </div>
           <div>
-            <span className="text-[#A99CCB]">Complementary roles</span>
-            <p className="text-xs font-semibold text-[#2DD4BF] mt-1">
+            <span className="text-[#665E54]">Complementary roles</span>
+            <p className="text-xs font-semibold text-[#29251F] mt-1">
               Build • Design • Business • Research
             </p>
           </div>
@@ -92,7 +91,7 @@ export const CelebrationModal: React.FC<CelebrationModalProps> = ({
           </button>
           <button
             onClick={onClose}
-            className="text-xs text-[#A99CCB] hover:text-[#F3EEFF] py-1"
+            className="text-xs text-[#665E54] hover:text-[#29251F] py-1 transition-colors"
           >
             Review team constellation
           </button>

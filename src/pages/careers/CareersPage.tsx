@@ -2,15 +2,9 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { CareerOpportunity } from '../../types';
 import {
-  Briefcase,
   Bookmark,
   BookmarkCheck,
-  CheckCircle2,
   Sparkles,
-  MapPin,
-  ExternalLink,
-  ArrowRight,
-  X,
   Search,
 } from 'lucide-react';
 
@@ -20,7 +14,6 @@ export const CareersPage: React.FC = () => {
     toggleSaveCareer,
     applyToCareer,
     currentUser,
-    showToast,
   } = useApp();
 
   const [activeTab, setActiveTab] = useState<'all' | 'Job' | 'Internship' | 'Project invite' | 'saved'>('all');
@@ -43,19 +36,19 @@ export const CareersPage: React.FC = () => {
   return (
     <div className="space-y-6 pb-16">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#3A2E5C]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#DCD1C0]">
         <div>
-          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3EEFF]">
+          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F]">
             Careers & Opportunities
           </h1>
-          <p className="text-xs text-[#A99CCB] mt-0.5">
+          <p className="text-xs text-[#665E54] mt-0.5">
             Curated roles, research fellowships, and project invites for verified builders.
           </p>
         </div>
 
         {/* Search */}
         <div className="relative max-w-xs w-full">
-          <Search className="w-4 h-4 text-[#A99CCB] absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#8C8173] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
@@ -67,15 +60,15 @@ export const CareersPage: React.FC = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#3A2E5C] pb-2 text-xs overflow-x-auto">
+      <div className="flex items-center gap-2 border-b border-[#DCD1C0] pb-2 text-xs overflow-x-auto">
         {(['all', 'Job', 'Internship', 'Project invite', 'saved'] as const).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`px-3.5 py-1.5 rounded-xl capitalize font-semibold whitespace-nowrap transition-all ${
               activeTab === tab
-                ? 'bg-[#22183B] text-[#FFB547] border border-[#3A2E5C]'
-                : 'text-[#A99CCB] hover:text-[#F3EEFF]'
+                ? 'bg-[#805536] text-white font-bold shadow-sm'
+                : 'bg-[#FFFFFF] text-[#665E54] border border-[#DCD1C0] hover:text-[#29251F]'
             }`}
           >
             {tab === 'all' ? 'All Roles' : tab === 'saved' ? 'Saved Bookmarks' : `${tab}s`}
@@ -88,7 +81,7 @@ export const CareersPage: React.FC = () => {
         {/* Listings (5 cols) */}
         <div className="lg:col-span-5 space-y-3">
           {filteredCareers.length === 0 ? (
-            <div className="p-8 text-center bg-[#22183B] border border-[#3A2E5C] rounded-2xl text-xs text-[#A99CCB]">
+            <div className="p-8 text-center bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl text-xs text-[#665E54] shadow-card">
               No opportunities matching criteria.
             </div>
           ) : (
@@ -98,19 +91,19 @@ export const CareersPage: React.FC = () => {
                 <div
                   key={item.id}
                   onClick={() => setSelectedCareer(item)}
-                  className={`nc-card p-4 space-y-3 cursor-pointer transition-all ${
-                    isSelected ? 'border-[#FFB547] bg-[#2B1E4A]/60' : 'hover:border-[#3A2E5C]'
+                  className={`nc-card p-4 space-y-3 cursor-pointer transition-all bg-[#FFFFFF] border ${
+                    isSelected ? 'border-[#805536] ring-2 ring-[#805536]/20 shadow-md' : 'border-[#DCD1C0] hover:border-[#805536]'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <span className="text-[10px] font-bold text-[#FFB547] uppercase">
+                      <span className="text-[10px] font-bold text-[#805536] uppercase tracking-wider">
                         {item.type}
                       </span>
-                      <h3 className="font-heading font-bold text-sm text-[#F3EEFF] mt-0.5">
+                      <h3 className="font-heading font-bold text-sm text-[#29251F] mt-0.5">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-[#A99CCB]">{item.company}</p>
+                      <p className="text-xs text-[#665E54]">{item.company}</p>
                     </div>
 
                     <button
@@ -118,23 +111,23 @@ export const CareersPage: React.FC = () => {
                         e.stopPropagation();
                         toggleSaveCareer(item.id);
                       }}
-                      className="p-1 text-[#A99CCB] hover:text-[#FFB547]"
+                      className="p-1 text-[#665E54] hover:text-[#29251F] transition-colors"
                       title="Save"
                     >
                       {item.isSaved ? (
-                        <BookmarkCheck className="w-4 h-4 text-[#FFB547]" />
+                        <BookmarkCheck className="w-4 h-4 text-[#805536]" />
                       ) : (
                         <Bookmark className="w-4 h-4" />
                       )}
                     </button>
                   </div>
 
-                  <div className="flex items-center justify-between text-xs text-[#7C6F9B]">
-                    <span className="flex items-center gap-1 text-[#2DD4BF]">
-                      <Sparkles className="w-3 h-3" />
+                  <div className="flex items-center justify-between text-xs text-[#665E54]">
+                    <span className="flex items-center gap-1 text-[#29251F] font-medium">
+                      <Sparkles className="w-3 h-3 text-[#805536]" />
                       {item.matchScore}% skill match
                     </span>
-                    <span>{item.compensation}</span>
+                    <span className="text-[#805536] font-semibold">{item.compensation}</span>
                   </div>
                 </div>
               );
@@ -145,19 +138,19 @@ export const CareersPage: React.FC = () => {
         {/* Opportunity Detail View (7 cols) */}
         <div className="lg:col-span-7">
           {selectedCareer ? (
-            <div className="bg-[#1C1431] border border-[#3A2E5C] rounded-3xl p-6 sm:p-8 space-y-6 shadow-glow-card text-xs">
-              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-[#3A2E5C]">
+            <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl p-6 sm:p-8 space-y-6 shadow-card text-xs">
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-[#DCD1C0]">
                 <div>
-                  <span className="text-xs font-bold text-[#FFB547] uppercase">
+                  <span className="text-xs font-bold text-[#805536] uppercase tracking-wider">
                     {selectedCareer.type}
                   </span>
-                  <h2 className="font-heading font-extrabold text-xl sm:text-2xl text-[#F3EEFF] mt-1">
+                  <h2 className="font-heading font-extrabold text-xl sm:text-2xl text-[#29251F] mt-1">
                     {selectedCareer.title}
                   </h2>
-                  <p className="text-xs text-[#A99CCB] mt-0.5">
+                  <p className="text-xs text-[#665E54] mt-0.5">
                     {selectedCareer.company} • {selectedCareer.location}
                   </p>
-                  <span className="text-xs font-bold text-[#2DD4BF] mt-1 inline-block">
+                  <span className="text-xs font-bold text-[#805536] mt-1 inline-block">
                     {selectedCareer.compensation}
                   </span>
                 </div>
@@ -181,13 +174,13 @@ export const CareersPage: React.FC = () => {
               </div>
 
               {/* Skills Match vs Demonstrated Skills */}
-              <div className="p-4 bg-[#17102A] rounded-2xl border border-[#3A2E5C] space-y-3">
+              <div className="p-4 bg-[#F3EDE3] rounded-2xl border border-[#DCD1C0] space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-[#F3EEFF] flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5 text-[#FFB547]" />
+                  <span className="font-bold text-[#29251F] flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-[#805536]" />
                     Skill Match Analysis ({selectedCareer.matchScore}%)
                   </span>
-                  <span className="text-[10px] text-[#7C6F9B]">Compared against your persona</span>
+                  <span className="text-[10px] text-[#8C8173]">Compared against your persona</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2">
@@ -196,10 +189,10 @@ export const CareersPage: React.FC = () => {
                     return (
                       <div
                         key={skill}
-                        className={`p-2 rounded-xl border flex items-center justify-between ${
+                        className={`p-2 rounded-xl border flex items-center justify-between text-xs ${
                           userHasSkill
-                            ? 'bg-[#2DD4BF]/10 border-[#2DD4BF]/30 text-[#2DD4BF]'
-                            : 'bg-[#22183B] border-[#3A2E5C] text-[#A99CCB]'
+                            ? 'bg-[#805536]/10 border-[#805536]/30 text-[#805536]'
+                            : 'bg-[#FFFFFF] border-[#DCD1C0] text-[#665E54]'
                         }`}
                       >
                         <span className="font-medium truncate">{skill}</span>
@@ -213,14 +206,14 @@ export const CareersPage: React.FC = () => {
               </div>
 
               {/* Description */}
-              <div className="space-y-2 text-[#A99CCB] leading-relaxed">
-                <h4 className="font-bold text-[#F3EEFF]">Role Overview</h4>
-                <p>{selectedCareer.description}</p>
+              <div className="space-y-2 text-[#29251F] leading-relaxed">
+                <h4 className="font-bold text-[#29251F]">Role Overview</h4>
+                <p className="text-[#665E54]">{selectedCareer.description}</p>
               </div>
 
               {/* Responsibilities */}
-              <div className="space-y-2 text-[#A99CCB]">
-                <h4 className="font-bold text-[#F3EEFF]">Key Responsibilities</h4>
+              <div className="space-y-2 text-[#665E54]">
+                <h4 className="font-bold text-[#29251F]">Key Responsibilities</h4>
                 <ul className="list-disc list-inside space-y-1">
                   {selectedCareer.responsibilities.map((r, i) => (
                     <li key={i}>{r}</li>
@@ -229,8 +222,8 @@ export const CareersPage: React.FC = () => {
               </div>
 
               {/* Requirements */}
-              <div className="space-y-2 text-[#A99CCB]">
-                <h4 className="font-bold text-[#F3EEFF]">Requirements & Culture</h4>
+              <div className="space-y-2 text-[#665E54]">
+                <h4 className="font-bold text-[#29251F]">Requirements & Culture</h4>
                 <ul className="list-disc list-inside space-y-1">
                   {selectedCareer.requirements.map((req, i) => (
                     <li key={i}>{req}</li>
@@ -239,7 +232,7 @@ export const CareersPage: React.FC = () => {
               </div>
             </div>
           ) : (
-            <div className="p-12 text-center bg-[#22183B] border border-[#3A2E5C] rounded-2xl text-xs text-[#A99CCB]">
+            <div className="p-12 text-center bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl text-xs text-[#665E54] shadow-card">
               Select an opportunity to read requirements and submit your application.
             </div>
           )}

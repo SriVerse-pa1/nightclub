@@ -11,7 +11,6 @@ import {
   HelpCircle,
   ShieldCheck,
   UserX,
-  ArrowRight,
   Info,
   X,
 } from 'lucide-react';
@@ -47,18 +46,18 @@ export const FindYourFourPage: React.FC = () => {
   return (
     <div className="min-h-[calc(100vh-5rem)] flex flex-col justify-between space-y-6 pb-12">
       {/* Top Banner & Control Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#3A2E5C]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#DCD1C0]">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs uppercase tracking-wider text-[#FFB547] font-semibold">
+            <span className="text-xs uppercase tracking-wider text-[#805536] font-semibold">
               Signature Feature
             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FFB547] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#805536] animate-pulse" />
           </div>
-          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3EEFF]">
+          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F]">
             Find Your Four
           </h1>
-          <p className="text-xs text-[#A99CCB] mt-0.5">
+          <p className="text-xs text-[#665E54] mt-0.5">
             Four complementary builders assembled into a balanced five-person team with you.
           </p>
         </div>
@@ -69,23 +68,23 @@ export const FindYourFourPage: React.FC = () => {
             onClick={() => setShowHowItWorks(true)}
             className="nc-button-secondary text-xs py-2 px-3"
           >
-            <HelpCircle className="w-3.5 h-3.5 text-[#38BDF8]" />
+            <HelpCircle className="w-3.5 h-3.5 text-[#665E54]" />
             <span>How this works</span>
           </button>
 
           <button
             onClick={() => setShowRematchConfirm(true)}
             disabled={isComputingTeam}
-            className="nc-button-secondary text-xs py-2 px-3 hover:border-[#FFB547]/50"
+            className="nc-button-secondary text-xs py-2 px-3 hover:border-[#805536]"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${isComputingTeam ? 'animate-spin text-[#FFB547]' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${isComputingTeam ? 'animate-spin text-[#805536]' : ''}`} />
             <span>Rematch Team</span>
           </button>
 
           <button
             onClick={handleAcceptTeam}
             disabled={fourTeam.members.length === 0}
-            className="nc-button-primary text-xs py-2 px-4 shadow-glow-accent disabled:opacity-50"
+            className="nc-button-primary text-xs py-2 px-4 disabled:opacity-50"
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>Accept Team</span>
@@ -95,12 +94,12 @@ export const FindYourFourPage: React.FC = () => {
 
       {/* COMPUTING STATE */}
       {isComputingTeam && (
-        <div className="p-12 text-center bg-[#1E1537] border border-[#FFB547]/40 rounded-3xl space-y-4 shadow-glow-card">
-          <RefreshCw className="w-10 h-10 text-[#FFB547] animate-spin mx-auto" />
-          <h3 className="font-heading font-bold text-xl text-[#F3EEFF]">
+        <div className="p-12 text-center bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl space-y-4 shadow-card">
+          <RefreshCw className="w-10 h-10 text-[#805536] animate-spin mx-auto" />
+          <h3 className="font-heading font-bold text-xl text-[#29251F]">
             Computing New Complementary Constellation...
           </h3>
-          <p className="text-xs text-[#A99CCB] max-w-sm mx-auto">
+          <p className="text-xs text-[#665E54] max-w-sm mx-auto">
             Matching skill profiles, timezone overlaps, and 30-day goals across Telugu community members.
           </p>
         </div>
@@ -108,12 +107,12 @@ export const FindYourFourPage: React.FC = () => {
 
       {/* ALL DECLINED STATE */}
       {!isComputingTeam && fourTeam.status === 'declined_all' && (
-        <div className="p-12 text-center bg-[#1E1537] border border-[#3A2E5C] rounded-3xl space-y-4">
-          <UserX className="w-10 h-10 text-rose-400 mx-auto" />
-          <h3 className="font-heading font-bold text-xl text-[#F3EEFF]">
+        <div className="p-12 text-center bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl space-y-4 shadow-card">
+          <UserX className="w-10 h-10 text-[#8C8173] mx-auto" />
+          <h3 className="font-heading font-bold text-xl text-[#29251F]">
             All Candidates Declined
           </h3>
-          <p className="text-xs text-[#A99CCB] max-w-sm mx-auto">
+          <p className="text-xs text-[#665E54] max-w-sm mx-auto">
             You declined the current candidate pool. Don't worry — declined members won't appear
             again. Run a rematch to compute a fresh complementary constellation.
           </p>
@@ -131,7 +130,7 @@ export const FindYourFourPage: React.FC = () => {
       {!isComputingTeam && fourTeam.status !== 'declined_all' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start flex-1">
           {/* Constellation Orbit Ring (Left 7 Cols) */}
-          <div className="lg:col-span-7 bg-[#1C1333] border border-[#3A2E5C] rounded-3xl p-6 sm:p-8 flex flex-col items-center justify-center min-h-[520px] shadow-glow-card relative">
+          <div className="lg:col-span-7 bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl p-6 sm:p-8 flex flex-col items-center justify-center min-h-[520px] shadow-card relative">
             <RingView
               fourTeam={fourTeam}
               currentUser={currentUser}
@@ -140,9 +139,9 @@ export const FindYourFourPage: React.FC = () => {
             />
 
             {/* Bottom Balance Guarantee */}
-            <div className="mt-6 pt-4 border-t border-[#3A2E5C]/60 w-full flex items-center justify-between text-xs text-[#7C6F9B]">
-              <span className="flex items-center gap-1.5 text-[#2DD4BF]">
-                <ShieldCheck className="w-4 h-4" />
+            <div className="mt-6 pt-4 border-t border-[#DCD1C0] w-full flex items-center justify-between text-xs text-[#8C8173]">
+              <span className="flex items-center gap-1.5 text-[#29251F] font-medium">
+                <ShieldCheck className="w-4 h-4 text-[#805536]" />
                 <span>Balanced: 1 Build • 1 Design • 1 Business • 1 Research</span>
               </span>
               <span>Hyderabad Cohort</span>
@@ -165,9 +164,9 @@ export const FindYourFourPage: React.FC = () => {
                 onStartChat={(m) => startChatWithMember(m)}
               />
             ) : (
-              <div className="bg-[#22183B] border border-[#3A2E5C] rounded-2xl p-8 text-center text-xs text-[#A99CCB] space-y-2">
-                <Info className="w-6 h-6 text-[#FFB547] mx-auto" />
-                <p className="font-semibold text-[#F3EEFF]">No Member Selected</p>
+              <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl p-8 text-center text-xs text-[#665E54] space-y-2 shadow-card">
+                <Info className="w-6 h-6 text-[#805536] mx-auto" />
+                <p className="font-semibold text-[#29251F]">No Member Selected</p>
                 <p>Click on any teammate in the ring to view their score breakdown.</p>
               </div>
             )}
@@ -177,38 +176,38 @@ export const FindYourFourPage: React.FC = () => {
 
       {/* How This Works Explainer Modal */}
       {showHowItWorks && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="bg-[#1F1735] border border-[#3A2E5C] rounded-3xl max-w-lg w-full p-6 sm:p-7 space-y-4 text-xs">
-            <div className="flex items-center justify-between pb-3 border-b border-[#3A2E5C]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#29251F]/40 backdrop-blur-md">
+          <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl max-w-lg w-full p-6 sm:p-7 space-y-4 text-xs shadow-card-hover">
+            <div className="flex items-center justify-between pb-3 border-b border-[#DCD1C0]">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#FFB547]" />
-                <h3 className="font-heading font-bold text-base text-[#F3EEFF]">
+                <Sparkles className="w-4 h-4 text-[#805536]" />
+                <h3 className="font-heading font-bold text-base text-[#29251F]">
                   How "Find Your Four" Works
                 </h3>
               </div>
               <button
                 onClick={() => setShowHowItWorks(false)}
-                className="text-[#A99CCB] hover:text-[#F3EEFF]"
+                className="text-[#665E54] hover:text-[#29251F]"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="space-y-3 text-[#A99CCB] leading-relaxed">
+            <div className="space-y-3 text-[#665E54] leading-relaxed">
               <p>
                 Instead of searching through lists of people with identical skills, Nightclub's
-                matching engine introduces you to a <strong>complementary Five-person mesh</strong>.
+                matching engine introduces you to a <strong className="text-[#29251F]">complementary Five-person mesh</strong>.
               </p>
-              <div className="p-3 bg-[#17102A] rounded-xl border border-[#3A2E5C] space-y-2">
-                <p className="font-semibold text-[#F3EEFF]">The 4 Complementary Roles:</p>
-                <p>• <span className="text-[#38BDF8] font-bold">Build:</span> Developers and systems architects.</p>
-                <p>• <span className="text-[#F472B6] font-bold">Design:</span> Product designers & design system builders.</p>
-                <p>• <span className="text-[#FBBF24] font-bold">Business:</span> GTM strategists, marketers, and sales leaders.</p>
-                <p>• <span className="text-[#2DD4BF] font-bold">Research:</span> Indic NLP scientists and data researchers.</p>
+              <div className="p-3.5 bg-[#F3EDE3] rounded-xl border border-[#DCD1C0] space-y-2 text-[#29251F]">
+                <p className="font-semibold text-[#29251F]">The 4 Complementary Roles:</p>
+                <p>• <span className="text-[#805536] font-bold">Build:</span> Developers and systems architects.</p>
+                <p>• <span className="text-[#96603B] font-bold">Design:</span> Product designers & design system builders.</p>
+                <p>• <span className="text-[#6E4D36] font-bold">Business:</span> GTM strategists, marketers, and sales leaders.</p>
+                <p>• <span className="text-[#5C4533] font-bold">Research:</span> Indic NLP scientists and data researchers.</p>
               </div>
               <p>
-                When you click <strong>Accept Team</strong>, your five members are transitioned into
-                a private <strong>Build Room</strong> with shared Kanban sprints and mentor advisory slots.
+                When you click <strong className="text-[#29251F]">Accept Team</strong>, your five members are transitioned into
+                a private <strong className="text-[#29251F]">Build Room</strong> with shared Kanban sprints and mentor advisory slots.
               </p>
             </div>
 
@@ -226,10 +225,10 @@ export const FindYourFourPage: React.FC = () => {
 
       {/* Rematch Confirmation Modal */}
       {showRematchConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-          <div className="bg-[#1F1735] border border-amber-500/40 rounded-2xl max-w-sm w-full p-6 space-y-4 text-xs text-center">
-            <h3 className="font-heading font-bold text-base text-[#F3EEFF]">Rematch Teammates?</h3>
-            <p className="text-[#A99CCB]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#29251F]/40 backdrop-blur-md">
+          <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl max-w-sm w-full p-6 space-y-4 text-xs text-center shadow-card-hover">
+            <h3 className="font-heading font-bold text-base text-[#29251F]">Rematch Teammates?</h3>
+            <p className="text-[#665E54]">
               This will recompute your graph to suggest alternative builders. Currently accepted
               teammates will be reshuffled.
             </p>

@@ -111,13 +111,8 @@ export const AppContent: React.FC = () => {
     }
   };
 
-  // Determine theme class
-  const themeClass =
-    settings.theme === 'monochrome'
-      ? 'theme-monochrome bg-[#0A0A0A] text-[#EDEDED]'
-      : settings.theme === 'light'
-      ? 'theme-light bg-[#F9F8FD] text-[#17102A]'
-      : 'theme-nightclub bg-[#17102A] text-[#F3EEFF]';
+  // Premium warm luxury theme
+  const themeClass = 'bg-[#F3EDE3] text-[#29251F] font-body selection:bg-[#805536]/15 selection:text-[#29251F]';
 
   if (isStandalonePage) {
     return (

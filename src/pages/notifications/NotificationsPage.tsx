@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useApp } from '../../context/AppContext';
-import { AppNotification, NotificationType } from '../../types';
+import { NotificationType } from '../../types';
 import {
   Bell,
   MessageSquare,
@@ -23,25 +23,23 @@ export const NotificationsPage: React.FC = () => {
     navigate,
   } = useApp();
 
-  const [activeGroupFilter, setActiveGroupFilter] = useState<'all' | 'today' | 'this_week' | 'earlier'>('all');
-
   const getNotificationIcon = (type: NotificationType) => {
     switch (type) {
       case 'message':
-        return <MessageSquare className="w-4 h-4 text-[#38BDF8]" />;
+        return <MessageSquare className="w-4 h-4 text-[#805536]" />;
       case 'connection_accepted':
-        return <UserCheck className="w-4 h-4 text-[#2DD4BF]" />;
+        return <UserCheck className="w-4 h-4 text-[#805536]" />;
       case 'team_ready':
-        return <Users2 className="w-4 h-4 text-[#FFB547]" />;
+        return <Users2 className="w-4 h-4 text-[#805536]" />;
       case 'session_reminder':
-        return <Calendar className="w-4 h-4 text-[#F472B6]" />;
+        return <Calendar className="w-4 h-4 text-[#805536]" />;
       case 'milestone':
-        return <Flag className="w-4 h-4 text-emerald-400" />;
+        return <Flag className="w-4 h-4 text-[#805536]" />;
       case 'challenge':
-        return <Trophy className="w-4 h-4 text-amber-400" />;
+        return <Trophy className="w-4 h-4 text-[#805536]" />;
       case 'new_intro':
       default:
-        return <Sparkles className="w-4 h-4 text-[#FFB547]" />;
+        return <Sparkles className="w-4 h-4 text-[#805536]" />;
     }
   };
 
@@ -54,12 +52,12 @@ export const NotificationsPage: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6 pb-16">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#3A2E5C]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#DCD1C0]">
         <div>
-          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3EEFF]">
+          <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F]">
             Notifications
           </h1>
-          <p className="text-xs text-[#A99CCB] mt-0.5">
+          <p className="text-xs text-[#665E54] mt-0.5">
             Real-time updates regarding your five-person team, mentor sessions, and messages.
           </p>
         </div>
@@ -69,13 +67,13 @@ export const NotificationsPage: React.FC = () => {
             onClick={markAllNotificationsRead}
             className="nc-button-secondary text-xs py-2 px-3"
           >
-            <CheckCheck className="w-3.5 h-3.5" />
+            <CheckCheck className="w-3.5 h-3.5 text-[#805536]" />
             <span>Mark all read</span>
           </button>
 
           <button
             onClick={() => navigate('/settings')}
-            className="p-2 text-[#A99CCB] hover:text-[#F3EEFF]"
+            className="p-2 text-[#665E54] hover:text-[#29251F] transition-colors rounded-lg hover:bg-[#E7DCCB]/60"
             title="Notification Settings"
           >
             <Settings className="w-4 h-4" />
@@ -91,7 +89,7 @@ export const NotificationsPage: React.FC = () => {
 
           return (
             <div key={group.id} className="space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#7C6F9B] px-1">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#8C8173] px-1">
                 {group.title}
               </span>
 
@@ -103,30 +101,30 @@ export const NotificationsPage: React.FC = () => {
                       markNotificationRead(notif.id);
                       navigate(notif.linkRoute as any);
                     }}
-                    className={`nc-card p-4 flex items-start justify-between gap-4 cursor-pointer hover:border-[#FFB547]/50 transition-all text-xs ${
-                      !notif.read ? 'bg-[#2B1E4A]/70 border-[#FFB547]/30' : ''
+                    className={`nc-card p-4 flex items-start justify-between gap-4 cursor-pointer hover:border-[#805536] transition-all text-xs bg-[#FFFFFF] border shadow-sm ${
+                      !notif.read ? 'border-[#805536]/40 shadow-card-hover' : 'border-[#DCD1C0]'
                     }`}
                   >
                     <div className="flex items-start gap-3.5">
-                      <div className="p-2.5 rounded-xl bg-[#17102A] border border-[#3A2E5C] shrink-0 mt-0.5">
+                      <div className="p-2.5 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] shrink-0 mt-0.5">
                         {getNotificationIcon(notif.type)}
                       </div>
 
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <h4 className="font-semibold text-xs text-[#F3EEFF]">{notif.title}</h4>
+                          <h4 className="font-semibold text-xs text-[#29251F]">{notif.title}</h4>
                           {!notif.read && (
-                            <span className="w-2 h-2 rounded-full bg-[#FFB547]" />
+                            <span className="w-2 h-2 rounded-full bg-[#805536]" />
                           )}
                         </div>
-                        <p className="text-[#A99CCB] text-[11px] leading-relaxed">
+                        <p className="text-[#665E54] text-[11px] leading-relaxed">
                           {notif.description}
                         </p>
-                        <span className="text-[10px] text-[#7C6F9B] block pt-1">{notif.time}</span>
+                        <span className="text-[10px] text-[#8C8173] block pt-1">{notif.time}</span>
                       </div>
                     </div>
 
-                    <ArrowRight className="w-4 h-4 text-[#A99CCB] shrink-0 mt-1" />
+                    <ArrowRight className="w-4 h-4 text-[#8C8173] shrink-0 mt-1" />
                   </div>
                 ))}
               </div>
@@ -135,9 +133,9 @@ export const NotificationsPage: React.FC = () => {
         })}
 
         {notifications.length === 0 && (
-          <div className="p-12 text-center bg-[#22183B] border border-[#3A2E5C] rounded-2xl text-xs text-[#A99CCB] space-y-2">
-            <Bell className="w-8 h-8 text-[#FFB547] mx-auto" />
-            <p className="font-semibold text-[#F3EEFF]">You're all caught up</p>
+          <div className="p-12 text-center bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl text-xs text-[#665E54] space-y-2 shadow-sm">
+            <Bell className="w-8 h-8 text-[#805536] mx-auto" />
+            <p className="font-semibold text-[#29251F]">You're all caught up</p>
             <p>New team match introductions and session alerts will appear here.</p>
           </div>
         )}

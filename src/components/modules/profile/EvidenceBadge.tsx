@@ -11,22 +11,22 @@ export const EvidenceBadge: React.FC<EvidenceBadgeProps> = ({ evidence }) => {
     'Self-reported': {
       label: 'Self-reported',
       icon: CheckCircle,
-      classes: 'bg-[#22183B] text-[#A99CCB] border-[#3A2E5C]',
+      classes: 'bg-[#F3EDE3] text-[#665E54] border-[#DCD1C0]',
     },
     Portfolio: {
       label: 'Portfolio Verified',
       icon: Award,
-      classes: 'bg-[#F472B6]/10 text-[#F472B6] border-[#F472B6]/30',
+      classes: 'bg-[#E7DCCB] text-[#29251F] border-[#DCD1C0]',
     },
     Project: {
       label: 'Shipped in Project',
       icon: FolderGit2,
-      classes: 'bg-[#38BDF8]/10 text-[#38BDF8] border-[#38BDF8]/30',
+      classes: 'bg-[#E7DCCB] text-[#29251F] border-[#DCD1C0]',
     },
     Endorsed: {
       label: 'Peer Endorsed',
       icon: ShieldCheck,
-      classes: 'bg-[#2DD4BF]/10 text-[#2DD4BF] border-[#2DD4BF]/30',
+      classes: 'bg-[#805536]/10 text-[#805536] border-[#805536]/30 font-semibold',
     },
   }[evidence];
 

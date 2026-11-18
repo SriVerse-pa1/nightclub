@@ -9,10 +9,6 @@ import {
   CreditCard,
   Trash2,
   Download,
-  Moon,
-  Clock,
-  Sparkles,
-  CheckCircle2,
 } from 'lucide-react';
 
 export const SettingsPage: React.FC = () => {
@@ -20,8 +16,6 @@ export const SettingsPage: React.FC = () => {
     settings,
     updateSettings,
     currentUser,
-    toggleTheme,
-    toggleLanguage,
     navigate,
     showToast,
   } = useApp();
@@ -35,10 +29,12 @@ export const SettingsPage: React.FC = () => {
 
   const handleSaveNotifs = () => {
     updateSettings({ notifications: notifState });
+    showToast('Notification preferences saved.', 'success');
   };
 
   const handleSavePrivacy = () => {
     updateSettings({ privacy: privacyState });
+    showToast('Privacy preferences saved.', 'success');
   };
 
   const handleExportData = () => {
@@ -52,18 +48,18 @@ export const SettingsPage: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto space-y-6 pb-16">
       {/* Header */}
-      <div className="pb-4 border-b border-[#3A2E5C]">
-        <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3EEFF]">
+      <div className="pb-4 border-b border-[#DCD1C0]">
+        <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F]">
           Account & App Settings
         </h1>
-        <p className="text-xs text-[#A99CCB] mt-0.5">
+        <p className="text-xs text-[#665E54] mt-0.5">
           Configure notification alerts, language, membership billing, and privacy controls.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
         {/* Left Settings Sidebar (4 cols) */}
-        <div className="md:col-span-4 bg-[#1C1431] border border-[#3A2E5C] rounded-2xl p-2.5 space-y-1 text-xs">
+        <div className="md:col-span-4 bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl p-2.5 space-y-1 text-xs shadow-card">
           {[
             { id: 'account', label: 'Account Profile', icon: User },
             { id: 'notifications', label: 'Notifications & Quiet Hours', icon: Bell },
@@ -81,8 +77,8 @@ export const SettingsPage: React.FC = () => {
                 onClick={() => setActiveTab(item.id as any)}
                 className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium transition-all ${
                   isSelected
-                    ? 'bg-[#FFB547] text-[#17102A] font-bold shadow-sm'
-                    : 'text-[#A99CCB] hover:text-[#F3EEFF] hover:bg-[#22183B]'
+                    ? 'bg-[#805536] text-white font-bold shadow-sm'
+                    : 'text-[#665E54] hover:text-[#29251F] hover:bg-[#F3EDE3]/70'
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />
@@ -93,14 +89,14 @@ export const SettingsPage: React.FC = () => {
         </div>
 
         {/* Right Settings Body (8 cols) */}
-        <div className="md:col-span-8 bg-[#22183B] border border-[#3A2E5C] rounded-3xl p-6 sm:p-8 space-y-6 text-xs">
+        <div className="md:col-span-8 bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl p-6 sm:p-8 space-y-6 text-xs shadow-card">
           {/* TAB: ACCOUNT */}
           {activeTab === 'account' && (
             <div className="space-y-5">
-              <h3 className="font-heading font-bold text-base text-[#F3EEFF]">Account Profile</h3>
+              <h3 className="font-heading font-bold text-base text-[#29251F]">Account Profile</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-[#A99CCB] mb-1 font-medium">Display Name</label>
+                  <label className="block text-[#665E54] mb-1 font-medium">Display Name</label>
                   <input
                     type="text"
                     defaultValue={currentUser.name}
@@ -108,19 +104,19 @@ export const SettingsPage: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-[#A99CCB] mb-1 font-medium">Registered Email</label>
+                  <label className="block text-[#665E54] mb-1 font-medium">Registered Email</label>
                   <input
                     type="email"
                     disabled
                     defaultValue="sai.venkata@example.com"
-                    className="w-full nc-input opacity-60 cursor-not-allowed"
+                    className="w-full nc-input opacity-60 cursor-not-allowed bg-[#F3EDE3]"
                   />
-                  <span className="text-[10px] text-[#7C6F9B] mt-1 block">
+                  <span className="text-[10px] text-[#8C8173] mt-1 block">
                     Contact our support team to transfer primary billing email.
                   </span>
                 </div>
                 <div>
-                  <label className="block text-[#A99CCB] mb-1 font-medium">Time Zone</label>
+                  <label className="block text-[#665E54] mb-1 font-medium">Time Zone</label>
                   <input
                     type="text"
                     defaultValue="Asia/Kolkata (IST UTC+5:30)"
@@ -140,15 +136,15 @@ export const SettingsPage: React.FC = () => {
           {/* TAB: NOTIFICATIONS */}
           {activeTab === 'notifications' && (
             <div className="space-y-6">
-              <h3 className="font-heading font-bold text-base text-[#F3EEFF]">
+              <h3 className="font-heading font-bold text-base text-[#29251F]">
                 Notifications & Quiet Hours
               </h3>
 
-              <div className="space-y-3 divide-y divide-[#3A2E5C]/60">
+              <div className="space-y-3 divide-y divide-[#DCD1C0]">
                 <div className="flex items-center justify-between pt-2">
                   <div>
-                    <p className="font-semibold text-[#F3EEFF]">Direct Chat Messages</p>
-                    <span className="text-[11px] text-[#A99CCB]">
+                    <p className="font-semibold text-[#29251F]">Direct Chat Messages</p>
+                    <span className="text-[11px] text-[#665E54]">
                       Alerts when teammates message you
                     </span>
                   </div>
@@ -158,14 +154,14 @@ export const SettingsPage: React.FC = () => {
                     onChange={(e) =>
                       setNotifState({ ...notifState, messages: e.target.checked })
                     }
-                    className="accent-[#FFB547] w-4 h-4 rounded"
+                    className="accent-[#805536] w-4 h-4 rounded cursor-pointer"
                   />
                 </div>
 
                 <div className="flex items-center justify-between pt-3">
                   <div>
-                    <p className="font-semibold text-[#F3EEFF]">Find Your Four Introductions</p>
-                    <span className="text-[11px] text-[#A99CCB]">
+                    <p className="font-semibold text-[#29251F]">Find Your Four Introductions</p>
+                    <span className="text-[11px] text-[#665E54]">
                       Notify me immediately when a new team constellation is formed
                     </span>
                   </div>
@@ -175,14 +171,14 @@ export const SettingsPage: React.FC = () => {
                     onChange={(e) =>
                       setNotifState({ ...notifState, teamMatches: e.target.checked })
                     }
-                    className="accent-[#FFB547] w-4 h-4 rounded"
+                    className="accent-[#805536] w-4 h-4 rounded cursor-pointer"
                   />
                 </div>
 
                 <div className="flex items-center justify-between pt-3">
                   <div>
-                    <p className="font-semibold text-[#F3EEFF]">Mentor Session Reminders</p>
-                    <span className="text-[11px] text-[#A99CCB]">
+                    <p className="font-semibold text-[#29251F]">Mentor Session Reminders</p>
+                    <span className="text-[11px] text-[#665E54]">
                       Alerts 1 hour and 15 minutes before 1-on-1 strategy calls
                     </span>
                   </div>
@@ -192,19 +188,19 @@ export const SettingsPage: React.FC = () => {
                     onChange={(e) =>
                       setNotifState({ ...notifState, mentorshipReminders: e.target.checked })
                     }
-                    className="accent-[#FFB547] w-4 h-4 rounded"
+                    className="accent-[#805536] w-4 h-4 rounded cursor-pointer"
                   />
                 </div>
               </div>
 
               {/* Quiet Hours */}
-              <div className="pt-4 border-t border-[#3A2E5C] space-y-3">
-                <span className="font-bold text-[#FFB547] uppercase text-[11px]">
+              <div className="pt-4 border-t border-[#DCD1C0] space-y-3">
+                <span className="font-bold text-[#29251F] uppercase text-[11px] tracking-wider">
                   Quiet Hours (Do Not Disturb)
                 </span>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[#A99CCB] mb-1">Start Time</label>
+                    <label className="block text-[#665E54] mb-1">Start Time</label>
                     <input
                       type="time"
                       value={notifState.quietHoursStart}
@@ -215,7 +211,7 @@ export const SettingsPage: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-[#A99CCB] mb-1">End Time</label>
+                    <label className="block text-[#665E54] mb-1">End Time</label>
                     <input
                       type="time"
                       value={notifState.quietHoursEnd}
@@ -237,15 +233,15 @@ export const SettingsPage: React.FC = () => {
           {/* TAB: PRIVACY */}
           {activeTab === 'privacy' && (
             <div className="space-y-5">
-              <h3 className="font-heading font-bold text-base text-[#F3EEFF]">
+              <h3 className="font-heading font-bold text-base text-[#29251F]">
                 Privacy & Visibility
               </h3>
 
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-3.5 bg-[#17102A] rounded-xl border border-[#3A2E5C]">
+                <div className="flex items-center justify-between p-3.5 bg-[#F3EDE3] rounded-xl border border-[#DCD1C0]">
                   <div>
-                    <p className="font-semibold text-[#F3EEFF]">Appear in Member Discover</p>
-                    <span className="text-[11px] text-[#A99CCB]">
+                    <p className="font-semibold text-[#29251F]">Appear in Member Discover</p>
+                    <span className="text-[11px] text-[#665E54]">
                       Allow peers in Telugu AI community to discover your profile
                     </span>
                   </div>
@@ -255,14 +251,14 @@ export const SettingsPage: React.FC = () => {
                     onChange={(e) =>
                       setPrivacyState({ ...privacyState, appearInDiscover: e.target.checked })
                     }
-                    className="accent-[#FFB547] w-4 h-4 rounded"
+                    className="accent-[#805536] w-4 h-4 rounded cursor-pointer"
                   />
                 </div>
 
-                <div className="flex items-center justify-between p-3.5 bg-[#17102A] rounded-xl border border-[#3A2E5C]">
+                <div className="flex items-center justify-between p-3.5 bg-[#F3EDE3] rounded-xl border border-[#DCD1C0]">
                   <div>
-                    <p className="font-semibold text-[#F3EEFF]">Show Available Weekly Hours</p>
-                    <span className="text-[11px] text-[#A99CCB]">
+                    <p className="font-semibold text-[#29251F]">Show Available Weekly Hours</p>
+                    <span className="text-[11px] text-[#665E54]">
                       Displays your 25 hrs/week building availability
                     </span>
                   </div>
@@ -272,7 +268,7 @@ export const SettingsPage: React.FC = () => {
                     onChange={(e) =>
                       setPrivacyState({ ...privacyState, showAvailability: e.target.checked })
                     }
-                    className="accent-[#FFB547] w-4 h-4 rounded"
+                    className="accent-[#805536] w-4 h-4 rounded cursor-pointer"
                   />
                 </div>
 
@@ -286,12 +282,12 @@ export const SettingsPage: React.FC = () => {
           {/* TAB: BLOCKED */}
           {activeTab === 'blocked' && (
             <div className="space-y-4">
-              <h3 className="font-heading font-bold text-base text-[#F3EEFF]">Blocked People</h3>
-              <p className="text-[#A99CCB]">
+              <h3 className="font-heading font-bold text-base text-[#29251F]">Blocked People</h3>
+              <p className="text-[#665E54]">
                 Blocked individuals cannot see your profile, send connection requests, or appear in
                 your Find Your Four constellations.
               </p>
-              <div className="p-8 text-center bg-[#17102A] rounded-xl border border-[#3A2E5C] text-[#7C6F9B]">
+              <div className="p-8 text-center bg-[#F3EDE3] rounded-xl border border-[#DCD1C0] text-[#8C8173]">
                 Your blocked list is currently empty.
               </div>
             </div>
@@ -300,21 +296,21 @@ export const SettingsPage: React.FC = () => {
           {/* TAB: LANGUAGE & THEME */}
           {activeTab === 'language' && (
             <div className="space-y-6">
-              <h3 className="font-heading font-bold text-base text-[#F3EEFF]">
+              <h3 className="font-heading font-bold text-base text-[#29251F]">
                 Language & Appearance
               </h3>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-[#A99CCB] font-medium mb-2">Display Language</label>
+                  <label className="block text-[#665E54] font-medium mb-2">Display Language</label>
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       type="button"
                       onClick={() => updateSettings({ language: 'en' })}
-                      className={`p-3 rounded-xl border text-center font-bold ${
+                      className={`p-3 rounded-xl border text-center font-bold transition-colors ${
                         settings.language === 'en'
-                          ? 'border-[#FFB547] bg-[#FFB547]/10 text-[#FFB547]'
-                          : 'border-[#3A2E5C] bg-[#17102A] text-[#A99CCB]'
+                          ? 'border-[#805536] bg-[#805536] text-white shadow-sm'
+                          : 'border-[#DCD1C0] bg-[#FFFFFF] text-[#665E54] hover:text-[#29251F] hover:border-[#805536]'
                       }`}
                     >
                       English
@@ -322,10 +318,10 @@ export const SettingsPage: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => updateSettings({ language: 'te' })}
-                      className={`p-3 rounded-xl border text-center font-bold ${
+                      className={`p-3 rounded-xl border text-center font-bold transition-colors ${
                         settings.language === 'te'
-                          ? 'border-[#FFB547] bg-[#FFB547]/10 text-[#FFB547]'
-                          : 'border-[#3A2E5C] bg-[#17102A] text-[#A99CCB]'
+                          ? 'border-[#805536] bg-[#805536] text-white shadow-sm'
+                          : 'border-[#DCD1C0] bg-[#FFFFFF] text-[#665E54] hover:text-[#29251F] hover:border-[#805536]'
                       }`}
                     >
                       తెలుగు (Telugu)
@@ -333,42 +329,16 @@ export const SettingsPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#3A2E5C]">
-                  <label className="block text-[#A99CCB] font-medium mb-2">Visual Theme</label>
-                  <div className="grid grid-cols-3 gap-2">
-                    <button
-                      type="button"
-                      onClick={() => updateSettings({ theme: 'nightclub' })}
-                      className={`p-3 rounded-xl border text-center text-xs font-semibold ${
-                        settings.theme === 'nightclub'
-                          ? 'border-[#FFB547] bg-[#FFB547]/10 text-[#FFB547]'
-                          : 'border-[#3A2E5C] bg-[#17102A] text-[#A99CCB]'
-                      }`}
-                    >
-                      Nightclub Aubergine
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => updateSettings({ theme: 'monochrome' })}
-                      className={`p-3 rounded-xl border text-center text-xs font-semibold ${
-                        settings.theme === 'monochrome'
-                          ? 'border-[#FFB547] bg-[#FFB547]/10 text-[#FFB547]'
-                          : 'border-[#3A2E5C] bg-[#17102A] text-[#A99CCB]'
-                      }`}
-                    >
-                      Strict Monochrome
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => updateSettings({ theme: 'light' })}
-                      className={`p-3 rounded-xl border text-center text-xs font-semibold ${
-                        settings.theme === 'light'
-                          ? 'border-[#FFB547] bg-[#FFB547]/10 text-[#FFB547]'
-                          : 'border-[#3A2E5C] bg-[#17102A] text-[#A99CCB]'
-                      }`}
-                    >
-                      Light Mode
-                    </button>
+                <div className="pt-3 border-t border-[#DCD1C0]">
+                  <label className="block text-[#665E54] font-medium mb-2">Visual Theme</label>
+                  <div className="p-3.5 rounded-xl border border-[#DCD1C0] bg-[#F3EDE3] text-xs">
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-[#29251F]">Nightclub Warm Luxury</span>
+                      <span className="text-[10px] text-[#805536] font-semibold bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25">Active</span>
+                    </div>
+                    <p className="text-[#665E54] text-[11px] mt-1">
+                      Warm editorial palette inspired by high-end paper, refined typography, and purposeful terracotta accents.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -378,20 +348,20 @@ export const SettingsPage: React.FC = () => {
           {/* TAB: BILLING */}
           {activeTab === 'billing' && (
             <div className="space-y-6">
-              <h3 className="font-heading font-bold text-base text-[#F3EEFF]">
+              <h3 className="font-heading font-bold text-base text-[#29251F]">
                 Subscription & Invoices
               </h3>
 
-              <div className="p-4 rounded-2xl bg-[#17102A] border border-[#3A2E5C] space-y-2">
+              <div className="p-4 rounded-2xl bg-[#F3EDE3] border border-[#DCD1C0] space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="font-bold text-[#FFB547]">Founding Builder Membership</span>
-                  <span className="text-emerald-400 font-semibold">Active</span>
+                  <span className="font-bold text-[#29251F]">Founding Builder Membership</span>
+                  <span className="text-[#805536] font-semibold bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25 text-[10px]">Active</span>
                 </div>
-                <p className="text-[#A99CCB]">₹1,499 per month • Renews on Dec 01, 2026</p>
+                <p className="text-[#665E54]">₹1,499 per month • Renews on 1st of next month</p>
                 <div className="pt-2 flex items-center gap-2">
                   <button
                     onClick={() => navigate('/subscription-flow')}
-                    className="text-xs text-[#FFB547] hover:underline"
+                    className="text-xs text-[#805536] hover:underline font-semibold"
                   >
                     Pause or Cancel Membership →
                   </button>
@@ -400,15 +370,15 @@ export const SettingsPage: React.FC = () => {
 
               {/* Invoices */}
               <div className="space-y-2 pt-2">
-                <span className="font-bold text-[#F3EEFF] text-xs uppercase">Billing History</span>
-                <div className="p-3 bg-[#17102A] rounded-xl border border-[#3A2E5C] flex items-center justify-between text-xs">
+                <span className="font-bold text-[#29251F] text-xs uppercase">Billing History</span>
+                <div className="p-3 bg-[#FFFFFF] rounded-xl border border-[#DCD1C0] flex items-center justify-between text-xs shadow-sm">
                   <div>
-                    <span className="font-semibold text-[#F3EEFF]">Nov 01, 2026</span>
-                    <p className="text-[10px] text-[#7C6F9B]">Invoice #NC-8921 • UPI Paid</p>
+                    <span className="font-semibold text-[#29251F]">Current Month Intake</span>
+                    <p className="text-[10px] text-[#8C8173]">Invoice #NC-8921 • UPI Paid</p>
                   </div>
                   <button
                     onClick={() => showToast('Invoice PDF downloaded.', 'info')}
-                    className="text-[#FFB547] hover:underline"
+                    className="text-[#805536] hover:underline font-semibold"
                   >
                     Download PDF
                   </button>
@@ -420,14 +390,14 @@ export const SettingsPage: React.FC = () => {
           {/* TAB: DATA & DANGER ZONE */}
           {activeTab === 'data' && (
             <div className="space-y-6">
-              <h3 className="font-heading font-bold text-base text-[#F3EEFF]">
+              <h3 className="font-heading font-bold text-base text-[#29251F]">
                 Data Privacy & Account Removal
               </h3>
 
               <div className="space-y-4">
-                <div className="p-4 bg-[#17102A] border border-[#3A2E5C] rounded-2xl space-y-2">
-                  <h4 className="font-bold text-[#F3EEFF]">Export Your Builder Data</h4>
-                  <p className="text-[#A99CCB]">
+                <div className="p-4 bg-[#F3EDE3] border border-[#DCD1C0] rounded-2xl space-y-2">
+                  <h4 className="font-bold text-[#29251F]">Export Your Builder Data</h4>
+                  <p className="text-[#665E54]">
                     Download a copy of your matching profile, chat history, and Builder Journey
                     timeline in JSON format.
                   </p>
@@ -435,20 +405,20 @@ export const SettingsPage: React.FC = () => {
                     onClick={handleExportData}
                     className="nc-button-secondary text-xs py-2 px-4"
                   >
-                    <Download className="w-3.5 h-3.5" />
+                    <Download className="w-3.5 h-3.5 text-[#805536]" />
                     <span>Export JSON Archive</span>
                   </button>
                 </div>
 
-                <div className="p-4 bg-rose-950/20 border border-rose-500/30 rounded-2xl space-y-2 text-rose-300">
-                  <h4 className="font-bold text-rose-400">Delete Account & Leave Cohort</h4>
-                  <p className="text-xs text-rose-300/80">
+                <div className="p-4 bg-[#F3EDE3] border border-[#DCD1C0] rounded-2xl space-y-2">
+                  <h4 className="font-bold text-[#29251F]">Delete Account & Leave Cohort</h4>
+                  <p className="text-xs text-[#665E54]">
                     This action permanently deletes your persona from the matching graph. You will
                     lose all remaining mentor credits and access to active Build Rooms.
                   </p>
                   <button
                     onClick={handleDeleteAccount}
-                    className="py-2 px-4 rounded-xl bg-rose-500 text-white font-semibold hover:bg-rose-600 text-xs flex items-center gap-1.5"
+                    className="nc-button-secondary py-2 px-4 text-xs flex items-center gap-1.5 text-red-600 hover:text-red-700 hover:border-red-300 border-[#DCD1C0]"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                     <span>Delete Account Permanently</span>

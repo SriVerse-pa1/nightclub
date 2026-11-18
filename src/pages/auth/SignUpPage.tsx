@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { RoleBadge } from '../../components/common/RoleBadge';
 import {
-  ArrowRight,
   Eye,
   EyeOff,
-  Sparkles,
   ShieldCheck,
   AlertCircle,
-  CheckCircle2,
 } from 'lucide-react';
 
 export const SignUpPage: React.FC = () => {
-  const { navigate, signup, fourTeam } = useApp();
+  const { navigate, fourTeam } = useApp();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,15 +21,15 @@ export const SignUpPage: React.FC = () => {
 
   const sampleTeammate = fourTeam.members[1]; // Karthik Varma (Business)
 
-  // Password strength checker
+  // Password strength checker (warm tones)
   const getPasswordStrength = (pass: string) => {
-    if (!pass) return { label: 'Enter password', color: 'bg-zinc-700', width: '0%' };
-    if (pass.length < 6) return { label: 'Too short (min 6 chars)', color: 'bg-rose-500', width: '25%' };
-    if (pass.length < 8) return { label: 'Fair', color: 'bg-amber-500', width: '50%' };
+    if (!pass) return { label: 'Enter password', color: 'bg-[#DCD1C0]', width: '0%' };
+    if (pass.length < 6) return { label: 'Too short (min 6 chars)', color: 'bg-[#8C8173]', width: '25%' };
+    if (pass.length < 8) return { label: 'Fair', color: 'bg-[#96603B]', width: '50%' };
     if (/[0-9]/.test(pass) && /[a-zA-Z]/.test(pass)) {
-      return { label: 'Strong', color: 'bg-emerald-500', width: '100%' };
+      return { label: 'Strong', color: 'bg-[#805536]', width: '100%' };
     }
-    return { label: 'Medium', color: 'bg-sky-500', width: '75%' };
+    return { label: 'Medium', color: 'bg-[#805536]/70', width: '75%' };
   };
 
   const strength = getPasswordStrength(password);
@@ -61,32 +58,31 @@ export const SignUpPage: React.FC = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      // Navigate to email verification screen
       navigate('/verify-email', { email, name });
     }, 500);
   };
 
   return (
-    <div className="min-h-screen bg-[#17102A] text-[#F3EEFF] flex flex-col justify-between">
+    <div className="min-h-screen bg-[#F3EDE3] text-[#29251F] flex flex-col justify-between font-body selection:bg-[#805536]/15 selection:text-[#29251F]">
       {/* Header */}
-      <header className="h-16 px-6 border-b border-[#3A2E5C] flex items-center justify-between">
+      <header className="h-16 px-6 border-b border-[#DCD1C0] bg-[#F3EDE3] flex items-center justify-between">
         <div
           onClick={() => navigate('/')}
           className="flex items-center gap-2 cursor-pointer"
         >
-          <div className="w-8 h-8 rounded-lg bg-[#22183B] border border-[#FFB547]/50 flex items-center justify-center text-[#FFB547] font-bold">
+          <div className="w-8 h-8 rounded-lg bg-[#805536] border border-[#805536] flex items-center justify-center text-white font-bold shadow-sm">
             N
           </div>
-          <span className="font-heading font-bold text-base tracking-wider text-[#F3EEFF]">
+          <span className="font-heading font-bold text-base tracking-wider text-[#29251F]">
             NIGHTCLUB
           </span>
         </div>
 
         <button
           onClick={() => navigate('/login')}
-          className="text-xs text-[#A99CCB] hover:text-[#FFB547] font-medium"
+          className="text-xs text-[#665E54] hover:text-[#29251F] font-medium transition-colors"
         >
-          Already a member? <strong>Log in</strong>
+          Already a member? <strong className="text-[#805536]">Log in</strong>
         </button>
       </header>
 
@@ -96,13 +92,13 @@ export const SignUpPage: React.FC = () => {
           {/* Form Side */}
           <div className="lg:col-span-6 max-w-md w-full mx-auto space-y-5">
             <div className="space-y-1.5">
-              <span className="text-xs uppercase tracking-wider text-[#FFB547] font-semibold">
+              <span className="text-xs uppercase tracking-wider text-[#805536] font-semibold">
                 Founding Member Application
               </span>
-              <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3EEFF]">
+              <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F]">
                 Create your builder profile
               </h1>
-              <p className="text-xs text-[#A99CCB]">
+              <p className="text-xs text-[#665E54]">
                 Join the Telugu AI community. Get matched with 4 complementary teammates.
               </p>
             </div>
@@ -126,22 +122,22 @@ export const SignUpPage: React.FC = () => {
             </div>
 
             <div className="relative flex items-center justify-center">
-              <div className="border-t border-[#3A2E5C] w-full" />
-              <span className="bg-[#17102A] px-3 text-[11px] text-[#7C6F9B] uppercase font-semibold">
+              <div className="border-t border-[#DCD1C0] w-full" />
+              <span className="bg-[#F3EDE3] px-3 text-[11px] text-[#8C8173] uppercase font-semibold">
                 Or with email
               </span>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
               {error && (
-                <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4 shrink-0" />
+                <div className="p-3 rounded-xl bg-[#FFFFFF] border border-[#805536]/30 text-[#805536] text-xs flex items-center gap-2 shadow-sm">
+                  <AlertCircle className="w-4 h-4 shrink-0 text-[#805536]" />
                   <span>{error}</span>
                 </div>
               )}
 
               <div>
-                <label className="block text-[#A99CCB] font-medium mb-1">Full Name</label>
+                <label className="block text-[#665E54] font-medium mb-1">Full Name</label>
                 <input
                   type="text"
                   required
@@ -153,7 +149,7 @@ export const SignUpPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[#A99CCB] font-medium mb-1">Email address</label>
+                <label className="block text-[#665E54] font-medium mb-1">Email address</label>
                 <input
                   type="email"
                   required
@@ -165,7 +161,7 @@ export const SignUpPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-[#A99CCB] font-medium mb-1">Password</label>
+                <label className="block text-[#665E54] font-medium mb-1">Password</label>
                 <div className="relative">
                   <input
                     type={showPassword ? 'text' : 'password'}
@@ -178,7 +174,7 @@ export const SignUpPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#A99CCB] hover:text-[#F3EEFF]"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8C8173] hover:text-[#29251F]"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -187,13 +183,13 @@ export const SignUpPage: React.FC = () => {
                 {/* Password strength bar */}
                 {password && (
                   <div className="mt-1.5 space-y-1">
-                    <div className="w-full h-1 bg-[#17102A] rounded-full overflow-hidden border border-[#3A2E5C]">
+                    <div className="w-full h-1.5 bg-[#E7DCCB] rounded-full overflow-hidden border border-[#DCD1C0]">
                       <div
                         style={{ width: strength.width }}
                         className={`h-full transition-all duration-300 ${strength.color}`}
                       />
                     </div>
-                    <span className="text-[10px] text-[#A99CCB]">{strength.label}</span>
+                    <span className="text-[10px] text-[#8C8173]">{strength.label}</span>
                   </div>
                 )}
               </div>
@@ -205,9 +201,9 @@ export const SignUpPage: React.FC = () => {
                   id="terms"
                   checked={agreeTerms}
                   onChange={(e) => setAgreeTerms(e.target.checked)}
-                  className="accent-[#FFB547] w-4 h-4 rounded mt-0.5"
+                  className="accent-[#805536] w-4 h-4 rounded mt-0.5"
                 />
-                <label htmlFor="terms" className="text-[#A99CCB] text-[11px] leading-relaxed cursor-pointer">
+                <label htmlFor="terms" className="text-[#665E54] text-[11px] leading-relaxed cursor-pointer">
                   I agree to the Nightclub Community Guidelines, respectful builder conduct, and
                   privacy terms.
                 </label>
@@ -224,9 +220,9 @@ export const SignUpPage: React.FC = () => {
           </div>
 
           {/* Right Preview */}
-          <div className="hidden lg:flex lg:col-span-6 flex-col items-center justify-center pl-8 border-l border-[#3A2E5C]">
-            <div className="w-full max-w-sm bg-[#1E1537] border border-[#3A2E5C] rounded-3xl p-6 shadow-glow-card space-y-4">
-              <span className="text-[10px] uppercase font-bold tracking-widest text-[#FFB547]">
+          <div className="hidden lg:flex lg:col-span-6 flex-col items-center justify-center pl-8 border-l border-[#DCD1C0]">
+            <div className="w-full max-w-sm bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl p-6 shadow-card space-y-4">
+              <span className="text-[10px] uppercase font-bold tracking-widest text-[#805536]">
                 Your Team is Already Out There
               </span>
 
@@ -234,36 +230,44 @@ export const SignUpPage: React.FC = () => {
                 <img
                   src={sampleTeammate.avatar}
                   alt={sampleTeammate.name}
-                  className="w-12 h-12 rounded-full object-cover border border-[#3A2E5C]"
+                  className="w-12 h-12 rounded-full object-cover border border-[#DCD1C0]"
                 />
                 <div>
-                  <h4 className="font-heading font-bold text-sm text-[#F3EEFF]">
+                  <h4 className="font-heading font-bold text-sm text-[#29251F]">
                     {sampleTeammate.name}
                   </h4>
-                  <p className="text-[11px] text-[#A99CCB]">{sampleTeammate.roleTitle}</p>
+                  <p className="text-[11px] text-[#665E54]">{sampleTeammate.roleTitle}</p>
                   <div className="flex items-center gap-1.5 mt-1">
                     <RoleBadge role={sampleTeammate.role} size="sm" />
-                    <span className="text-[10px] text-[#7C6F9B]">{sampleTeammate.location}</span>
+                    <span className="text-[10px] text-[#8C8173]">{sampleTeammate.location}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-[#17102A] border border-[#3A2E5C] space-y-1 text-xs">
+              <div className="p-3.5 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] space-y-1 text-xs">
                 <div className="flex items-center justify-between">
-                  <span className="text-[#A99CCB]">Complementary fit</span>
-                  <span className="text-[#FFB547] font-bold">92%</span>
+                  <span className="text-[#665E54]">Complementary fit</span>
+                  <span className="text-[#805536] font-bold bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25">92%</span>
                 </div>
-                <p className="text-[11px] text-[#F3EEFF]/80 leading-relaxed pt-1">
+                <p className="text-[11px] text-[#29251F] leading-relaxed pt-1">
                   Connects your software with sales distribution across Telugu tech networks and
                   angel investment circles.
                 </p>
+              </div>
+
+              <div className="pt-2 flex items-center justify-between text-[11px] text-[#8C8173]">
+                <span className="flex items-center gap-1 text-[#29251F] font-medium">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#805536]" />
+                  Verified Builder
+                </span>
+                <span>Hyderabad Cohort</span>
               </div>
             </div>
           </div>
         </div>
       </main>
 
-      <footer className="h-14 border-t border-[#3A2E5C] px-6 flex items-center justify-center text-xs text-[#7C6F9B]">
+      <footer className="h-14 border-t border-[#DCD1C0] px-6 flex items-center justify-center text-xs text-[#8C8173] bg-[#F3EDE3]">
         <span>© 2026 Nightclub. Privacy-first network for Telugu AI builders.</span>
       </footer>
     </div>

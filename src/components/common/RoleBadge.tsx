@@ -19,34 +19,34 @@ export const RoleBadge: React.FC<RoleBadgeProps> = ({
       case 'build':
         return {
           label: 'Build',
-          textColor: 'text-[#38BDF8]',
-          bgColor: 'bg-[#38BDF8]/10',
-          borderColor: 'border-[#38BDF8]/30',
-          dotColor: 'bg-[#38BDF8]',
+          textColor: 'text-[#805536]',
+          bgColor: 'bg-[#805536]/10',
+          borderColor: 'border-[#805536]/25',
+          dotColor: 'bg-[#805536]',
         };
       case 'design':
         return {
           label: 'Design',
-          textColor: 'text-[#F472B6]',
-          bgColor: 'bg-[#F472B6]/10',
-          borderColor: 'border-[#F472B6]/30',
-          dotColor: 'bg-[#F472B6]',
+          textColor: 'text-[#96603B]',
+          bgColor: 'bg-[#96603B]/10',
+          borderColor: 'border-[#96603B]/25',
+          dotColor: 'bg-[#96603B]',
         };
       case 'business':
         return {
           label: 'Business',
-          textColor: 'text-[#FBBF24]',
-          bgColor: 'bg-[#FBBF24]/10',
-          borderColor: 'border-[#FBBF24]/30',
-          dotColor: 'bg-[#FBBF24]',
+          textColor: 'text-[#6E4D36]',
+          bgColor: 'bg-[#6E4D36]/10',
+          borderColor: 'border-[#6E4D36]/25',
+          dotColor: 'bg-[#6E4D36]',
         };
       case 'research':
         return {
           label: 'Research',
-          textColor: 'text-[#2DD4BF]',
-          bgColor: 'bg-[#2DD4BF]/10',
-          borderColor: 'border-[#2DD4BF]/30',
-          dotColor: 'bg-[#2DD4BF]',
+          textColor: 'text-[#5C4533]',
+          bgColor: 'bg-[#5C4533]/10',
+          borderColor: 'border-[#5C4533]/25',
+          dotColor: 'bg-[#5C4533]',
         };
     }
   };

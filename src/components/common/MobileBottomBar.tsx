@@ -38,7 +38,7 @@ export const MobileBottomBar: React.FC = () => {
 
   return (
     <>
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#17102A]/95 backdrop-blur-lg border-t border-[#3A2E5C] px-2 py-1 safe-area-inset-bottom">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FFFFFF]/95 backdrop-blur-lg border-t border-[#DCD1C0] px-2 py-1 safe-area-inset-bottom shadow-lg">
         <div className="flex items-center justify-around h-14">
           {primaryTabs.map((tab) => {
             const Icon = tab.icon;
@@ -54,20 +54,22 @@ export const MobileBottomBar: React.FC = () => {
                   navigate(tab.route);
                 }}
                 className={`relative flex flex-col items-center justify-center flex-1 py-1 px-1 transition-colors ${
-                  isActive ? 'text-[#FFB547]' : 'text-[#A99CCB] hover:text-[#F3EEFF]'
+                  isActive ? 'text-[#805536]' : 'text-[#665E54] hover:text-[#29251F]'
                 }`}
               >
                 <div className="relative">
                   <Icon className={`w-5 h-5 ${tab.isSpecial && isActive ? 'scale-110' : ''}`} />
                   {tab.badge !== undefined && tab.badge > 0 && (
-                    <span className="absolute -top-1 -right-1.5 w-3.5 h-3.5 bg-[#FFB547] text-[#17102A] text-[9px] font-bold rounded-full flex items-center justify-center">
+                    <span className="absolute -top-1 -right-1.5 w-3.5 h-3.5 bg-[#805536] text-white text-[9px] font-bold rounded-full flex items-center justify-center">
                       {tab.badge}
                     </span>
                   )}
                 </div>
-                <span className="text-[10px] font-medium tracking-tight mt-0.5">{tab.name}</span>
+                <span className={`text-[10px] tracking-tight mt-0.5 ${isActive ? 'font-bold text-[#805536]' : 'font-medium'}`}>
+                  {tab.name}
+                </span>
                 {isActive && (
-                  <span className="w-1 h-1 rounded-full bg-[#FFB547] mt-0.5" />
+                  <span className="w-1 h-1 rounded-full bg-[#805536] mt-0.5" />
                 )}
               </button>
             );
@@ -77,7 +79,7 @@ export const MobileBottomBar: React.FC = () => {
           <button
             onClick={() => setShowMoreMenu(!showMoreMenu)}
             className={`flex flex-col items-center justify-center flex-1 py-1 px-1 transition-colors ${
-              showMoreMenu ? 'text-[#FFB547]' : 'text-[#A99CCB] hover:text-[#F3EEFF]'
+              showMoreMenu ? 'text-[#805536]' : 'text-[#665E54] hover:text-[#29251F]'
             }`}
           >
             <MoreHorizontal className="w-5 h-5" />
@@ -88,19 +90,19 @@ export const MobileBottomBar: React.FC = () => {
 
       {/* More Drawer Sheet */}
       {showMoreMenu && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex flex-col justify-end">
+        <div className="lg:hidden fixed inset-0 z-50 bg-[#29251F]/40 backdrop-blur-sm flex flex-col justify-end">
           <div
             className="absolute inset-0"
             onClick={() => setShowMoreMenu(false)}
           />
-          <div className="relative bg-[#1E1537] border-t border-[#3A2E5C] rounded-t-2xl p-4 space-y-4 max-h-[80vh] overflow-y-auto">
-            <div className="flex items-center justify-between pb-2 border-b border-[#3A2E5C]">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#F3EEFF]">
+          <div className="relative bg-[#FFFFFF] border-t border-[#DCD1C0] rounded-t-2xl p-4 space-y-4 max-h-[80vh] overflow-y-auto shadow-2xl">
+            <div className="flex items-center justify-between pb-2 border-b border-[#DCD1C0]">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#29251F]">
                 More Navigation
               </span>
               <button
                 onClick={() => setShowMoreMenu(false)}
-                className="p-1 rounded-lg text-[#A99CCB] hover:text-[#F3EEFF]"
+                className="p-1 rounded-lg text-[#665E54] hover:text-[#29251F]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -112,9 +114,9 @@ export const MobileBottomBar: React.FC = () => {
                   navigate('/discover');
                   setShowMoreMenu(false);
                 }}
-                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#22183B] border border-[#3A2E5C] text-[#F3EEFF]"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
-                <Compass className="w-4 h-4 text-[#38BDF8]" />
+                <Compass className="w-4 h-4 text-[#805536]" />
                 <span>Discover</span>
               </button>
 
@@ -123,9 +125,9 @@ export const MobileBottomBar: React.FC = () => {
                   navigate('/connections');
                   setShowMoreMenu(false);
                 }}
-                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#22183B] border border-[#3A2E5C] text-[#F3EEFF]"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
-                <Users2 className="w-4 h-4 text-[#2DD4BF]" />
+                <Users2 className="w-4 h-4 text-[#805536]" />
                 <span>Connections</span>
               </button>
 
@@ -134,9 +136,9 @@ export const MobileBottomBar: React.FC = () => {
                   navigate('/careers');
                   setShowMoreMenu(false);
                 }}
-                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#22183B] border border-[#3A2E5C] text-[#F3EEFF]"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
-                <Briefcase className="w-4 h-4 text-[#FBBF24]" />
+                <Briefcase className="w-4 h-4 text-[#805536]" />
                 <span>Careers</span>
               </button>
 
@@ -145,9 +147,9 @@ export const MobileBottomBar: React.FC = () => {
                   navigate('/circles');
                   setShowMoreMenu(false);
                 }}
-                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#22183B] border border-[#3A2E5C] text-[#F3EEFF]"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
-                <Layers className="w-4 h-4 text-[#F472B6]" />
+                <Layers className="w-4 h-4 text-[#805536]" />
                 <span>Circles</span>
               </button>
 
@@ -156,9 +158,9 @@ export const MobileBottomBar: React.FC = () => {
                   navigate('/profile');
                   setShowMoreMenu(false);
                 }}
-                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#22183B] border border-[#3A2E5C] text-[#F3EEFF]"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
-                <User className="w-4 h-4 text-[#A99CCB]" />
+                <User className="w-4 h-4 text-[#805536]" />
                 <span>My Profile</span>
               </button>
 
@@ -167,9 +169,9 @@ export const MobileBottomBar: React.FC = () => {
                   navigate('/settings');
                   setShowMoreMenu(false);
                 }}
-                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#22183B] border border-[#3A2E5C] text-[#F3EEFF]"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
-                <Settings className="w-4 h-4 text-[#A99CCB]" />
+                <Settings className="w-4 h-4 text-[#805536]" />
                 <span>Settings</span>
               </button>
 
@@ -178,9 +180,9 @@ export const MobileBottomBar: React.FC = () => {
                   navigate('/admin');
                   setShowMoreMenu(false);
                 }}
-                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#22183B] border border-[#3A2E5C] text-[#F3EEFF]"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] hover:border-[#805536] transition-colors font-medium text-xs"
               >
-                <Shield className="w-4 h-4 text-[#2DD4BF]" />
+                <Shield className="w-4 h-4 text-[#805536]" />
                 <span>Admin</span>
               </button>
 
@@ -189,7 +191,7 @@ export const MobileBottomBar: React.FC = () => {
                   logout();
                   setShowMoreMenu(false);
                 }}
-                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#22183B] border border-red-500/30 text-red-400"
+                className="flex items-center gap-2.5 p-3 rounded-xl bg-[#FFFFFF] border border-[#DCD1C0] text-[#665E54] hover:text-[#805536] hover:border-[#805536] transition-colors font-medium text-xs"
               >
                 <LogOut className="w-4 h-4" />
                 <span>Log out</span>

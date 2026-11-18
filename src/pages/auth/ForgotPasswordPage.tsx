@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { ArrowLeft, Mail, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ArrowLeft, CheckCircle2 } from 'lucide-react';
 
 export const ForgotPasswordPage: React.FC = () => {
   const { navigate } = useApp();
@@ -20,23 +20,23 @@ export const ForgotPasswordPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#17102A] text-[#F3EEFF] flex flex-col justify-between">
-      <header className="h-16 px-6 border-b border-[#3A2E5C] flex items-center justify-between">
+    <div className="min-h-screen bg-[#F3EDE3] text-[#29251F] flex flex-col justify-between font-body selection:bg-[#805536]/15 selection:text-[#29251F]">
+      <header className="h-16 px-6 border-b border-[#DCD1C0] bg-[#F3EDE3] flex items-center justify-between">
         <div onClick={() => navigate('/')} className="flex items-center gap-2 cursor-pointer">
-          <div className="w-8 h-8 rounded-lg bg-[#22183B] border border-[#FFB547]/50 flex items-center justify-center text-[#FFB547] font-bold">
+          <div className="w-8 h-8 rounded-lg bg-[#805536] border border-[#805536] flex items-center justify-center text-white font-bold shadow-sm">
             N
           </div>
-          <span className="font-heading font-bold text-base tracking-wider text-[#F3EEFF]">
+          <span className="font-heading font-bold text-base tracking-wider text-[#29251F]">
             NIGHTCLUB
           </span>
         </div>
       </header>
 
       <main className="flex-1 max-w-md mx-auto w-full px-4 py-12 flex flex-col justify-center">
-        <div className="bg-[#1E1537] border border-[#3A2E5C] rounded-3xl p-6 sm:p-8 space-y-5 shadow-glow-card">
+        <div className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl p-6 sm:p-8 space-y-5 shadow-card">
           <button
             onClick={() => navigate('/login')}
-            className="inline-flex items-center gap-1.5 text-xs text-[#A99CCB] hover:text-[#F3EEFF]"
+            className="inline-flex items-center gap-1.5 text-xs text-[#665E54] hover:text-[#29251F] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to login</span>
@@ -45,15 +45,15 @@ export const ForgotPasswordPage: React.FC = () => {
           {!submitted ? (
             <>
               <div className="space-y-1">
-                <h1 className="font-heading font-bold text-xl text-[#F3EEFF]">Reset your password</h1>
-                <p className="text-xs text-[#A99CCB]">
+                <h1 className="font-heading font-bold text-xl text-[#29251F]">Reset your password</h1>
+                <p className="text-xs text-[#665E54]">
                   Enter your email address and we'll send you instructions to reset your password.
                 </p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 <div>
-                  <label className="block text-[#A99CCB] font-medium mb-1">Email address</label>
+                  <label className="block text-[#665E54] font-medium mb-1">Email address</label>
                   <input
                     type="email"
                     required
@@ -75,12 +75,12 @@ export const ForgotPasswordPage: React.FC = () => {
             </>
           ) : (
             <div className="space-y-4 text-center py-4">
-              <div className="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto">
+              <div className="w-12 h-12 rounded-full bg-[#E7DCCB] border border-[#DCD1C0] flex items-center justify-center text-[#805536] mx-auto">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
-              <h2 className="font-heading font-bold text-lg text-[#F3EEFF]">Password reset sent</h2>
-              <p className="text-xs text-[#A99CCB] leading-relaxed">
-                We have emailed instructions to <strong>{email}</strong>. Check your inbox and spam folder.
+              <h2 className="font-heading font-bold text-lg text-[#29251F]">Password reset sent</h2>
+              <p className="text-xs text-[#665E54] leading-relaxed">
+                We have emailed instructions to <strong className="text-[#29251F]">{email}</strong>. Check your inbox and spam folder.
               </p>
               <button
                 onClick={() => navigate('/login')}
@@ -93,7 +93,7 @@ export const ForgotPasswordPage: React.FC = () => {
         </div>
       </main>
 
-      <footer className="h-14 border-t border-[#3A2E5C] px-6 flex items-center justify-center text-xs text-[#7C6F9B]">
+      <footer className="h-14 border-t border-[#DCD1C0] px-6 flex items-center justify-center text-xs text-[#8C8173] bg-[#F3EDE3]">
         <span>© 2026 Nightclub. Privacy-first network for Telugu AI builders.</span>
       </footer>
     </div>
