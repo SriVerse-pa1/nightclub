@@ -10,6 +10,10 @@ import {
   ShieldCheck,
   Eye,
   Plus,
+  ExternalLink,
+  Award,
+  CheckCircle2,
+  Code2,
 } from 'lucide-react';
 
 export const OwnProfilePage: React.FC = () => {
@@ -108,6 +112,74 @@ export const OwnProfilePage: React.FC = () => {
 
         {/* Bio */}
         <p className="text-xs text-[#29251F] leading-relaxed">{currentUser.bio}</p>
+
+        {/* Builder Achievements & Verifications */}
+        <div className="pt-4 border-t border-[#DCD1C0] flex flex-wrap gap-2.5">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#805536]/10 border border-[#805536]/25 text-[#805536] text-xs font-semibold">
+            <Award className="w-3.5 h-3.5" /> Founding Cohort Builder
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#805536]/10 border border-[#805536]/25 text-[#805536] text-xs font-semibold">
+            <CheckCircle2 className="w-3.5 h-3.5" /> Mentorship Verified
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#F3EDE3] border border-[#DCD1C0] text-[#29251F] text-xs font-semibold">
+            <Sparkles className="w-3.5 h-3.5 text-[#805536]" /> 92% Squad Complementarity
+          </span>
+        </div>
+      </div>
+
+      {/* Featured Portfolio Projects */}
+      <div className="nc-card p-6 space-y-4 bg-[#FFFFFF] border border-[#DCD1C0] shadow-card">
+        <div className="flex items-center justify-between pb-2 border-b border-[#DCD1C0]">
+          <div className="flex items-center gap-2">
+            <Code2 className="w-4 h-4 text-[#805536]" />
+            <h3 className="font-heading font-bold text-sm text-[#29251F]">
+              Featured Portfolio & Shipped Products
+            </h3>
+          </div>
+          <span className="text-xs text-[#805536] font-semibold">2 Live Projects</span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="p-4 rounded-2xl bg-[#F3EDE3] border border-[#DCD1C0] space-y-2.5 hover:border-[#805536] transition-colors">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-xs text-[#29251F]">KisanAI Voice Assistant</span>
+              <span className="text-[10px] text-[#805536] font-bold bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25">Production</span>
+            </div>
+            <p className="text-[11px] text-[#665E54] line-clamp-2">
+              Bilingual Telugu speech assistant providing hyper-local pest and crop advisory to 12,000+ farmers in AP and Telangana.
+            </p>
+            <div className="flex items-center justify-between pt-2 border-t border-[#DCD1C0] text-[11px]">
+              <span className="text-[#8C8173]">FastAPI • PyTorch • Whisper</span>
+              <a
+                href="#/build-room"
+                className="inline-flex items-center gap-1 text-[#805536] hover:underline font-semibold"
+              >
+                <span>Workspace</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-[#F3EDE3] border border-[#DCD1C0] space-y-2.5 hover:border-[#805536] transition-colors">
+            <div className="flex items-center justify-between">
+              <span className="font-bold text-xs text-[#29251F]">Telugu Indic NLP Corpus</span>
+              <span className="text-[10px] text-[#665E54] font-bold bg-[#FFFFFF] px-2 py-0.5 rounded border border-[#DCD1C0]">Open Source</span>
+            </div>
+            <p className="text-[11px] text-[#665E54] line-clamp-2">
+              Curated dataset of 450,000 conversational Telugu tokens optimized for Rayalaseema and Coastal dialect translation.
+            </p>
+            <div className="flex items-center justify-between pt-2 border-t border-[#DCD1C0] text-[11px]">
+              <span className="text-[#8C8173]">LoRA • HuggingFace</span>
+              <a
+                href="#/build"
+                className="inline-flex items-center gap-1 text-[#805536] hover:underline font-semibold"
+              >
+                <span>Repo Link</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Skills & Evidence Section */}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { NotificationType } from '../../types';
 import {
@@ -13,6 +13,8 @@ import {
   Settings,
   Sparkles,
   ArrowRight,
+  Moon,
+  Filter,
 } from 'lucide-react';
 
 export const NotificationsPage: React.FC = () => {
@@ -21,7 +23,19 @@ export const NotificationsPage: React.FC = () => {
     markNotificationRead,
     markAllNotificationsRead,
     navigate,
+    settings,
   } = useApp();
+
+  const [activeFilter, setActiveFilter] = useState<'all' | 'team' | 'mentorship' | 'message' | 'challenge'>('all');
+
+  const filteredNotifications = notifications.filter((notif) => {
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'team') return notif.type === 'team_ready' || notif.type === 'new_intro' || notif.type === 'connection_accepted';
+    if (activeFilter === 'mentorship') return notif.type === 'session_reminder';
+    if (activeFilter === 'message') return notif.type === 'message';
+    if (activeFilter === 'challenge') return notif.type === 'challenge' || notif.type === 'milestone';
+    return true;
+  });
 
   const getNotificationIcon = (type: NotificationType) => {
     switch (type) {
@@ -81,10 +95,54 @@ export const NotificationsPage: React.FC = () => {
         </div>
       </div>
 
+      {/* Quiet Hours Banner */}
+      {settings.notifications.quietHoursEnabled && (
+        <div className="p-3.5 rounded-2xl bg-[#F3EDE3] border border-[#DCD1C0] flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2.5">
+            <Moon className="w-4 h-4 text-[#805536] shrink-0" />
+            <div>
+              <span className="font-bold text-[#29251F]">Quiet Hours Active</span>
+              <p className="text-[11px] text-[#665E54]">
+                {settings.notifications.quietHoursStart} – {settings.notifications.quietHoursEnd} IST (UTC+5:30) • Non-urgent alerts muted.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => navigate('/settings')}
+            className="text-[11px] text-[#805536] hover:underline font-semibold shrink-0"
+          >
+            Configure
+          </button>
+        </div>
+      )}
+
+      {/* Filter Tabs */}
+      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
+        {[
+          { id: 'all' as const, label: 'All Alerts' },
+          { id: 'team' as const, label: 'Team Matches' },
+          { id: 'mentorship' as const, label: 'Mentorship' },
+          { id: 'message' as const, label: 'Messages' },
+          { id: 'challenge' as const, label: 'Challenges' },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveFilter(tab.id)}
+            className={`px-3 py-1.5 rounded-xl font-medium transition-all shrink-0 ${
+              activeFilter === tab.id
+                ? 'bg-[#805536] text-white font-bold shadow-sm'
+                : 'bg-[#FFFFFF] border border-[#DCD1C0] text-[#665E54] hover:text-[#29251F]'
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       {/* Notifications grouped */}
       <div className="space-y-8">
         {groups.map((group) => {
-          const groupNotifications = notifications.filter((n) => n.group === group.id);
+          const groupNotifications = filteredNotifications.filter((n) => n.group === group.id);
           if (groupNotifications.length === 0) return null;
 
           return (
@@ -101,7 +159,7 @@ export const NotificationsPage: React.FC = () => {
                       markNotificationRead(notif.id);
                       navigate(notif.linkRoute as any);
                     }}
-                    className={`nc-card p-4 flex items-start justify-between gap-4 cursor-pointer hover:border-[#805536] transition-all text-xs bg-[#FFFFFF] border shadow-sm ${
+                    className={`nc-card p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 cursor-pointer hover:border-[#805536] transition-all text-xs bg-[#FFFFFF] border shadow-sm ${
                       !notif.read ? 'border-[#805536]/40 shadow-card-hover' : 'border-[#DCD1C0]'
                     }`}
                   >
@@ -116,6 +174,9 @@ export const NotificationsPage: React.FC = () => {
                           {!notif.read && (
                             <span className="w-2 h-2 rounded-full bg-[#805536]" />
                           )}
+                          <span className="text-[10px] text-[#8C8173] px-1.5 py-0.2 rounded bg-[#E7DCCB]">
+                            IST
+                          </span>
                         </div>
                         <p className="text-[#665E54] text-[11px] leading-relaxed">
                           {notif.description}
@@ -124,7 +185,12 @@ export const NotificationsPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <ArrowRight className="w-4 h-4 text-[#8C8173] shrink-0 mt-1" />
+                    <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                      <span className="text-xs text-[#805536] font-semibold hover:underline flex items-center gap-1">
+                        Open
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -132,11 +198,11 @@ export const NotificationsPage: React.FC = () => {
           );
         })}
 
-        {notifications.length === 0 && (
+        {filteredNotifications.length === 0 && (
           <div className="p-12 text-center bg-[#FFFFFF] border border-[#DCD1C0] rounded-2xl text-xs text-[#665E54] space-y-2 shadow-sm">
             <Bell className="w-8 h-8 text-[#805536] mx-auto" />
-            <p className="font-semibold text-[#29251F]">You're all caught up</p>
-            <p>New team match introductions and session alerts will appear here.</p>
+            <p className="font-semibold text-[#29251F]">No notifications in this filter</p>
+            <p>Select another category or view all alerts.</p>
           </div>
         )}
       </div>

@@ -19,6 +19,11 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
   const [newAssigneeId, setNewAssigneeId] = useState(project.members[0]?.id || '');
   const [newPriority, setNewPriority] = useState<'Low' | 'Medium' | 'High'>('High');
   const [newDueDate, setNewDueDate] = useState('Nov 25');
+  const [filterPriority, setFilterPriority] = useState<'all' | 'High' | 'Medium'>('all');
+
+  const visibleTasks = filterPriority === 'all'
+    ? project.tasks
+    : project.tasks.filter((t) => t.priority === filterPriority);
 
   const columns: Array<{
     id: 'todo' | 'in_progress' | 'done';
@@ -28,17 +33,17 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
     {
       id: 'todo',
       title: 'To Do',
-      count: project.tasks.filter((t) => t.status === 'todo').length,
+      count: visibleTasks.filter((t) => t.status === 'todo').length,
     },
     {
       id: 'in_progress',
       title: 'Doing',
-      count: project.tasks.filter((t) => t.status === 'in_progress').length,
+      count: visibleTasks.filter((t) => t.status === 'in_progress').length,
     },
     {
       id: 'done',
       title: 'Done',
-      count: project.tasks.filter((t) => t.status === 'done').length,
+      count: visibleTasks.filter((t) => t.status === 'done').length,
     },
   ];
 
@@ -65,14 +70,31 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
   return (
     <div className="space-y-4">
       {/* Board Controls */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold uppercase tracking-wider text-[#8C8173]">
             Team Tasks & Sprints
           </span>
           <span className="text-xs px-2 py-0.5 rounded-full bg-[#E7DCCB] border border-[#DCD1C0] text-[#29251F] font-medium">
-            {project.tasks.length} tasks
+            {visibleTasks.length} tasks
           </span>
+
+          {/* Filter Pills */}
+          <div className="flex items-center gap-1.5 ml-2">
+            {(['all', 'High', 'Medium'] as const).map((p) => (
+              <button
+                key={p}
+                onClick={() => setFilterPriority(p)}
+                className={`px-2 py-0.5 rounded-lg text-[10px] font-semibold transition-colors ${
+                  filterPriority === p
+                    ? 'bg-[#805536] text-white shadow-sm'
+                    : 'bg-[#FFFFFF] border border-[#DCD1C0] text-[#665E54] hover:text-[#29251F]'
+                }`}
+              >
+                {p === 'all' ? 'All' : `${p} Priority`}
+              </button>
+            ))}
+          </div>
         </div>
 
         <button
@@ -87,7 +109,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
       {/* 3 Columns */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {columns.map((col) => {
-          const colTasks = project.tasks.filter((t) => t.status === col.id);
+          const colTasks = visibleTasks.filter((t) => t.status === col.id);
 
           return (
             <div

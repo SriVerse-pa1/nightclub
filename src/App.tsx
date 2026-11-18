@@ -117,7 +117,12 @@ export const AppContent: React.FC = () => {
   if (isStandalonePage) {
     return (
       <div className={`min-h-screen ${themeClass}`}>
-        {renderCurrentPage()}
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
+        <main id="main-content" role="main" tabIndex={-1} className="outline-none">
+          {renderCurrentPage()}
+        </main>
         <ToastContainer />
       </div>
     );
@@ -126,6 +131,10 @@ export const AppContent: React.FC = () => {
   // Core App Layout (Desktop: Sidebar left + Header top + Content; Mobile: Header top + Content + Bottom bar)
   return (
     <div className={`min-h-screen flex ${themeClass}`}>
+      <a href="#main-content" className="skip-to-content">
+        Skip to main content
+      </a>
+
       {/* Web Left Sidebar */}
       <Sidebar />
 
@@ -133,7 +142,7 @@ export const AppContent: React.FC = () => {
       <div className="flex-1 flex flex-col min-w-0">
         <AppHeader />
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto pb-20 lg:pb-8">
+        <main id="main-content" role="main" tabIndex={-1} className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto pb-24 lg:pb-8 outline-none">
           {renderCurrentPage()}
         </main>
 

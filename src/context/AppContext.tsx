@@ -196,10 +196,30 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return 'en';
   };
 
+  const getInitialFontSize = (): 'normal' | 'large' | 'extra-large' => {
+    try {
+      const saved = localStorage.getItem('nightclub_fontsize');
+      if (saved === 'normal' || saved === 'large' || saved === 'extra-large') return saved;
+    } catch (e) {}
+    return 'normal';
+  };
+
+  const getInitialReducedMotion = (): boolean => {
+    try {
+      const saved = localStorage.getItem('nightclub_reduced_motion');
+      if (saved === 'true') return true;
+      if (saved === 'false') return false;
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    } catch (e) {}
+    return false;
+  };
+
   const [settings, setSettings] = useState<UserSettings>(() => ({
     ...INITIAL_SETTINGS,
     theme: getInitialTheme(),
     language: getInitialLanguage(),
+    fontSize: getInitialFontSize(),
+    reducedMotion: getInitialReducedMotion(),
   }));
 
   // Sync theme with document & localStorage
@@ -228,6 +248,27 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       // Ignore localStorage errors
     }
   }, [settings.language]);
+
+  // Sync font size scaling & reduced motion with document & localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem('nightclub_fontsize', settings.fontSize);
+      localStorage.setItem('nightclub_reduced_motion', String(settings.reducedMotion));
+    } catch (e) {}
+    const root = document.documentElement;
+    root.classList.remove('font-size-large', 'font-size-xlarge');
+    if (settings.fontSize === 'large') {
+      root.classList.add('font-size-large');
+    } else if (settings.fontSize === 'extra-large') {
+      root.classList.add('font-size-xlarge');
+    }
+
+    if (settings.reducedMotion) {
+      root.classList.add('reduced-motion');
+    } else {
+      root.classList.remove('reduced-motion');
+    }
+  }, [settings.fontSize, settings.reducedMotion]);
 
   // Toasts
   const [toasts, setToasts] = useState<ToastItem[]>([]);

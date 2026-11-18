@@ -12,6 +12,8 @@ import {
   Sun,
   Moon,
   Check,
+  Type,
+  Sliders,
 } from 'lucide-react';
 
 export const SettingsPage: React.FC = () => {
@@ -429,6 +431,66 @@ export const SettingsPage: React.FC = () => {
                         <div className="w-4 h-4 rounded-full bg-[#F7F2EE]" title="#F7F2EE Text" />
                         <span className="text-[10px] text-[#8A7E73] ml-auto">Warm Obsidian</span>
                       </div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Accessibility: Font Size & Reduced Motion */}
+                <div className="pt-4 border-t border-[#DCD1C0] space-y-4">
+                  <div>
+                    <label className="block text-[#665E54] font-medium mb-1 flex items-center gap-2">
+                      <Type className="w-4 h-4 text-[#805536]" />
+                      Font Size & Display Scale
+                    </label>
+                    <p className="text-xs text-[#8C8173] mb-3">
+                      Adjust reading typography scale across all screens and workspaces.
+                    </p>
+                    <div className="grid grid-cols-3 gap-3">
+                      {[
+                        { id: 'normal' as const, label: 'Normal (100%)', scale: '14px' },
+                        { id: 'large' as const, label: 'Large (112%)', scale: '16px' },
+                        { id: 'extra-large' as const, label: 'Extra Large (124%)', scale: '18px' },
+                      ].map((item) => (
+                        <button
+                          key={item.id}
+                          type="button"
+                          onClick={() => updateSettings({ fontSize: item.id })}
+                          className={`p-3 rounded-xl border text-center font-bold transition-all ${
+                            settings.fontSize === item.id
+                              ? 'border-[#805536] bg-[#805536] text-white shadow-sm ring-2 ring-[#805536]/20'
+                              : 'border-[#DCD1C0] bg-[#FFFFFF] text-[#665E54] hover:text-[#29251F] hover:border-[#805536]'
+                          }`}
+                        >
+                          <span className="block text-xs">{item.label}</span>
+                          <span className="block text-[10px] opacity-75 font-normal mt-0.5">Base: {item.scale}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t border-[#DCD1C0] flex items-center justify-between">
+                    <div>
+                      <span className="font-semibold text-xs text-[#29251F] flex items-center gap-1.5">
+                        <Sliders className="w-4 h-4 text-[#805536]" />
+                        Reduced Motion
+                      </span>
+                      <p className="text-[11px] text-[#665E54] mt-0.5">
+                        Minimizes pulse, rotation, and slide animations across dashboard rings and dialogs.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => updateSettings({ reducedMotion: !settings.reducedMotion })}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${
+                        settings.reducedMotion ? 'bg-[#805536]' : 'bg-[#DCD1C0]'
+                      }`}
+                      aria-pressed={settings.reducedMotion}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          settings.reducedMotion ? 'translate-x-6' : 'translate-x-1'
+                        }`}
+                      />
                     </button>
                   </div>
                 </div>

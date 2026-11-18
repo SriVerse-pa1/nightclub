@@ -274,10 +274,13 @@ export interface ChatThread {
 }
 
 export type SupportedLanguage = 'en' | 'te' | 'ta';
+export type FontSizePreference = 'normal' | 'large' | 'extra-large';
 
 export interface UserSettings {
   language: SupportedLanguage;
   theme: 'light' | 'dark' | 'nightclub' | 'monochrome';
+  fontSize: FontSizePreference;
+  reducedMotion: boolean;
   notifications: {
     messages: boolean;
     teamMatches: boolean;

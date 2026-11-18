@@ -12,6 +12,8 @@ import {
   Sparkles,
   Users2,
   X,
+  Award,
+  CheckCircle2,
 } from 'lucide-react';
 
 export const MemberProfilePage: React.FC = () => {
@@ -69,9 +71,12 @@ export const MemberProfilePage: React.FC = () => {
                   {member.name}
                 </h1>
                 <RoleBadge role={member.role} size="md" />
+                <span className="inline-flex items-center gap-1 text-[10px] text-[#805536] font-semibold bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25">
+                  <CheckCircle2 className="w-3 h-3" /> Verified Builder
+                </span>
               </div>
               <p className="text-xs text-[#29251F] font-medium">{member.roleTitle}</p>
-              <div className="flex items-center justify-center sm:justify-start gap-3 text-xs text-[#665E54] pt-1">
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 text-xs text-[#665E54] pt-1">
                 <span>{member.location}</span>
                 <span>•</span>
                 <span>{member.yearsExperience} yrs experience</span>
@@ -204,7 +209,10 @@ export const MemberProfilePage: React.FC = () => {
                   key={skill.name}
                   className="p-3 bg-[#F3EDE3] border border-[#DCD1C0] rounded-xl flex items-center justify-between text-xs"
                 >
-                  <span className="font-semibold text-[#29251F]">{skill.name}</span>
+                  <div>
+                    <span className="font-semibold text-[#29251F]">{skill.name}</span>
+                    <span className="block text-[10px] text-[#8C8173] mt-0.5">Verified by {Math.floor(Math.random() * 3 + 2)} peers</span>
+                  </div>
                   <EvidenceBadge evidence={skill.evidence} />
                 </div>
               ))}

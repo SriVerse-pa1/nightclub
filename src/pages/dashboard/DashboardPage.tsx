@@ -9,6 +9,11 @@ import {
   MessageSquare,
   Clock,
   Hammer,
+  Flame,
+  CheckCircle2,
+  TrendingUp,
+  Compass,
+  Layers,
 } from 'lucide-react';
 
 export const DashboardPage: React.FC = () => {
@@ -34,17 +39,30 @@ export const DashboardPage: React.FC = () => {
   const activeProject = projects[0];
   const newIntroMember = fourTeam.members[1]; // Karthik Varma
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    const name = currentUser.name.split(' ')[0];
+    if (hour < 12) return `Good morning, ${name}`;
+    if (hour < 18) return `Good afternoon, ${name}`;
+    return `Good evening, ${name}`;
+  };
+
   return (
     <div className="space-y-6 pb-12">
       {/* Hero Area: Greeting & Find Your Four Interactive Constellation */}
       <section className="bg-[#FFFFFF] border border-[#DCD1C0] rounded-3xl p-5 sm:p-7 shadow-card">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#DCD1C0]">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#805536]">
-              {t('nav_foundingCohort')}
-            </span>
-            <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F] mt-0.5">
-              {t('dashboard_greeting')}, {currentUser.name.split(' ')[0]}
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#805536] bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25">
+                {t('nav_foundingCohort')}
+              </span>
+              <span className="inline-flex items-center gap-1 text-[10px] text-[#805536] font-semibold bg-[#805536]/10 px-2 py-0.5 rounded border border-[#805536]/25">
+                <Flame className="w-3 h-3 text-[#805536]" /> 7-Day Streak
+              </span>
+            </div>
+            <h1 className="font-heading font-extrabold text-2xl sm:text-3xl text-[#29251F]">
+              {getGreeting()}
             </h1>
             <p className="text-xs text-[#665E54] mt-1">
               {t('dashboard_subtitle')}
@@ -59,6 +77,44 @@ export const DashboardPage: React.FC = () => {
               <span>{t('dashboard_viewFour')}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
+          </div>
+        </div>
+
+        {/* Builder Momentum & Sprint Bar */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-5 pb-2">
+          <div className="p-3 rounded-2xl bg-[#F3EDE3] border border-[#DCD1C0] flex items-center gap-3">
+            <div className="w-8 h-8 rounded-xl bg-[#805536] flex items-center justify-center text-white shrink-0">
+              <Flame className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-[10px] uppercase font-bold text-[#8C8173]">Builder Momentum</span>
+              <p className="text-xs font-bold text-[#29251F]">7 Active Days • Top 5%</p>
+            </div>
+          </div>
+
+          <div className="p-3 rounded-2xl bg-[#F3EDE3] border border-[#DCD1C0] flex items-center gap-3">
+            <div className="w-8 h-8 rounded-xl bg-[#805536] flex items-center justify-center text-white shrink-0">
+              <CheckCircle2 className="w-4 h-4" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex justify-between items-center text-[10px] text-[#8C8173] font-bold">
+                <span>Sprint Progress</span>
+                <span className="text-[#805536]">67%</span>
+              </div>
+              <div className="w-full h-1.5 bg-[#DCD1C0] rounded-full overflow-hidden mt-1">
+                <div className="w-[67%] h-full bg-[#805536] rounded-full" />
+              </div>
+            </div>
+          </div>
+
+          <div className="p-3 rounded-2xl bg-[#F3EDE3] border border-[#DCD1C0] flex items-center gap-3">
+            <div className="w-8 h-8 rounded-xl bg-[#805536] flex items-center justify-center text-white shrink-0">
+              <TrendingUp className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="text-[10px] uppercase font-bold text-[#8C8173]">Complementary Squad</span>
+              <p className="text-xs font-bold text-[#29251F]">4/4 Connected & Synced</p>
+            </div>
           </div>
         </div>
 
